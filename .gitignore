@@ -1,11 +1,4 @@
-# virtual environment
-.venv/
-
-# Python cache
-__pycache__/
-*.pyc
-
-# data cache
 /data/raw/
-
-/*.log
+/.venv/
+/__pycache__/
+*.log
