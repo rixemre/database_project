@@ -1,0 +1,755 @@
+{% extends "base.html" %}
+
+{% block title %}Armors - M&B Inventory{% endblock %}
+
+{% block content %}
+
+<style>
+  /* ============================================
+     PAGE HEADER
+  ============================================ */
+  .page-header {
+    background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);
+    border: 2px solid var(--primary-gold);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .page-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-gold) 0%, #c9a537 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: #000;
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+  }
+
+  .page-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--primary-gold);
+    margin: 0;
+    letter-spacing: 2px;
+  }
+
+  .page-subtitle {
+    color: #adb5bd;
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  /* ============================================
+     ADD ARMOR FORM
+  ============================================ */
+  .add-form-card {
+    background: linear-gradient(145deg, #1a1f3a, #0f1419);
+    border: 2px solid #198754;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .add-form-header {
+    background: linear-gradient(135deg, #198754 0%, #157347 100%);
+    padding: 1.5rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .add-form-header h5 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    letter-spacing: 1px;
+  }
+
+  .form-label {
+    font-size: 0.8rem;
+    color: var(--primary-gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-control,
+  .form-select {
+    background: rgba(26, 31, 58, 0.5);
+    border: 1px solid #2a3f5f;
+    color: #e9ecef;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .form-control:focus,
+  .form-select:focus {
+    background: rgba(26, 31, 58, 0.8);
+    color: #fff;
+    border-color: var(--primary-gold);
+    box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
+  }
+
+  .form-control:read-only {
+    background: rgba(0, 0, 0, 0.5);
+    border-color: var(--primary-gold);
+    color: var(--primary-gold);
+    font-weight: 700;
+    cursor: not-allowed;
+  }
+
+  .btn-forge {
+    background: linear-gradient(135deg, #198754 0%, #157347 100%);
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    padding: 0.8rem;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    box-shadow: 0 5px 15px rgba(25, 135, 84, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .btn-forge:hover {
+    background: linear-gradient(135deg, #157347 0%, #198754 100%);
+    box-shadow: 0 8px 25px rgba(25, 135, 84, 0.6);
+    transform: translateY(-2px);
+  }
+
+  /* ============================================
+     FILTERS SECTION
+  ============================================ */
+  .filters-card {
+    background: linear-gradient(145deg, #1a1f3a, #0f1419);
+    border: 2px solid #2a3f5f;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .filters-header {
+    background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);
+    border-bottom: 2px solid var(--primary-gold);
+    padding: 1.5rem;
+  }
+
+  .filters-header h5 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: var(--primary-gold);
+    margin: 0;
+    letter-spacing: 1px;
+  }
+
+  .filter-section-title {
+    font-size: 0.75rem;
+    color: var(--primary-gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #2a3f5f;
+  }
+
+  /* ============================================
+     TABLE STYLES
+  ============================================ */
+  .armors-table-card {
+    background: linear-gradient(145deg, #1a1f3a, #0f1419);
+    border: 2px solid #2a3f5f;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .table-header {
+    background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);
+    border-bottom: 2px solid var(--primary-gold);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .table-header-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .table-header h5 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: var(--primary-gold);
+    margin: 0;
+    letter-spacing: 1px;
+  }
+
+  .table-icon {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, var(--primary-gold) 0%, #c9a537 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #000;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+  }
+
+  .table {
+    margin: 0;
+  }
+
+  .table thead {
+    background: rgba(10, 14, 39, 0.8);
+  }
+
+  .table thead th {
+    color: var(--primary-gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.75rem;
+    padding: 1rem;
+    border: none;
+    border-bottom: 2px solid #2a3f5f;
+  }
+
+  .table tbody tr {
+    border-bottom: 1px solid #2a3f5f;
+    transition: all 0.3s ease;
+  }
+
+  .table tbody tr:hover {
+    background: rgba(212, 175, 55, 0.05);
+    transform: scale(1.01);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .table tbody td {
+    padding: 1rem;
+    vertical-align: middle;
+    color: #e9ecef;
+  }
+
+  .item-name {
+    font-weight: 700;
+    color: #fff;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .item-name::before {
+    content: "⚔️";
+    font-size: 1.2rem;
+  }
+
+  /* Stat Badges */
+  .stat-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    min-width: 50px;
+  }
+
+  .stat-body {
+    background: rgba(220, 53, 69, 0.2);
+    border: 1px solid #dc3545;
+    color: #dc3545;
+  }
+
+  .stat-leg {
+    background: rgba(13, 110, 253, 0.2);
+    border: 1px solid #0d6efd;
+    color: #0d6efd;
+  }
+
+  .stat-head {
+    background: rgba(25, 135, 84, 0.2);
+    border: 1px solid #198754;
+    color: #198754;
+  }
+
+  .stat-arm {
+    background: rgba(255, 193, 7, 0.2);
+    border: 1px solid #ffc107;
+    color: #ffc107;
+  }
+
+  .stat-total {
+    background: linear-gradient(135deg, var(--primary-gold) 0%, #c9a537 100%);
+    border: none;
+    color: #000;
+    font-weight: 700;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+  }
+
+  .culture-badge {
+    background: rgba(108, 117, 125, 0.2);
+    border: 1px solid #6c757d;
+    color: #adb5bd;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .material-badge {
+    background: rgba(13, 202, 240, 0.1);
+    border: 1px solid #0dcaf0;
+    color: #0dcaf0;
+    padding: 0.3rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  /* Action Buttons */
+  .action-btn-group {
+    display: flex;
+    gap: 0.3rem;
+  }
+
+  .btn-action {
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 1px solid;
+  }
+
+  .btn-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .btn-view {
+    background: rgba(13, 202, 240, 0.1);
+    border-color: #0dcaf0;
+    color: #0dcaf0;
+  }
+
+  .btn-view:hover {
+    background: #0dcaf0;
+    color: #000;
+  }
+
+  .btn-edit {
+    background: rgba(255, 193, 7, 0.1);
+    border-color: #ffc107;
+    color: #ffc107;
+  }
+
+  .btn-edit:hover {
+    background: #ffc107;
+    color: #000;
+  }
+
+  .btn-delete {
+    background: rgba(220, 53, 69, 0.1);
+    border-color: #dc3545;
+    color: #dc3545;
+  }
+
+  .btn-delete:hover {
+    background: #dc3545;
+    color: #fff;
+  }
+
+  /* ============================================
+     BUTTONS
+  ============================================ */
+  .btn-add-armor {
+    background: linear-gradient(135deg, #198754 0%, #157347 100%);
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    box-shadow: 0 5px 15px rgba(25, 135, 84, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .btn-add-armor:hover {
+    background: linear-gradient(135deg, #157347 0%, #198754 100%);
+    box-shadow: 0 8px 25px rgba(25, 135, 84, 0.6);
+    transform: translateY(-3px);
+  }
+
+  .btn-filters {
+    background: linear-gradient(135deg, var(--primary-gold) 0%, #c9a537 100%);
+    border: none;
+    color: #000;
+    font-weight: 700;
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .btn-filters:hover {
+    background: linear-gradient(135deg, #c9a537 0%, var(--primary-gold) 100%);
+    box-shadow: 0 6px 18px rgba(212, 175, 55, 0.6);
+    transform: translateY(-2px);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-title {
+      font-size: 1.5rem;
+    }
+    .table-responsive {
+      font-size: 0.85rem;
+    }
+    .action-btn-group {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <div class="d-flex align-items-center gap-3">
+      <div class="page-icon">
+        <i class="bi bi-shield-shaded"></i>
+      </div>
+      <div>
+        <h1 class="page-title">ARMORS</h1>
+        <p class="page-subtitle">Manage protective equipment and gear</p>
+      </div>
+    </div>
+    
+    {% if current_user.is_authenticated %}
+    <button class="btn btn-add-armor" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAddForm">
+      <i class="bi bi-plus-circle-fill me-2"></i>Forge New Armor
+    </button>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Add Armor Form (Collapsed) -->
+{% if current_user.is_authenticated %}
+<div class="collapse mb-4" id="collapseAddForm">
+  <div class="add-form-card">
+    <div class="add-form-header">
+      <h5><i class="bi bi-hammer me-2"></i>Forge New Armor</h5>
+    </div>
+    <div class="card-body p-4">
+      <form action="{{ url_for('add_armor') }}" method="POST">
+        
+        <!-- Basic Info -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label">Armor Name</label>
+            <input type="text" class="form-control" name="item_name" placeholder="Enter armor name" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Weight (kg)</label>
+            <input type="number" step="0.1" min="0" class="form-control" name="weight" value="0.0" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Culture</label>
+            <select name="culture_id" class="form-select" required>
+              {% for c in cultures %}
+              <option value="{{ c.Culture_Type_ID }}">{{ c.Culture_Type_Name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <!-- Armor Stats -->
+        <div class="filter-section-title">
+          <i class="bi bi-shield-fill-check me-2"></i>Armor Protection Values
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-md-3">
+            <label class="form-label">Head Armor</label>
+            <input type="number" min="0" class="form-control" id="head_armor" name="head_armor" value="0">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Body Armor</label>
+            <input type="number" min="0" class="form-control" id="body_armor" name="body_armor" value="0">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Leg Armor</label>
+            <input type="number" min="0" class="form-control" id="leg_armor" name="leg_armor" value="0">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Arm Armor</label>
+            <input type="number" min="0" class="form-control" id="arm_armor" name="arm_armor" value="0">
+          </div>
+        </div>
+
+        <!-- Additional Info -->
+        <div class="filter-section-title">
+          <i class="bi bi-gear-fill me-2"></i>Additional Properties
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-md-3">
+            <label class="form-label">Armor Rating</label>
+            <input type="number" min="0" class="form-control" name="armor_rating" value="0">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Total (Auto-Calculated)</label>
+            <input type="number" class="form-control" id="total_armor_rating" name="total_armor_rating" value="0" readonly>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Material</label>
+            <input type="text" class="form-control" name="material" placeholder="e.g., Iron, Steel">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Merchandise</label>
+            <select class="form-select" name="merchandise">
+              <option value="No">No</option>
+              <option value="Yes">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Civilian Checkbox -->
+        <div class="form-check form-switch mb-4">
+          <input class="form-check-input" type="checkbox" name="civilian" id="civilianCheck">
+          <label class="form-check-label text-white" for="civilianCheck">
+            <i class="bi bi-person-fill me-2"></i>Civilian Equipment
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-grid">
+          <button type="submit" class="btn btn-forge">
+            <i class="bi bi-check-circle-fill me-2"></i>Save to Inventory
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Filters Section -->
+<div class="filters-card">
+  <div class="filters-header">
+    <div class="d-flex justify-content-between align-items-center">
+      <h5><i class="bi bi-funnel-fill me-2"></i>Advanced Filters</h5>
+      <button class="btn btn-filters btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilters">
+        <i class="bi bi-chevron-down"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="collapse show" id="collapseFilters">
+    <div class="card-body p-4">
+      <form action="{{ url_for('armors_page') }}" method="GET">
+        
+        <!-- Basic Filters -->
+        <div class="filter-section-title">
+          <i class="bi bi-search me-2"></i>Basic Search
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-md-4">
+            <label class="form-label">Armor Name</label>
+            <input type="search" class="form-control" name="search_name" placeholder="Search by name..." 
+                   value="{{ request.args.get('search_name', '') }}">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Culture</label>
+            <select name="search_culture" class="form-select">
+              <option value="">All Cultures</option>
+              {% for c in cultures %}
+              <option value="{{ c.Culture_Type_ID }}" 
+                      {% if request.args.get('search_culture')|int == c.Culture_Type_ID %}selected{% endif %}>
+                {{ c.Culture_Type_Name }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Material</label>
+            <select name="search_material" class="form-select">
+              <option value="">All Materials</option>
+              {% for m in materials %}
+              <option value="{{ m.Material }}" 
+                      {% if request.args.get('search_material') == m.Material %}selected{% endif %}>
+                {{ m.Material }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <!-- Range Filters -->
+        <div class="filter-section-title">
+          <i class="bi bi-sliders me-2"></i>Armor Value Ranges
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-md-3">
+            <label class="form-label">Body Armor (Min-Max)</label>
+            <div class="input-group">
+              <input type="number" min="0" class="form-control" name="min_body" placeholder="Min" 
+                     value="{{ request.args.get('min_body','') }}">
+              <input type="number" min="0" class="form-control" name="max_body" placeholder="Max" 
+                     value="{{ request.args.get('max_body','') }}">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Head Armor (Min-Max)</label>
+            <div class="input-group">
+              <input type="number" min="0" class="form-control" name="min_head" placeholder="Min" 
+                     value="{{ request.args.get('min_head','') }}">
+              <input type="number" min="0" class="form-control" name="max_head" placeholder="Max" 
+                     value="{{ request.args.get('max_head','') }}">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Leg Armor (Min-Max)</label>
+            <div class="input-group">
+              <input type="number" min="0" class="form-control" name="min_leg" placeholder="Min" 
+                     value="{{ request.args.get('min_leg','') }}">
+              <input type="number" min="0" class="form-control" name="max_leg" placeholder="Max" 
+                     value="{{ request.args.get('max_leg','') }}">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Total Armor (Min-Max)</label>
+            <div class="input-group">
+              <input type="number" min="0" class="form-control" name="min_total" placeholder="Min" 
+                     value="{{ request.args.get('min_total','') }}">
+              <input type="number" min="0" class="form-control" name="max_total" placeholder="Max" 
+                     value="{{ request.args.get('max_total','') }}">
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="d-flex justify-content-end gap-2">
+          <a href="{{ url_for('armors_page') }}" class="btn btn-outline-secondary px-4">
+            <i class="bi bi-arrow-counterclockwise me-2"></i>Reset
+          </a>
+          <button type="submit" class="btn btn-filters px-4">
+            <i class="bi bi-check2-circle me-2"></i>Apply Filters
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Armors Table -->
+<div class="armors-table-card">
+  <div class="table-header">
+    <div class="table-header-title">
+      <div class="table-icon">
+        <i class="bi bi-shield-fill-check"></i>
+      </div>
+      <div>
+        <h5>Armor Inventory</h5>
+        <small class="text-white-50">{{ armors|length }} items found</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-dark table-hover mb-0">
+      <thead>
+        <tr>
+          <th class="ps-4">Armor Name</th>
+          <th>Culture</th>
+          <th class="text-center">Body</th>
+          <th class="text-center">Leg</th>
+          <th class="text-center">Head</th>
+          <th class="text-center">Arm</th>
+          <th class="text-center">Total</th>
+          <th>Material</th>
+          <th class="text-end pe-4">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for a in armors %}
+        <tr>
+          <td class="ps-4">
+            <div class="item-name">{{ a.Item_Name }}</div>
+            {% if a.Civilian == 'Yes' %}
+            <small class="text-info"><i class="bi bi-person-fill"></i> Civilian</small>
+            {% endif %}
+          </td>
+          <td>
+            <span class="culture-badge">{{ a.Culture }}</span>
+          </td>
+          <td class="text-center">
+            <span class="stat-badge stat-body">{{ a.Body_Armor_Rating }}</span>
+          </td>
+          <td class="text-center">
+            <span class="stat-badge stat-leg">{{ a.Leg_Armor_Rating }}</span>
+          </td>
+          <td class="text-center">
+            <span class="stat-badge stat-head">{{ a.Head_Armor_Rating }}</span>
+          </td>
+          <td class="text-center">
+            <span class="stat-badge stat-arm">{{ a.Arm_Armor_Rating }}</span>
+          </td>
+          <td class="text-center">
+            <span class="stat-badge stat-total">{{ a.Total_Armor_Rating }}</span>
+          </td>
+          <td>
+            <span class="material-badge">{{ a.Material }}</span>
+          </td>
+          <td class="text-end pe-4">
+            <div class="action-btn-group">
+              <a href="{{ url_for('item_details_page', item_id=a.Item_ID) }}" 
+                 class="btn btn-action btn-view" title="View Details">
+                <i class="bi bi-eye-fill"></i>
+              </a>
+              
+              {% if current_user.is_authenticated %}
+              <a href="{{ url_for('update_page', item_id=a.Item_ID) }}" 
+                 class="btn btn-action btn-edit" title="Edit Armor">
+                <i class="bi bi-pencil-square"></i>
+              </a>
+              <form action="{{ url_for('delete_armor', item_id=a.Item_ID) }}" method="POST" 
+                    class="d-inline" onsubmit="return confirm('Delete {{ a.Item_Name }}?');">
+                <button type="submit" class="btn btn-action btn-delete" title="Delete Armor">
+                  <i class="bi bi-trash-fill"></i>
+                </button>
+              </form>
+              {% endif %}
+            </div>
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="9" class="text-center py-5">
+            <i class="bi bi-inbox fs-1 text-secondary d-block mb-3"></i>
+            <p class="text-secondary mb-0">No armors found. Try adjusting your filters or add a new armor.</p>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
+

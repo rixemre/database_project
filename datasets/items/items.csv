@@ -1,0 +1,1025 @@
+Item_ID,Item_Type_ID,Culture_ID,Item_Name,Weight,Civilian
+1,1,2,Falx Knife,0.82,Yes
+2,1,2,Highland Dagger,0.78,Yes
+3,1,3,Pugio,0.76,Yes
+4,1,6,Seax,0.44,Yes
+5,1,3,Xiphos,0.93,Yes
+6,1,5,Falchion,1.69,Yes
+7,1,3,Iron Spatha,1.69,Yes
+8,1,2,Ridged Iron Broadsword,2.09,Yes
+9,1,5,Simple Bastard Sword,1.25,Yes
+10,1,5,Simple Scimitar,1.23,Yes
+11,1,6,Tapered Blade,1.11,Yes
+12,1,6,Backsword,1.18,Yes
+13,1,2,Broad Ridged Shortsword,1.35,Yes
+14,1,2,Broadsword,1.75,Yes
+15,1,6,Gold Bound Short Warsword,1.34,Yes
+16,1,7,Iron Arming Sword,1.34,Yes
+17,1,1,Iron Flyssa,1.53,Yes
+18,1,4,Iron Saber,1.23,Yes
+19,1,1,Iron Scimitar,1.38,Yes
+20,1,3,Iron Spatha,1.3,Yes
+21,1,7,Short Sword,1.49,Yes
+22,1,5,Star Falchion,2.3,No
+23,1,5,Cleaver,1.8,No
+24,1,5,Narrow Sword,1.52,Yes
+25,1,6,Pointy Warsword,1.14,Yes
+26,1,5,Broad Falchion,2.14,No
+27,1,4,Broad Ild,1.39,Yes
+28,1,7,Decorated Fullered Sword,1.54,Yes
+29,1,6,Decorated Long Warsword,1.54,Yes
+30,1,1,Fine Steel Long Kaskara,"1,84",No
+31,1,3,Fine Steel Paramerion,1.5,No
+32,1,3,Fine Steel Spatha,1.48,Yes
+33,1,6,Fullered Narrow Warsword,1.23,Yes
+34,1,4,Long Saber,1.4,Yes
+35,1,6,Long Warsword,1.41,Yes
+36,1,5,Pointed Falchion,1.68,No
+37,1,7,Ridged Tipped Arming Sword,1.45,Yes
+38,1,3,Spatha with Narrow Fuller,1.37,Yes
+39,1,5,Scalpel,1.47,No
+40,1,1,Slightly Ridged Flyssa,1.45,No
+41,1,3,Spatha,1.41,Yes
+42,1,4,Straight Saber,1.35,Yes
+43,1,7,The Ambassador,1.69,No
+44,1,6,Tyrhung,1.95,Yes
+45,1,7,Arming Sword with Circle,1.4,Yes
+46,1,5,Broad Arming Sword,1.67,No
+47,1,7,Crescent Guarded Arming Sword,1.37,Yes
+48,1,7,Decorated Arming Sword,1.34,Yes
+49,1,4,Decorated Saber,1.8,No
+50,1,1,Desert Long Sword,1.93,No
+51,1,1,Engraved Angular Kaskara,1.63,Yes
+52,1,2,Fine Steel Cavalry Broadsword,1.49,No
+53,1,4,Fine Steel Saber,1.55,Yes
+54,1,6,Fullered Long Warsword,1.52,Yes
+55,1,4,Heavy Sabre,1.62,Yes
+56,1,2,Highland Fine Steel Blade,1.54,Yes
+57,1,7,Knightly Arming Sword,1.41,Yes
+58,1,1,Long Fine Steel Scimitar,1.7,No
+59,1,1,Narrow Fine Steel Kaskara,1.6,No
+60,1,7,Ridged Arming Sword,1.54,No
+61,1,1,Ridged Saber,1.53,No
+62,1,4,Tall Gripped Ild Sword,1.8,No
+63,1,3,Thamaskene Steel Spathion,1.37,No
+64,1,6,Thamaskene Steel Warsword,1.54,Yes
+65,1,7,Wide Fullered Broad Arming Sword,1.9,No
+66,1,2,Decorated Broadsword,1.17,Yes
+67,1,1,Decorated Kaskara,1.73,Yes
+68,1,1,Decorated Long Scimitar,1.78,Yes
+69,1,1,Decorated Scimitar with Wide Grip,1.73,Yes
+70,1,2,Engraved Backsword,1.77,Yes
+71,1,4,Lion Imprinted Saber,1.7,No
+72,1,1,Thamaskene Steel Kaskara,1.43,No
+73,1,5,Hatchet,1.05,Yes
+74,1,5,Pickaxe,1.05,Yes
+75,1,5,Sickle,1.18,Yes
+76,1,1,Bamboo Handled Ascia Axe,1.02,No
+77,1,1,Bamboo Handled Axe,0.96,No
+78,1,5,Galloglaich Axe,1.03,No
+79,1,7,Infantry Axe,0.92,No
+80,1,5,Norse Hatchet,1.09,No
+81,1,5,Small Bit Axe,1.12,No
+82,1,5,Small Spurred Axe,1.05,No
+83,1,1,Wood Splitter Axe,1.15,No
+84,1,5,Broad Tzikourion,1.23,No
+85,1,6,Commoner Axe,0.94,No
+86,1,5,Large Franziska Axe,1.21,No
+87,1,6,Simple Raider Battle Axe,1.15,No
+88,1,3,Tzikourion,1.08,No
+89,1,2,Woodland Axe,1.27,No
+90,1,1,Bamboo Axe,1.21,No
+91,1,5,Battle Axe,1.01,No
+92,1,2,One Handed Bearded Axe,1.03,No
+93,1,5,Spiked Battle Axe,1.1,No
+94,1,6,Veteran Warrior Axe,1.19,No
+95,1,6,Rectangular Bitted Axe,1.05,No
+96,1,2,Round Bitted Fine Steel Hatchet,1.05,No
+97,1,5,Wooden Hammer,1.48,Yes
+98,1,5,Blacksmith Hammer,1.4,Yes
+99,1,2,Knobbed Club,1.34,No
+100,1,5,Spiked Club,1.14,No
+101,1,5,Spiked Mace,1.38,No
+102,1,1,Fullered Light Mace,1.32,No
+103,1,2,Highland Spiked Club,1.42,No
+104,1,4,Steppe Light Mace,1.73,No
+105,1,1,Heavy Horseman Mace,1.86,No
+106,1,2,Highland Mace,2.13,No
+107,1,5,Judgement,1.83,No
+108,1,1,Light Mace,1.8,No
+109,1,5,Morningstar,2.16,No
+110,1,5,Steel Shestopyor,2.24,No
+111,1,5,Light Mace,1.8,No
+112,1,3,Calradic Mace,1.8,No
+113,1,4,Eastern Heavy Mace,2.35,No
+114,1,4,Fine Steel Mace,2.12,No
+115,1,7,Fullered Cavalry Mace,2.1,No
+116,1,3,Imperial Light Mace,1.9,No
+117,1,1,Light Shishpar Mace,1.57,No
+118,1,1,Spiralled Mace,2.05,No
+119,1,3,Cataphract Mace,2.23,No
+120,1,4,Heavy Flanged Mace,2.29,No
+121,1,3,Light Royal Mace,2.3,No
+122,1,7,Pernach,1.92,No
+123,1,4,Steel Mace,1.88,No
+124,1,3,Justicier,1.41,Yes
+125,1,2,Battanian Mountain Blade,1.22,Yes
+126,1,1,Broad Kaskara,1.52,No
+127,1,2,Early Retirement,1.32,No
+128,1,2,Falx,1.52,No
+129,1,6,Fine Steel Two Handed Sword,1.48,Yes
+130,1,2,Highland Broadsword,1.85,Yes
+131,1,2,Highland Fine Two Handed Sword,1.63,Yes
+132,1,2,Reaper,1.64,No
+133,1,5,Ridged Great Saber,1.86,No
+134,1,1,Ridged Long Kaskara,1.76,Yes
+135,1,7,Tapered Two-Hander,1.67,Yes
+136,1,5,Two-Handed Cleaver,2.28,No
+137,1,5,War Razor,1.54,No
+138,1,2,Iron Broadsword,1.99,Yes
+139,1,7,Broad Two Hander,1.67,No
+140,1,2,Northlander Wide Fullered Greatsword,2.08,Yes
+141,1,7,Sentinel,1.88,Yes
+142,1,7,Thamaskene Steel Two Hander,2.04,No
+143,1,7,Wide Fullered Broad Two Hander,1.92,No
+144,1,5,Hoe*,1.57,Yes
+145,1,5,Simple Sparth Axe,1.13,No
+146,1,2,Square Bit Two Handed Axe,1.4,No
+147,1,5,Bearded Axe,1.12,No
+148,1,5,Black Heart,1.64,No
+149,1,1,Executioner Axe,1.88,No
+150,1,7,Hooked Cavalry Axe,1.52,No
+151,1,6,Northlander Broad Axe,1.3,No
+152,1,7,Short Bill,1.72,No
+153,1,1,Short Handled Bardiche,1.6,No
+154,1,6,Avalanche,1.36,No
+155,1,6,Drilled Two Handed Axe,1.32,No
+156,1,1,Heavy Executioner Axe,1.49,No
+157,1,6,Northlander Decorated Two Handed Axe,1.68,No
+158,1,2,Sledgehammer,1.96,Yes
+159,1,5,Iron Pitchfork,1.92,Yes
+160,1,5,Pitchfork,1.47,Yes
+161,1,6,Military Fork,2.17,No
+162,1,5,Short Militia Spear,1.94,No
+163,1,7,Simple Commoner Spear,1.83,No
+164,1,6,Short Simple Raider Spear,2.11,No
+165,1,4,Weighted Steppe Spear,1.73,No
+166,1,5,Broad Leaf Shaped Spear,1.79,No
+167,1,1,Knob Headed Spear,1.82,No
+168,1,1,Knob Headed Spear with Frills,1.82,No
+169,1,3,Light Cavalry Lance,1.95,No
+170,1,7,Light Lance,2.12,No
+171,1,4,Light Steppe Rider Spear,1.91,No
+172,1,4,Long Narrow Headed Spear,2.17,No
+173,1,4,Narrow Long Headed Spear,2.17,No
+174,1,2,Reinforced Highland Spear,2.46,No
+175,1,7,Tall Tipped Long Spear,2.07,No
+176,1,7,Tall Tipped Spear,2.1,No
+177,1,5,Triangular Headed Spear,1.83,No
+178,1,6,Druzhinnik Lance,1.88,No
+179,1,1,Fine Steel Leaf Spear,2.01,No
+180,1,5,Fine Steel Spear,2,No
+181,1,4,Heavy Cavalry Lance,1.94,No
+182,1,6,Jagged Fine Steel Spear,1.87,No
+183,1,7,Knight Lance,1.99,No
+184,1,5,Long Fine Steel Spear,2.06,No
+185,1,1,Long Thamaskene Tipped Spear,1.96,No
+186,1,1,Mamluke Lance,1.85,No
+187,1,2,Steel Tipped Hooked Spear,2.03,No
+188,1,5,Wide Leaf Spear,2.02,No
+189,1,6,Fine Steel Hewing Spear,1.92,No
+190,1,6,Heavy Druzhinnik Lance,2.16,No
+191,1,7,Heavy Knight Lance,2.21,No
+192,1,2,Highland War Spear,1.85,No
+193,1,4,Jagged Throwing Spear*,1.43,No
+194,1,4,Noble Cavalry Lance,1.9,No
+195,1,3,Pilum*,1.19,No
+196,1,4,Thin Fine Steel Hewing Spear,1.4,No
+197,1,3,Fine Steel Menavlion,1.81,No
+198,1,4,Glaive,2.04,No
+199,1,4,Long Glaive,1.4,No
+200,1,3,Menavlion,1.81,No
+201,1,1,Polesword,2.45,No
+202,1,7,Voulge,1.51,No
+203,1,5,Simple Pike,1.62,No
+204,1,5,Scythe,2.7,Yes
+205,1,5,Notched Military Fork,2.09,No
+206,1,5,Fine Pike,2.81,No
+207,1,3,Courser Lance,2.22,No
+208,1,5,Thamaskene Pike,2.78,No
+209,1,3,Cataphract Lance,2.04,No
+210,1,7,Pike,3.19,No
+211,1,7,Billhook,1.69,No
+212,1,2,Rhomphaia,1.2,No
+213,1,6,Warrazor,1.83,No
+214,2,5,Hunting Bow,0.3,Yes
+215,2,2,Mountain Hunting Bow,0.3,Yes
+216,2,4,Steppe Bow,0.3,Yes
+217,2,5,Ranger Bow,0.4,No
+218,2,5,Longbow,0.4,No
+219,2,7,Lowland Longbow,0.5,No
+220,2,6,Nordic Shortbow,0.3,Yes
+221,2,5,Simple Short Bow,0.3,Yes
+222,2,4,Heavy Recurve Bow,0.3,No
+223,2,1,Nomad Bow,0.5,Yes
+224,2,4,Steppe Recurve Bow,0.3,No
+225,2,4,Steppe War Bow,0.3,No
+226,2,2,Woodland Yew Bow,0.5,No
+227,2,7,Yew Bow,0.5,No
+228,2,1,Strong Tribesman Bow,0.3,No
+229,2,2,Woodland Longbow,0.1,No
+230,2,5,Noble Bow,0.8,No
+231,2,5,Noble Long Bow,0.8,No
+232,2,5,Simple Light Crossbow,1,Yes
+233,2,5,Heavy Crossbow,2.7,No
+234,2,7,Light Crossbow,2.2,Yes
+235,2,7,Arbalest,3,No
+236,2,7,Fine Light Crossbow,2.2,Yes
+237,2,3,Hickory Crossbow,2.2,No
+238,2,7,Bound Crossbow,2,No
+239,2,5,Arrows,0.7,Yes
+240,2,5,Barbed Arrows,1.2,Yes
+241,2,5,Lowland Arrows,0.5,Yes
+242,2,5,Range Arrows,0.5,Yes
+243,2,4,Steppe Arrows,0.8,Yes
+244,2,5,Light Bodkin Arrows,1,Yes
+245,2,5,Bodkin Arrows,1.5,Yes
+246,2,5,Piercing Arrows,2,Yes
+247,2,5,Stacked Bodkin Arrows,1.2,Yes
+248,2,4,Stacked Steppe Arrows,1.1,No
+249,2,7,Francesca,2.04,No
+250,2,2,Highland Throwing Axe*,2.16,No
+251,2,2,Highland Throwing Axe*,2.07,No
+252,2,6,Raider Throwing Axe,2.13,No
+253,2,1,Tribesman Throwing Axe,2.07,Yes
+254,2,5,Broad Bladed Throwing Knives,2.88,Yes
+255,2,2,Highland Throwing Dagger,2.4,Yes
+256,2,2,Leafblade Throwing Knife,2.58,Yes
+257,2,7,Lowland Throwing Knife,2.43,Yes
+258,2,5,Tribesman Throwing Daggers,2.58,Yes
+259,2,5,Simple Javelin,3.64,Yes
+260,2,6,Fish Harpoon,3.92,No
+261,2,5,Jagged Javelin,3.64,No
+262,2,5,Horseman Javelin,5.55,Yes
+263,2,6,Harpoon,6.75,Yes
+264,2,7,Lowland Javelin,6,No
+265,2,2,Woodland Javelin,5,No
+266,2,6,Broad Blade Javelin,5.55,No
+267,2,7,Hooked Javelin,7.05,No
+268,2,1,Jereed,6,No
+269,3,7,Aketon,3.4,No
+270,3,7,Aproned Dress,0.7,Yes
+271,3,4,Aproned Feminine Coat,0.8,Yes
+272,3,2,Armored Baggy Trunks,0.3,No
+273,3,8,Auxiliary Armor,1.9,No
+274,3,8,Auxiliary Armor with Straps,2,No
+275,3,2,Baggy Trunks,0.2,Yes
+276,3,7,Banded Leather over Mail,8.6,No
+277,3,4,Belted Leather Cuirass,1.9,No
+278,3,6,Belted Tunic,0.3,Yes
+279,3,8,Boarskin Leather Coat,5.1,No
+280,3,7,Brigandine over Hauberk,28.6,No
+281,3,7,Brigandine over Mail,23.2,No
+282,3,4,Brigandine Vest,14.2,No
+283,3,2,Bronze Breastplate,8.5,Yes
+284,3,4,Bronze Lamellar over Mail,22,No
+285,3,1,Bronze Lamellar Vest over Gambeson,9.5,No
+286,3,6,Bronze Scale Vest,14,No
+287,3,6,Bronze Scale Vest over Gambeson,15,No
+288,3,9,Buckled Mail Armor,12.3,No
+289,3,9,Burlap Dress,0.5,Yes
+290,3,2,Burlap Waistcoat,0.4,Yes
+291,3,8,Cataphract Lamellar Armor,22.1,No
+292,3,1,Cavalry Lamellar Armor,18,No
+293,3,8,Cavalryman Mail Shirt,8.3,No
+294,3,9,Cheap Colored Clothes,1.8,No
+295,3,9,Cheap Paddings,2.9,No
+296,3,5,Cloth Apron,0.8,Yes
+297,3,6,Coat Of Plates,21,No
+298,3,4,Coat with Mirrored Belt,2.4,Yes
+299,3,6,Cold Weather Dress,0.7,Yes
+300,3,1,Colored Bisht,1,Yes
+301,3,1,Colored Kaftan,0.9,Yes
+302,3,8,Commoner Clothes,0.5,Yes
+303,3,9,Commoner Shirt,0.5,Yes
+304,3,9,Commoner Tunic,0.6,Yes
+305,3,7,Corseted Dress,0.5,Yes
+306,3,4,Crude Hide Armor,2.4,No
+307,3,4,Cured Leather Lamellar Armor,14,No
+308,3,6,Cured Leather Lamellar Shirt,8.9,No
+309,3,8,Cured Studded Leather Armor,3,No
+310,3,6,Cut Dress with Pouch,0.5,Yes
+311,3,6,Decorated Hauberk,14.5,No
+312,3,8,Decorated Legionary Mail,22,No
+313,3,6,Decorated Thick Tunic,0.6,Yes
+314,3,6,Dress,0.5,Yes
+315,3,4,Dress with Fur,0.9,Yes
+316,3,9,Dummy Higher Average,30,No
+317,3,9,Dummy Lower Average,20,No
+318,3,9,Dummy Max Armor,40,No
+319,3,9,Dummy Min Armor,10,No
+320,3,4,Envelope Dress,0.6,Yes
+321,3,1,Feminine Kaftan,0.9,Yes
+322,3,7,Fortified Mercenary Armor,8.2,No
+323,3,6,Frilled Dress,0.6,Yes
+324,3,2,Fur Armor,4,No
+325,3,2,Fur Armor with Strap,3.1,Yes
+326,3,9,Fur Coat over Tunic,2.1,No
+327,3,9,Fur Skirt,0.6,No
+328,3,9,Fur Skirt with Tunic,0.9,No
+329,3,6,Fur Trimmed Short Tunic,0.4,Yes
+330,3,6,Fur Trimmed Tunic,0.8,Yes
+331,3,9,Fur Waistcoat over Tunic,2.3,No
+332,3,1,Gambeson over Mail Armor,11,No
+333,3,5,Half Apron,0.7,Yes
+334,3,7,Heavy Aketon,2,Yes
+335,3,6,Heavy Lamellar over Hauberk,23.8,No
+336,3,6,Heavy Lamellar over Mail,23.6,No
+337,3,6,Heavy Lamellar over Mail Armor,24,No
+338,3,6,Heavy Lamellar Vest,8.3,No
+339,3,6,Heavy Lamellar Vest,6.2,No
+340,3,7,Heavy Mail Hauberk,12,No
+341,3,7,Heavy Mail Shirt,9.5,No
+342,3,2,Heavy Mail Shirt with Wide Belt,14,No
+343,3,2,Heavy Mail Vest,10.7,No
+344,3,1,Heavy Ring Mail,10.5,No
+345,3,8,Heavy Scale Armor over Mail Hauberk,18.2,No
+346,3,6,Heavy Tunic,1,Yes
+347,3,8,Hemp Tunic,0.4,Yes
+348,3,2,Highborn Mail Armor,19.6,No
+349,3,2,Highland Kilt over Tartan Trousers,0.8,Yes
+350,3,2,Highland Long Tartan,2.4,Yes
+351,3,2,Highland Mail Shirt,10.7,No
+352,3,2,Highland Reinforced Mail,16.6,No
+353,3,2,Highland Reinforced Mail over Tartan,14.7,No
+354,3,2,Highland Scale Armor over Cloth,11.4,No
+355,3,2,Highland Scale Armor over Mail Armor,22.4,No
+356,3,2,Highland Tartan,3.2,Yes
+357,3,2,Highland Tartan with Chest Plate,6.5,No
+358,3,6,Huscarl Decorated Mail Shirt,10.7,No
+359,3,6,Huscarl Hauberk,8.3,No
+360,3,6,Huscarl Mail Shirt,10.7,No
+361,3,8,Infantryman Gambeson,2.1,Yes
+362,3,8,Infantryman Gambeson over Leather Jacket,1.8,Yes
+363,3,8,Infantryman Gambeson with Skirts,2,Yes
+364,3,8,Infantryman Gambeson with Straps,1.6,Yes
+365,3,8,Infantryman Long Gambeson,1.5,Yes
+366,3,8,Infantryman Mail over Leather,8.6,No
+367,3,8,Infantryman Mail over Striped Leather,10.2,No
+368,3,8,Infantryman Mail Vest,9.8,No
+369,3,8,Infantryman Rough Gambeson,2.8,Yes
+370,3,1,Kaftan with Leather Belt,1.1,Yes
+371,3,1,Kaftan with Waistband,0.8,Yes
+372,3,4,Khan's Coat of Plates,26.5,No
+373,3,2,Kilt over Plated Leather,13.6,No
+374,3,6,Laced Dress,0.6,Yes
+375,3,8,Ladies Dress,0.7,Yes
+376,3,8,Lamellar with Scale Skirt,24.1,No
+377,3,4,Lancer Lamellar Armor,13,No
+378,3,6,Layered Leather Tunic,1.2,Yes
+379,3,1,Layered Robe,2,Yes
+380,3,5,Leather Apron,2.5,Yes
+381,3,8,Leather Armor,3.1,No
+382,3,6,Leather Armor over Heavy Cloth,1.8,Yes
+383,3,6,Leather Armor with Iron Plates,9.6,No
+384,3,7,Leather Coat over Cloth,0.7,Yes
+385,3,7,Leather Scale Armor,6.9,Yes
+386,3,1,Leather Strips over Padded Robe,5.5,Yes
+387,3,6,Leather Tabard,4.4,No
+388,3,6,Leather Tabard over Mail,10,No
+389,3,7,Leather Tunic,2.3,Yes
+390,3,8,Leather Tunic,2.1,Yes
+391,3,8,Legionary Mail,19,No
+392,3,1,Light Lamellar Armor,16.5,No
+393,3,1,Light Long Padded Armor,1.3,Yes
+394,3,6,Light Padded Armor,1.6,Yes
+395,3,6,Light Tunic,0.4,Yes
+396,3,2,Long Fur Coat,2.6,Yes
+397,3,7,Long Hemp Tunic,0.6,Yes
+398,3,1,Long Padded Robe,3.9,Yes
+399,3,1,Long Simple Robe,1.6,Yes
+400,3,6,Long Tunic,0.4,Yes
+401,3,7,Long Woolen Tunic,0.4,Yes
+402,3,2,Luxury Brigandine,24,No
+403,3,4,Luxury Coat,2.7,Yes
+404,3,1,Luxury Kaftan,0.8,Yes
+405,3,1,Luxury Kaftan with Waistband,0.8,Yes
+406,3,8,Luxury Lamellar Vest over Leather,15,No
+407,3,1,Luxury Scale Armor,20,No
+408,3,4,Luxury Thick Coat,2.7,Yes
+409,3,6,Luxury Tunic,0.6,Yes
+410,3,7,Mail Shirt,7.5,No
+411,3,1,Mastercrafted Southern Scale Mail,18,No
+412,3,1,Mastercrafted Southern Scale over Chain Hauberk,28,No
+413,3,1,Mastercrafted Southern Scale over Chain Mail,22,No
+414,3,5,Merchant Fur Coat,2.9,Yes
+415,3,8,Military Tunic,0.6,Yes
+416,3,4,Mirrored Brigandine Armor,18.6,No
+417,3,4,Mirrored Leather Armor,2.4,No
+418,3,9,Old Fur Armor,0.9,Yes
+419,3,9,Old Fur Coat,1,Yes
+420,3,8,Ornate Legionary Scale Mail,28,No
+421,3,8,Ornate Scale Armor,16,No
+422,3,8,Padded Cloth with Strips,2.2,No
+423,3,7,Padded Footman Coat,2.4,No
+424,3,9,Padded Leather Overcoat,3.2,No
+425,3,7,Padded Leather Shirt,1.8,Yes
+426,3,7,Padded Short Coat,2.2,No
+427,3,8,Patched Gambeson,2.4,Yes
+428,3,2,Plaid Dress,0.9,Yes
+429,3,6,Plain Dress,0.5,Yes
+430,3,9,Ragged Robes,0.9,Yes
+431,3,2,Ranger Mail,12,No
+432,3,8,Red Dress,0.6,Yes
+433,3,7,Red Tabard over Mail Hauberk,15,No
+434,3,4,Reinforced Leather Armor,11.1,No
+435,3,4,Reinforced Mirror Armor,2.4,Yes
+436,3,4,Reinforced Suede Armor,2.3,No
+437,3,6,Reinforced Thick Tunic,1.1,Yes
+438,3,8,Rich Dress,0.5,Yes
+439,3,8,Rich Tunic,0.4,Yes
+440,3,1,Ring Mail,4.4,No
+441,3,1,Robe over Mail Hauberk,8.9,No
+442,3,1,Robe over Mail Shirt,8.2,No
+443,3,7,Rough Brigandine,19,No
+444,3,9,Rough Fur Armor,1.3,No
+445,3,9,Rough Fur over Mail,14,No
+446,3,2,Rough Scale Mail,12.8,No
+447,3,6,Roughcloth Shortcoat,0.4,Yes
+448,3,9,Rugged Gambeson,2.2,Yes
+449,3,2,Rugged Scale Armor,10.7,No
+450,3,7,Sackcloth Tunic,0.6,Yes
+451,3,2,Scale Warlord Armor,19,No
+452,3,7,Scholar Robe,0.5,Yes
+453,3,6,Short Gambeson over Tunic,1.5,Yes
+454,3,1,Short Padded Robe,1.3,Yes
+455,3,8,Short Tunic,1,Yes
+456,3,1,Silk Kaftan,0.4,Yes
+457,3,7,Silken Noble Dress,0.6,Yes
+458,3,7,Simple Cloth Tunic,0.4,Yes
+459,3,1,Simple Kaftan,1.6,Yes
+460,3,1,Simple Peasant Robe,1.1,Yes
+461,3,6,Sleeved Heavy Tunic,0.9,Yes
+462,3,9,Sleeveless Enveloped Padded Garments,0.5,Yes
+463,3,9,Sleeveless Fur Coat,1.8,No
+464,3,7,Sleeveless Padded Coat,2.2,No
+465,3,7,Sleeveless Padded Short Coat,2,Yes
+466,3,2,Sleeveless Studded Fur Armor,0.4,Yes
+467,3,6,Sloven Leather,2.9,No
+468,3,1,Southern Chain Mail,17,No
+469,3,1,Southern Decorated Chain Mail,18,No
+470,3,1,Southern Mail Shirt with Brass Plates,18,No
+471,3,1,Southern Reinforced Mail Armor,22,No
+472,3,1,Southern Reinforced Mail Vest,15,No
+473,3,1,Southern Reinforced Short Mail Armor,18,No
+474,3,1,Southern Reinforced Sleeveless Mail Armor,19,No
+475,3,1,Southern Sleeveless Mail Shirt with Brass Plates,15,No
+476,3,4,Steppe Robe,0.4,Yes
+477,3,4,Stitched Cured Leather Coat,8.4,No
+478,3,1,Stitched Leather over Mail,15.1,No
+479,3,6,Stitched Leather Vest,1.5,Yes
+480,3,4,Striped Coat,0.6,Yes
+481,3,9,Studded Fur Armor,1.2,Yes
+482,3,4,Studded Leather Armor,2.4,No
+483,3,1,Studded Leather Coat,1.6,No
+484,3,4,Studded Leather over Aketon,4.4,No
+485,3,4,Studded Leather Waistcoat,0.7,Yes
+486,3,1,Tailored Dress,0.7,Yes
+487,3,2,Tartan Dress,0.7,Yes
+488,3,2,Tartan Long Dress,0.7,Yes
+489,3,2,Tartan Toga,0.7,Yes
+490,3,2,Tartan Tunic,0.6,Yes
+491,3,1,Tassled Robes,0.9,Yes
+492,3,9,Tattered Rags,0.3,Yes
+493,3,1,Thawb,1.1,Yes
+494,3,8,Thick Brigandine Vest,4.5,Yes
+495,3,1,Thick Sleeved Robe,1,Yes
+496,3,8,Tied Cloth Tunic,0.4,Yes
+497,3,8,Toga,0.9,Yes
+498,3,9,Torn Padded Garments,0.5,Yes
+499,3,9,Torn Robe,0.4,No
+500,3,2,Townsman Luxury Coat,0.6,Yes
+501,3,6,Tunic with Leather Vest,0.9,Yes
+502,3,8,Tunic with Rolled Cloth,0.7,Yes
+503,3,8,Tunic with Shoulder Pads,0.6,Yes
+504,3,6,Varyag Tunic,0.4,Yes
+505,3,2,Villager Leather Tunic,0.4,Yes
+506,3,1,Villager Short Dress,0.5,Yes
+507,3,2,Villager Thick Dress,0.7,Yes
+508,3,7,White Tabard over Mail Hauberk,15,No
+509,3,2,Wildling Armor,0.8,Yes
+510,3,2,Woodland Cloth Armor,1.5,Yes
+511,3,2,Woodland Commoner Dress,0.8,Yes
+512,3,2,Woodland Garments,1.2,Yes
+513,3,7,Woven Leather Vest,4.7,No
+514,3,8,Austere Crown,0.35,Yes
+515,3,1,Bandit Leather Hood,0.1,Yes
+516,3,6,Battle Crown,2.2,No
+517,3,2,Bear Head,1.4,No
+518,3,1,Brass Southern Closed Helmet,2.5,No
+519,3,1,Brass Southern Closed Helmet with Turban,2.55,No
+520,3,1,Brass Southern Helmet,2.2,No
+521,3,1,Brass Southern Helmet with Leather Flaps,1.8,No
+522,3,1,Brass Southern Helmet with Turban,2.3,No
+523,3,1,Brass Turbaned Helmet with Leather Flaps,1.9,No
+524,3,2,Bronze Cap with Cheek Guards,3,No
+525,3,8,Bronze Nasalhelm over Mail,3.7,No
+526,3,2,Cap with Fur Coif,1.3,No
+527,3,4,Cap with Neck Flap,0.3,Yes
+528,3,7,Cervelliere over Arming Coif,1.9,No
+529,3,7,Cervelliere over Cloth Headwrap,2,No
+530,3,7,Cervelliere over Laced Coif,2.1,No
+531,3,7,Cervelliere over Padded Cap,2.1,No
+532,3,6,Closed Decorated Goggled Helmet,3.8,No
+533,3,1,Closed Head Scarf,0.6,No
+534,3,6,Closed Huscarl Helmet,4.4,No
+535,3,7,Closed Knight Helmet,2.2,No
+536,3,6,Closed Mail Goggled Helmet,3.65,No
+537,3,1,Closed Steel Cap,3.2,No
+538,3,6,Closed Warlord Helmet,3.8,No
+539,3,8,Cloth Coif,0.2,Yes
+540,3,7,Cloth Headwrap,0.4,Yes
+541,3,2,Cloth Hood,0.3,No
+542,3,1,Colored Hijab,0.1,Yes
+543,3,1,Colored Keffiyeh,0.1,Yes
+544,3,1,Colored Turban,0.2,Yes
+545,3,7,Crowned Helmet,3.4,No
+546,3,7,Crowned Plate Helmet,3.6,No
+547,3,2,Decorated Bronze Helmet with Cheek Guards,3.3,No
+548,3,4,Decorated Nomad Cap,0.4,Yes
+549,3,1,Desert Headdress,0.2,Yes
+550,3,1,Desert Headscarf,0.3,Yes
+551,3,1,Emir Helmet,3,No
+552,3,8,Feathered Spangenhelm,3.2,No
+553,3,8,Feathered Spangenhelm over Coif,3.1,No
+554,3,8,Feathered Spangenhelm over Leather,3.2,No
+555,3,8,Feathered Spangenhelm over Mail,3.4,No
+556,3,1,Female Headwrap,0.1,Yes
+557,3,7,Female Rural Headwrap,0.3,Yes
+558,3,7,Female Rural Scarf,0.2,Yes
+559,3,2,Fringed Bronze Cap with Cheek Guards,3.2,No
+560,3,2,Fringed Decorated Bronze Cap with Cheek Guards,3.3,No
+561,3,2,Fringed Decorated Steel Cap with Cheek Guards,3.1,No
+562,3,2,Fringed Steel Cap with Cheek Guards,3,No
+563,3,7,Full Helm over Arming Coif,3,No
+564,3,7,Full Helm over Cloth Headwrap,3.2,No
+565,3,7,Full Helm over Laced Coif,3.25,No
+566,3,7,Full Helm over Mail Coif,3.7,No
+567,3,7,Full Helm over Padded Cap,3.1,No
+568,3,7,Full Helm over Padded Cloth,3.6,No
+569,3,6,Fur Cap,0.5,Yes
+570,3,6,Fur Cap with Ear Flaps,0.4,Yes
+571,3,6,Fur Rimmed Cap,0.3,Yes
+572,3,4,Furred Noble Lancer Helmet,3.4,No
+573,3,8,Goggled Cataphract Helmet,3.2,No
+574,3,6,Goggled Helmet over Leather,3.1,No
+575,3,6,Goggled Helmet over Mail,3.4,No
+576,3,8,Golden Laurel Crown,0.3,Yes
+577,3,6,Head Scarf,0.2,Yes
+578,3,1,Headscarf with Fez,0.4,Yes
+579,3,6,Heavy Cavalry Helmet,3.8,No
+580,3,4,Heavy Lancer Helmet,4,No
+581,3,8,Heavy Nasalhelm over Laced Cloth,3.1,No
+582,3,8,Heavy Nasalhelm over Leather,3.4,No
+583,3,8,Heavy Nasalhelm over Mail,3.6,No
+584,3,8,Heavy Nasalhelm over Padding,3,No
+585,3,8,Helmet with Faceguard,2.5,No
+586,3,1,Helmet with Open Turban,2.1,No
+587,3,1,Helmet with Turban and Coif,2.2,No
+588,3,9,Hide Cap,0.45,No
+589,3,2,Highland Ceremonial Crown,0.5,No
+590,3,2,Highland Crowned Helmet,3.4,No
+591,3,1,Hijab,0.5,Yes
+592,3,8,Imperial Jeweled Band,0.85,Yes
+593,3,8,Imperial Jeweled Band,0.5,Yes
+594,3,8,Imperial Jeweled Helmet,3.4,No
+595,3,8,Imperial Plumed Helmet,3.1,No
+596,3,4,Infantry Steel Helmet,2.2,No
+597,3,8,Iron Legionary Helm over Cloth,3.2,No
+598,3,8,Iron Nasalhelm over Coif,3.6,No
+599,3,8,Iron Nasalhelm over Leather,3.5,No
+600,3,8,Iron Nasalhelm over Mail,3.3,No
+601,3,8,Iron Nasalhelm over Padding,3.1,No
+602,3,8,Iron Roundkettle over Leather,2.2,No
+603,3,8,Iron Roundkettle over Mail,2.85,No
+604,3,8,Iron Spiked Kettle over Mail,2.85,No
+605,3,8,Jeweled Crown,2.1,No
+606,3,6,Jeweled Fur Rimmed Helmet,2.4,Yes
+607,3,8,Jeweled Plumed Battle Crown,2.1,No
+608,3,1,Keffiyeh with Brown Band,0.2,Yes
+609,3,1,Keffiyeh with Silken Band,0.2,Yes
+610,3,7,Kettle Hat over Mail Coif,2.9,No
+611,3,7,Kettle Hat over Padded Cloth,2.4,No
+612,3,7,Kettle Hat over Padded Coif,2.6,No
+613,3,7,Kettle Helmet over Arming Coif,2.3,No
+614,3,7,Kettle Helmet over Laced Coif,2.5,No
+615,3,7,Kettle Helmet over Mail,2.8,No
+616,3,7,Kettle Helmet over Padded Cap,2.25,No
+617,3,7,Kettle Helmet over Padded Cloth,2.6,No
+618,3,7,Kettle Helmet over Padded Coif,2.68,No
+619,3,7,Kettle Helmet with Leather,2.4,No
+620,3,7,Kettle Helmet with Mail,2.9,No
+621,3,7,Kettle over Laced Coif,3,No
+622,3,7,Kettle over Mail Coif,3.6,No
+623,3,7,Kettle over Padded Coif,3,No
+624,3,4,Khuzait Battle Crown,2.7,No
+625,3,7,Knight Helmet with Bronze Faceguard,2.3,No
+626,3,8,Laced Cloth Coif,0.4,Yes
+627,3,7,Laced Coif,0.6,Yes
+628,3,8,Leather Cap,0.4,Yes
+629,3,7,Leather Coif,0.3,Yes
+630,3,8,Leather Coif,0.3,Yes
+631,3,2,Leather Studded Helm,0.5,No
+632,3,2,Leather Studded Helm over Headcloth,0.7,No
+633,3,2,Leather Studded Helm over Roughscale,2.1,No
+634,3,2,Leather Studded Helm over Thinhide,0.8,No
+635,3,8,Legionary Helm,3.2,No
+636,3,8,Light Roundkettle over Leather,2.2,No
+637,3,8,Lightweight Padded Coif,0.5,Yes
+638,3,7,Loose Head Scarf,0.5,Yes
+639,3,8,Lord Helmet with Metal Strips,3.4,No
+640,3,1,Lordly Steel Cap,2.9,No
+641,3,7,Luxurious Head Scarf,0.3,Yes
+642,3,1,Luxury Turban Over Helmet,2.8,No
+643,3,8,Mail Coif,1.7,No
+644,3,8,Mail Coif with Helmet Padding,1.7,No
+645,3,6,Mailed Nasal Helmet,3.15,No
+646,3,1,Mamluke Helmet with Mail,2.9,No
+647,3,5,Merchant Hat,0.1,Yes
+648,3,7,Nasal Cervelliere over Laced Coif,2.1,No
+649,3,7,Nasal Cervelliere over Mail Coif,2.6,No
+650,3,7,Nasal Cervelliere over Padded Cap,2,No
+651,3,7,Nasal Cervelliere over Padded Coif,2.2,No
+652,3,7,Nasal Helmet over Cloth Headwrap,2,No
+653,3,7,Nasal Helmet over Laced Coif,2.3,No
+654,3,7,Nasal Helmet over Mail,3.1,No
+655,3,7,Nasal Helmet over Mail Coif,3.3,No
+656,3,7,Nasal Helmet over Padded Cloth,2.2,No
+657,3,7,Nasal Helmet over Padded Coif,2.4,No
+658,3,6,Nasal Helmet with Leather,2.2,No
+659,3,6,Nasal Helmet with Mail,2.5,No
+660,3,6,Nasalhelm over Leather,1.9,No
+661,3,6,Nasalhelm over Mail,2.8,No
+662,3,1,Noble Crowned Lord Helmet,3.4,No
+663,3,4,Noble Lancer Helmet,3.4,No
+664,3,1,Noble Steel Cap,3.5,No
+665,3,4,Nomad Cap,0.3,Yes
+666,3,4,Nomad Fur Cap,0.35,Yes
+667,3,4,Nomad Helmet,2.1,No
+668,3,4,Nomad Padded Hood,0.6,Yes
+669,3,6,Northern Closed Warlord Helmet,3.7,No
+670,3,1,Open Head Scarf,0.5,Yes
+671,3,8,Open Mail Coif,1.5,No
+672,3,8,Open Mail Coif,1.6,No
+673,3,7,Open Padded Coif,0.6,Yes
+674,3,1,Ornate Desert Battle Crown,2.8,No
+675,3,4,Ornate Steel Cap,1.4,No
+676,3,7,Padded Cap,0.2,Yes
+677,3,7,Padded Coif,0.4,No
+678,3,7,Padded Half Coif,0.7,No
+679,3,7,Padded Leather Cape,0.4,No
+680,3,8,Palatine Guard Helmet,3.2,No
+681,3,4,Peaked Fur Hood,0.7,No
+682,3,7,Peaked Helmet over Laced Coif,2.8,No
+683,3,7,Peaked Helmet over Mail,2.8,No
+684,3,7,Peaked Helmet over Mail Coif,3,No
+685,3,7,Peaked Helmet over Padded Cloth,2.5,No
+686,3,7,Peasant Head Wrapping,0.05,Yes
+687,3,8,Pilgrim Hood,0.2,Yes
+688,3,7,Plated Helmet,3,No
+689,3,7,Plated Helmet with Sideguards,3.9,No
+690,3,6,Plated Warlord Helmet,3.8,No
+691,3,6,Plumed Decorated Mailed Nasal Helmet,3.2,No
+692,3,4,Plumed Fur Lined Helmet,2.1,No
+693,3,8,Plumed Helmet,2.9,No
+694,3,4,Plumed Lamellar Helmet,2.8,No
+695,3,4,Plumed Noble Lancer Helmet with Neckguard,3.6,No
+696,3,4,Plumed Nomad Helmet,2.6,No
+697,3,1,Pointed Skullcap over Cloth Headwrap,2.1,No
+698,3,1,Pointed Skullcap over Gambeson,2.2,No
+699,3,1,Pointed Skullcap over Laced Coif,2.2,No
+700,3,1,Pointed Skullcap over Mail Coif,2.8,No
+701,3,1,Pointed Skullcap with Mail,2.6,No
+702,3,6,Reinforced Closed Goggled Helmet,3.2,No
+703,3,2,Ridged Decorated Bronze Cap with Cheek Guards,3.3,No
+704,3,2,Ridged Decorated Steel Cap with Cheek Guards,3.2,No
+705,3,2,Ridged Helm,3.2,No
+706,3,6,Ridged Warlord Helmet,3.6,No
+707,3,9,Rough Padded Cap,0.5,No
+708,3,6,Roughhide Cap,0.5,Yes
+709,3,2,Roughscale Helmet,2.2,No
+710,3,1,Roughspun Keffiyeh,0.2,Yes
+711,3,8,Roundkettle Helmet,2.8,No
+712,3,8,Roundkettle over Cloth,2,No
+713,3,8,Roundkettle over Laced Cloth,2,No
+714,3,8,Roundkettle over Leather,2.2,No
+715,3,8,Roundkettle over Mail,2.8,No
+716,3,8,Roundkettle over Mail,3.1,No
+717,3,8,Roundkettle over Padding,2.4,No
+718,3,8,Royal Cataphract Helmet,3.7,No
+719,3,7,Rural Head Wrap,0.1,Yes
+720,3,1,Rural Headdress,0.2,Yes
+721,3,6,Sea Raider Goggled Helmet,3.2,No
+722,3,7,Segmented Cervelliere over Laced Coif,2.3,No
+723,3,7,Segmented Cervelliere over Mail,2.85,No
+724,3,7,Segmented Cervelliere over Mail Coif,2.9,No
+725,3,7,Segmented Cervelliere over Padded Cloth,2.8,No
+726,3,7,Segmented Skullcap over Laced Coif,1.2,No
+727,3,7,Segmented Skullcap over Mail Coif,3.2,No
+728,3,7,Segmented Skullcap over Padded Cloth,2.6,No
+729,3,7,Segmented Skullcap over Padded Coif,2.3,No
+730,3,8,Spangenhelm over Leather,2.7,No
+731,3,8,Spangenhelm over Mail,3.3,No
+732,3,6,Spangenhelm with Leather,1.2,No
+733,3,6,Spangenhelm with Padded Cloth,1.9,No
+734,3,4,Spiked Helmet,3.5,No
+735,3,1,Spiked Helmet with Closed Turban,2.4,No
+736,3,4,Spiked Helmet with Facemask,4.5,No
+737,3,1,Spiked Helmet with Open Turban,1.3,No
+738,3,8,Spiked Kettle over Mail,3.1,No
+739,3,8,Spiked Kettle over Padding,2.5,No
+740,3,1,Steel Cap,1.2,No
+741,3,2,Steel Cap with Cheek Guards,2.9,No
+742,3,6,Steel Cap with Nose Guard,1.8,No
+743,3,6,Steel Nasal Cap,2.4,No
+744,3,8,Tall Helmet,2.2,No
+745,3,4,Thick Fur Hood,0.6,No
+746,3,2,Thinhide Coif,0.5,Yes
+747,3,1,Tied Head Wrapping,0.5,Yes
+748,3,1,Tight Head Scarf,0.7,No
+749,3,1,Tribal Turban,0.6,Yes
+750,3,1,Turban,0.5,Yes
+751,3,2,Two Pronged Bronze Crown,2.3,Yes
+752,3,4,Upturned Fur Cap,0.6,Yes
+753,3,7,Visored Helmet over Laced Coif,3.2,No
+754,3,7,Visored Helmet over Mail Coif,3.6,No
+755,3,7,Visored Helmet over Padded Cloth,3.3,No
+756,3,7,Visored Helmet over Padded Coif,3.3,No
+757,3,2,Warlord Helmet,3.1,No
+758,3,6,Warlord Helmet over Full Mail,3.8,No
+759,3,6,Warlord Helmet over Mail,3.1,No
+760,3,6,Warlord Helmet with Cheek Guards,3.6,No
+761,3,2,Warlord Helmet with Feathers,3.3,No
+762,3,6,Warlord Helmet with Nose Guard,3.5,No
+763,3,2,Wolf Head,1.3,No
+764,3,1,Woven Turban,0.8,Yes
+765,3,1,Wrapped Cap,0.4,Yes
+766,3,2,Wrapped Headcloth,0.2,Yes
+767,3,1,Wrapped Helmet with Mail Coif,3,No
+768,3,1,Wrapped Leather Cap,0.5,Yes
+769,3,2,Armored Bearskin,7,No
+770,3,2,Bear Pelt,3.3,No
+771,3,4,Bolted Leather Strips,0.8,No
+772,3,4,Bronze Lamellar Shoulder Guards,1.6,No
+773,3,4,Bronze Lamellar Shoulder Pieces,5,No
+774,3,8,Bronze Pauldrons,3.5,No
+775,3,8,Bronze Pauldrons with Neck Guard,6.5,No
+776,3,8,Bronze Plate Pauldrons,2.4,No
+777,3,1,Bronze Scale Pauldrons,3.6,No
+778,3,1,Bronze Scale Pauldrons,2.6,No
+779,3,1,Bronze Scale Shoulder Guards,6,No
+780,3,1,Bronze Scale Shoulder Guards,5.8,No
+781,3,8,Caped Leather Harness,4.9,No
+782,3,2,Chained Fur Cloak,4.5,No
+783,3,5,Cotton Hood,0.2,Yes
+784,3,4,Cured Leather Pauldrons,0.8,No
+785,3,2,Cured Leather Shoulder Pieces,0.85,No
+786,3,4,Cured Studded Leather Shoulders,4.5,No
+787,3,1,Decorated Bronze Scale Pauldrons,5.8,No
+788,3,4,Decorated Lamellar Leather Shoulder Guards,1.3,No
+789,3,8,Decorated Leather Harness,4.5,No
+790,3,8,Decorated Leather Harness over Mail,11.5,No
+791,3,8,Decorated Leather Harness over Scale,13.5,No
+792,3,8,Decorated Leather Harness with Padding,8.5,No
+793,3,1,Decorated Long Sleeve Bronze Scale Pauldrons,12.4,No
+794,3,6,Decorated Scale Shoulder Guards,4.2,No
+795,3,4,Decorated Steel Lamellar Shoulder Pieces,3.8,No
+796,3,2,Fringed Cape,0.25,No
+797,3,2,Fur Cloak,2.7,No
+798,3,2,Fur Cloak With Round Plate,7.6,No
+799,3,7,Green Hood,0.35,Yes
+800,3,5,Heavy Cloak,0.5,Yes
+801,3,8,Heavy Lamellar Pauldrons,3.5,No
+802,3,2,Heavy Tartan Scarf,0.55,No
+803,3,2,Heavy Warlord Pauldrons,8,No
+804,3,7,Hood,0.35,Yes
+805,3,8,Iron Plate Pauldrons,2.2,No
+806,3,6,Lamellar Pauldrons,4.5,No
+807,3,8,Lamellar Pauldrons,2.2,No
+808,3,6,Lamellar Shoulder Guards,1.8,No
+809,3,4,Lamellar Shoulder Pieces,9,No
+810,3,2,Large Fur Cloak With Round Plate,8.3,No
+811,3,4,Leather Lamellar Shoulder Guards,3.5,No
+812,3,5,Leather Shoulder Guard,0.6,No
+813,3,8,Legionary Cape,6.9,No
+814,3,8,Legionary Padded Straps,3.2,No
+815,3,8,Legionary Reinforced Studded Harness,3.9,No
+816,3,8,Legionary Studded Harness,2.8,No
+817,3,1,Leopard Pelt,2,Yes
+818,3,1,Long Sleeved Bronze Scale Shoulder Guards,2.2,No
+819,3,6,Mail Shoulder Guards,5.7,No
+820,3,2,Mail Shoulder Pieces,2.3,No
+821,3,2,Mail Shoulder Reinforcements,3.5,No
+822,3,8,Neckguard with Bronze Plate Pauldrons,7.8,No
+823,3,7,Ornate Pauldrons,2.2,No
+824,3,7,Ornate Pauldrons with Cape,4.4,No
+825,3,7,Padded Leather Shoulders,2.4,No
+826,3,7,Pauldrons with Cape,5.6,No
+827,3,4,Reinforced Bronze Lamellar Shoulder Guards,3,No
+828,3,1,Reinforced Bronze Scale Shoulder Guards,9.2,No
+829,3,2,Reinforced Harness with Cape,3.5,No
+830,3,6,Reinforced Lamellar Shoulder Guards,2.4,No
+831,3,4,Reinforced Leather Pauldrons,3.5,No
+832,3,7,Reinforced Mail Shoulders,5.8,No
+833,3,7,Reinforced Ornate Pauldrons,6.4,No
+834,3,7,Reinforced Ornate Pauldrons over Scale,11.4,No
+835,3,1,Reinforced Scale Pauldrons,8.2,No
+836,3,4,Reinforced Studded Neckguard,5.9,No
+837,3,4,Reinforced Studded Shoulder Guards,9.9,No
+838,3,4,Reinforced Suede Shoulder Guards,0.75,No
+839,3,1,Ringmail Shoulder Guard,2.9,No
+840,3,2,Rough Bearskin,5.3,No
+841,3,1,Scale Pauldrons,2.8,No
+842,3,1,Scale Shoulder Guards,5,No
+843,3,7,Scale Shoulderguards,1.7,No
+844,3,5,Scarf,0.3,Yes
+845,3,5,Shawl,0.2,Yes
+846,3,5,Short Cloak,0.2,Yes
+847,3,2,Shoulder Harness,0.65,No
+848,3,2,Simple Cape,0.2,Yes
+849,3,6,Stitched Leather Shoulders,0.9,No
+850,3,2,Tartan Cape,0.5,No
+851,3,2,Tartan Cloak,0.25,Yes
+852,3,2,Tartan Shoulder Harness,1.3,No
+853,3,5,Thick Scarf,0.3,Yes
+854,3,2,Wolf Pelt Cape,2.8,No
+855,3,2,Woodland Cape,0.85,No
+856,3,2,Woodland Fur Cloak,1.2,No
+857,3,8,Woven Leather Shoulders,2.8,No
+858,3,5,Woven Shoulder Pad,0.3,Yes
+859,3,2,Armwraps,0.2,Yes
+860,3,6,Bronze Bracers,1.3,No
+861,3,2,Buttoned Leather Bracers,0.5,Yes
+862,3,8,Decorated Imperial Gauntlets,1.5,No
+863,3,2,Fian Bracers,0.6,Yes
+864,3,2,Fur Rimmed Leather Gloves,0.8,Yes
+865,3,2,Guarded Armwraps,0.4,Yes
+866,3,1,Guarded Padded Vambraces,0.6,Yes
+867,3,7,Heavy Mail Mittens,1.7,No
+868,3,7,Khan's Plated Bracers,2.2,No
+869,3,8,Lamellar Plate Gauntlets,1.8,No
+870,3,5,Leather Gloves,0.4,Yes
+871,3,4,Leather Vambraces,0.5,Yes
+872,3,8,Lordly Padded Mittens,1.3,No
+873,3,7,Mail Mittens,1.4,No
+874,3,8,Padded Mittens,0.6,Yes
+875,3,5,Padded Vambraces,0.1,No
+876,3,6,Plate Reinforced Gloves,1.5,No
+877,3,4,Plated Leather Vambraces,1.7,No
+878,3,8,Plated Striped Vambraces,1.4,No
+879,3,2,Ragged Armwraps,0.4,Yes
+880,3,7,Reinforced Mail Mittens,1.6,No
+881,3,8,Reinforced Padded Mittens,0.9,No
+882,3,2,Rough Tied Bracers,0.6,Yes
+883,3,2,Roughtied Leather Bracers,0.5,Yes
+884,3,2,Scale Warlord Bracers,1.5,No
+885,3,7,Splint Vambraces,1,No
+886,3,2,Strapped Leather Bracers,0.5,Yes
+887,3,4,Studded Leather Vambraces,0.9,No
+888,3,4,Studded Vambraces,0.7,No
+889,3,8,Woven Leather Bracers,0.8,No
+890,3,4,Wrapped Armguards,0.3,Yes
+891,3,2,Belted Leather Boots,1.1,Yes
+892,3,4,Curved Boots,0.9,Yes
+893,3,8,Decorated Plate Boots,2.3,No
+894,3,8,Fine Town Boots,0.5,Yes
+895,3,2,Folded Leather Boots,0.9,Yes
+896,3,8,Folded Town Boots,1,Yes
+897,3,2,Forester Boots,1,Yes
+898,3,2,Fur Boots,1.5,Yes
+899,3,4,Fur Rimmed Curved Boots,0.8,Yes
+900,3,2,Highborn Leather Boots,1,Yes
+901,3,8,Horseman Boots,0.8,Yes
+902,3,6,Huscarl Plated Boots,2.9,No
+903,3,5,Ladies Shoes,0.6,Yes
+904,3,8,Lamellar Plate Boots,3.5,No
+905,3,7,Leather Cavalier Boots,0.9,Yes
+906,3,4,Leather Riding Boots,1.1,Yes
+907,3,5,Leather Shoes,0.7,Yes
+908,3,7,Mail Cavalier Boots,1.8,No
+909,3,7,Mail Chausses,2.9,No
+910,3,1,Moccasins,0.5,Yes
+911,3,5,Ragged Boots,0.8,Yes
+912,3,4,Reinforced Suede Boots,1,Yes
+913,3,2,Rough Tied Boots,0.9,Yes
+914,3,2,Scaled Boots,2.6,No
+915,3,6,Simple Leather Boots,1.55,Yes
+916,3,8,Splint Boots,2.7,No
+917,3,8,Strapped Leather Boots,0.9,Yes
+918,3,7,Strapped Mail Chausses,3,No
+919,3,5,Strapped Shoes,0.7,Yes
+920,3,4,Sturdy Leather Boots,0.8,Yes
+921,3,6,Tied Boots,1.2,Yes
+922,3,6,Tied Leather Boots,1.8,Yes
+923,3,2,Woodland Boots,1,Yes
+924,3,2,Woodland Leg Wrappings,1,Yes
+925,3,4,Woven Leather Boots,0.7,Yes
+926,3,6,Wrapped Boots,1,Yes
+927,3,2,Wrapped Leather Boots,1,Yes
+928,3,1,Wrapped Shoes,0.8,Yes
+929,3,2,Battania Horse Harness,30,Yes
+930,3,1,Bedouin Cloth Saddle,22.5,Yes
+931,3,1,Bedouin Common Saddle,27,Yes
+932,3,1,Camel Saddle,130,Yes
+933,3,1,Camel Saddle with Heavy Load,130,Yes
+934,3,1,Camel Saddle with Light Load,130,Yes
+935,3,8,Cataphract Half Scale Barding,80,Yes
+936,3,8,Cataphract Scale Barding,135,Yes
+937,3,5,Celtic Frost,26,Yes
+938,3,5,Chain Mail Horse Armor,120,Yes
+939,3,5,Fortunas Choice,26,Yes
+940,3,5,Fur Saddle,16,Yes
+941,3,7,Half Mail Barding,65,Yes
+942,3,2,Half Scaled Barding,76,Yes
+943,3,8,Imperial Riding Harness,22,Yes
+944,3,4,Lamellar Half Barding,70,Yes
+945,3,5,Light Harness,20,Yes
+946,3,6,Light Saddle,30,Yes
+947,3,5,Mule Harness with Bags,120,Yes
+948,3,5,Mule Harness with Baskets,120,Yes
+949,3,5,Mule Harness with Pack,120,Yes
+950,3,7,Reinforced Chainmail Barding,130,Yes
+951,3,1,Reinforced Half Plate Barding,90,Yes
+952,3,4,Reinforced Mail Barding,85,Yes
+953,3,1,Reinforced Plate Barding,145,Yes
+954,3,6,Ring Mail Barding,82,Yes
+955,3,6,Rough Cavalry Saddle,35,Yes
+956,3,1,Rugged Bedouin Saddle,21,Yes
+957,3,2,Rugged Fur Saddle,23,Yes
+958,3,5,Rugged Saddle,24,Yes
+959,3,5,Saddle of Aeneas,26,Yes
+960,3,2,Scale Barding,125,Yes
+961,3,4,Steppe Fur Harness,25.5,Yes
+962,3,4,Steppe Saddle,23.5,Yes
+963,3,8,Striped Leather Harness,26,Yes
+964,4,5,Wooden Shield,2,Yes
+965,4,2,Hide Covered Round Shield,2,Yes
+966,4,2,Leather Covered Round Shield,2.5,Yes
+967,4,6,Nordic Shield,2,Yes
+968,4,5,Old Round Shield,2.5,Yes
+969,4,5,Plain Round Shield,3,Yes
+970,4,5,Round Shield,3.5,No
+971,4,7,Heavy Round Shield,4,No
+972,4,7,Huscarl's Round Shield,4.5,No
+973,4,7,Plain Cavalry Shield,2,No
+974,4,7,Round Cavalry Shield,2.5,No
+975,4,7,Elite Cavalry Shield,3,No
+976,4,8,Old Heater Shield,2,Yes
+977,4,8,Plain Heater Shield,2.5,Yes
+978,4,8,Heater Shield,3,No
+979,4,8,Heavy Heater Shield,3.5,No
+980,4,8,Horseman's Heater Shield,2,No
+981,4,8,Knightly Heater Shield,2.5,No
+982,4,5,Heater Shield,3.5,Yes
+983,4,5,Fur Covered Shield,3.5,Yes
+984,4,2,Old Kite Shield,2,Yes
+985,4,2,Plain Kite Shield,2.5,Yes
+986,4,2,Kite Shield,3,No
+987,4,2,Heavy Kite Shield,3.5,No
+988,4,7,Horseman's Kite Shield,2,No
+989,4,7,Knightly Kite Shield,2.5,No
+990,4,5,Old Board Shield,3.5,Yes
+991,4,5,Plain Board Shield,4,Yes
+992,4,5,Board Shield,4.5,No
+993,4,5,Heavy Board Shield,5,No
+994,4,7,Plate Covered Round Shield,4,No
+995,4,5,Steel Shield,4,No
+996,5,1,Asaligat,450,No
+997,5,1,Askarat,500,No
+998,5,2,Battanion Hobby,380,Yes
+999,5,2,Battanian Thoroughbred,420,No
+1000,5,1,Camel,500,Yes
+1001,5,8,Canterion Charger,460,No
+1002,5,7,Charger,430,No
+1003,5,7,Cossian,500,No
+1004,5,4,Darshi Horse,360,No
+1005,5,8,Hunter,390,Yes
+1006,5,8,Husnphree,550,No
+1007,5,8,Midlands Palfrey,390,Yes
+1008,5,5,Mule,300,Yes
+1009,5,1,Nahasawi,400,Yes
+1010,5,1,Omor Trotter,500,No
+1011,5,1,Pack Camel,520,Yes
+1012,5,1,Palmatian,520,No
+1013,5,1,Revyl Chaser,450,No
+1014,5,8,Rouncey,425,Yes
+1015,5,7,Royal Destrier,540,No
+1016,5,8,Saddle Horse,420,Yes
+1017,5,6,Sturgian Native,440,Yes
+1018,5,4,Sumpter Horse,430,Yes
+1019,5,6,Tyal Horse,490,No
+1020,5,7,Valanby Courser,475,No
+1021,5,7,Wadar Hotblood,485,No
+1022,5,1,War Camel,500,No
+1023,5,5,Work Horse,490,Yes
+1024,5,2,Glintor Pony,450,No

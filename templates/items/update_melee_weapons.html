@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card shadow-sm mb-4 bg-dark">
+  <div class="card-header bg-dark-subtle">
+    <h2 class="h5 mb-0"><i class="bi bi-pencil-fill text-warning"></i> Update Melee Weapon (ID: {{ item_id }})</h2>
+    <h3 class="h6 text-white-50">{{ weapon.Item_Name }}</h3>
+  </div>
+  <div class="card-body">
+    <form action="{{ url_for('update_melee_weapon', item_id=item_id) }}" method="POST">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="item_name" class="form-label">Weapon Name</label>
+          <input type="text" class="form-control" id="item_name" name="item_name" value="{{ weapon.Item_Name }}" required>
+        </div>
+        <div class="col-md-6">
+          <label for="weight" class="form-label">Weight</label>
+          <input type="text" class="form-control" id="weight" name="weight" value="{{ weapon.Weight }}" required>
+        </div>
+        <div class="col-md-6">
+          <label for="culture_id" class="form-label">Culture</label>
+          <select id="culture_id" name="culture_id" class="form-select">
+            {% for culture in cultures %}
+            <option value="{{ culture.Culture_Type_ID }}" {% if culture.Culture_Type_ID == weapon.Culture_ID %}selected{% endif %}>
+              {{ culture.Culture_Type_Name }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-6 d-flex align-items-end">
+          <div class="form-check form-switch fs-5">
+            <input class="form-check-input" type="checkbox" id="civilian" name="civilian" value="Yes" role="switch" {% if weapon.Civilian == 'Yes' %}checked{% endif %}>
+            <label class="form-check-label" for="civilian">Civilian Item</label>
+          </div>
+        </div>
+      </div>
+      
+      <hr class="my-4">
+      
+      <h5 class="text-white-50">Weapon Stats</h5>
+      <div class="row g-3">
+        <div class="col-md-3">
+          <label for="Tier" class="form-label">Tier</label>
+          <input type="number" class="form-control" id="Tier" name="Tier" value="{{ weapon.Tier }}" min="1">
+        </div>
+        <div class="col-md-3">
+          <label for="Length" class="form-label">Length</label>
+          <input type="number" class="form-control" id="Length" name="Length" value="{{ weapon.Length }}" min="0">
+        </div>
+        <div class="col-md-3">
+          <label for="Handling" class="form-label">Handling</label>
+          <input type="number" class="form-control" id="Handling" name="Handling" value="{{ weapon.Handling }}" min="0">
+        </div>
+      </div>
+      <div class="row g-3 mt-2">
+        <div class="col-md-3">
+          <label for="Swing_Speed" class="form-label">Swing Speed</label>
+          <input type="number" class="form-control" id="Swing_Speed" name="Swing_Speed" value="{{ weapon.Swing_Speed }}" min="0">
+        </div>
+        <div class="col-md-3">
+          <label for="Swing_Damage" class="form-label">Swing Damage</label>
+          <input type="number" class="form-control" id="Swing_Damage" name="Swing_Damage" value="{{ weapon.Swing_Damage }}" min="0">
+        </div>
+        <div class="col-md-3">
+          <label for="Thrust_Speed" class="form-label">Thrust Speed</label>
+          <input type="number" class="form-control" id="Thrust_Speed" name="Thrust_Speed" value="{{ weapon.Thrust_Speed }}" min="0">
+        </div>
+        <div class="col-md-3">
+          <label for="Thrust_Damage" class="form-label">Thrust Damage</label>
+          <input type="number" class="form-control" id="Thrust_Damage" name="Thrust_Damage" value="{{ weapon.Thrust_Damage }}" min="0">
+        </div>
+      </div>
+      
+      <button type="submit" class="btn btn-success mt-4"><i class="bi bi-check-circle-fill"></i> Save Changes</button>
+      <a href="{{ url_for('melee_weapons_page') }}" class="btn btn-secondary mt-4">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

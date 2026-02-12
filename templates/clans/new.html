@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Establish New Clan{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        
+        <div class="d-flex align-items-center mb-4">
+            <a href="{{ url_for('clans_page') }}" class="btn btn-outline-secondary me-3">
+                <i class="bi bi-arrow-left"></i>
+            </a>
+            <div>
+                <h2 class="text-warning fw-bold mb-0">Establish New Clan</h2>
+                <p class="text-muted small mb-0">Register a new noble house in Calradia.</p>
+            </div>
+        </div>
+
+        <div class="card bg-dark border-secondary shadow-lg">
+            <div class="card-body p-4">
+                <form action="{{ url_for('add_clan') }}" method="POST">
+                    
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-4">
+                            <label class="form-label text-warning small fw-bold">Clan ID</label>
+                            <input type="text" name="clan_id" class="form-control bg-black text-white border-secondary" 
+                                   placeholder="e.g. clan_vlandia_1" required>
+                            <div class="form-text text-secondary">Unique identifier.</div>
+                        </div>
+                        <div class="col-md-8">
+                            <label class="form-label text-warning small fw-bold">Clan Name</label>
+                            <input type="text" name="name" class="form-control bg-black text-white border-secondary" 
+                                   placeholder="e.g. dey Meroc" required>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label text-warning small fw-bold">Tier (1-6)</label>
+                            <select name="tier" class="form-select bg-black text-white border-secondary">
+                                <option value="0">Tier 0</option>
+                                <option value="1">Tier 1</option>
+                                <option value="2">Tier 2</option>
+                                <option value="3">Tier 3</option>
+                                <option value="4">Tier 4</option>
+                                <option value="5">Tier 5</option>
+                                <option value="6" selected>Tier 6 (Legendary)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-warning small fw-bold">Allegiance (Faction)</label>
+                            <select name="faction_id" class="form-select bg-black text-white border-secondary">
+                                <option value="">-- Independent / Mercenary --</option>
+                                {% for f in factions %}
+                                <option value="{{ f.faction_id }}">{{ f.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label text-warning small fw-bold">Clan Leader</label>
+                        <select name="leader_id" class="form-select bg-black text-white border-secondary">
+                            <option value="">-- Select a Lord --</option>
+                            {% for l in lords %}
+                            <option value="{{ l.ext_id }}">{{ l.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label text-warning small fw-bold">Banner Key (Code)</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-secondary border-secondary text-white"><i class="bi bi-flag"></i></span>
+                            <input type="text" name="banner_key" class="form-control bg-black text-white border-secondary" 
+                                   placeholder="11.12.12.4345...">
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-warning fw-bold text-dark py-2">
+                            <i class="bi bi-shield-plus me-2"></i> Establish Clan
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .table-hover tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        transition: 0.3s;
+    }
+
+    .custom-card-header {
+        background: linear-gradient(45deg, #212529, #343a40);
+        border-bottom: 2px solid #198754;
+    }
+
+    .form-label {
+        font-size: 0.75rem;
+        color: #198754;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .form-control,
+    .form-select {
+        background-color: #2b3035;
+        border: 1px solid #495057;
+        color: #e9ecef;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        background-color: #2b3035;
+        color: #fff;
+        border-color: #198754;
+        box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+    }
+
+    .settlement-name {
+        font-weight: 600;
+        color: #e9ecef;
+        font-size: 1.05rem;
+    }
+</style>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <a href="{{ url_for('dashboard') }}" class="btn btn-info text-white fw-bold px-4 shadow-sm">
+        <i class="bi bi-bar-chart-line-fill me-2"></i>View Analytics
+    </a>
+
+    {% if current_user.is_authenticated %}
+    <button class="btn btn-success fw-bold px-4 shadow-sm" type="button" data-bs-toggle="collapse"
+        data-bs-target="#collapseAddForm">
+        <i class="bi bi-building-add me-2"></i>Found New Settlement
+    </button>
+    {% endif %}
+</div>
+
+<div class="collapse mb-4" id="collapseAddForm">
+    <div class="card shadow-lg bg-dark text-white border-0 border-start border-4 border-success">
+        <div class="card-header bg-transparent border-bottom border-secondary py-3">
+            <h5 class="mb-0 text-success fw-bold"><i class="bi bi-geo-alt-fill me-2"></i>Establish New Settlement</h5>
+        </div>
+        <div class="card-body p-4">
+            <form action="{{ url_for('add_settlement') }}" method="POST">
+                <div class="row g-3 mb-3">
+                    <div class="col-md-3"><label class="form-label">Unique ID</label><input type="text"
+                            class="form-control" name="settlement_id" placeholder="e.g. town_V1" required></div>
+                    <div class="col-md-5"><label class="form-label">Settlement Name</label><input type="text"
+                            class="form-control" name="name" placeholder="e.g. Pravend" required></div>
+                    <div class="col-md-4"><label class="form-label">Type</label>
+                        <select name="type" class="form-select">
+                            <option value="Town">Town</option>
+                            <option value="Castle">Castle</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-3"><label class="form-label text-warning">Prosperity</label><input type="number"
+                            step="0.1" min="0" class="form-control" name="prosperity" value="0.0"></div>
+                    <div class="col-md-3"><label class="form-label">Faction</label><select name="faction_id"
+                            class="form-select">
+                            <option value="">None</option>{% for f in factions %}<option value="{{ f.faction_id }}">{{
+                                f.name }}</option>{% endfor %}
+                        </select></div>
+                    <div class="col-md-3"><label class="form-label">Owner</label><select name="lord_id"
+                            class="form-select">
+                            <option value="">None</option>{% for l in lords %}<option value="{{ l.lord_id }}">{{ l.name
+                                }}</option>{% endfor %}
+                        </select></div>
+                    <div class="col-md-3"><label class="form-label">Culture</label><select name="culture_id"
+                            class="form-select">
+                            <option value="">None</option>{% for c in cultures %}<option
+                                value="{{ c.Culture_Type_ID }}">{{ c.Culture_Type_Name }}</option>{% endfor %}
+                        </select></div>
+                </div>
+                <div class="mb-4"><label class="form-label">Description</label><textarea class="form-control"
+                        name="description" rows="2"></textarea></div>
+                <div class="d-grid"><button type="submit" class="btn btn-success fw-bold text-uppercase py-2">Add to
+                        Map</button></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-lg bg-dark text-white border-0">
+    <div class="card-header custom-card-header py-3 d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-2">
+            <div class="bg-success text-dark rounded p-1"><i class="bi bi-houses-fill fs-5"></i></div>
+            <h2 class="h5 mb-0 fw-bold text-uppercase ls-1">Settlements Registry</h2>
+        </div>
+        <button class="btn btn-outline-success btn-sm fw-bold px-3" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseFilters"><i class="bi bi-funnel-fill me-1"></i> Filters</button>
+    </div>
+
+    <div class="collapse" id="collapseFilters">
+        <div class="card-body bg-dark border-bottom border-secondary p-4">
+            <form action="{{ url_for('settlements_page') }}" method="GET">
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4"><label class="form-label">Name</label><input type="search"
+                            class="form-control" name="search_name" value="{{ request.args.get('search_name','') }}">
+                    </div>
+                    <div class="col-md-4"><label class="form-label">Type</label><select name="search_type"
+                            class="form-select">
+                            <option value="">All</option>
+                            <option value="Town" {% if request.args.get('search_type')=='Town' %}selected{% endif %}>
+                                Town</option>
+                            <option value="Castle" {% if request.args.get('search_type')=='Castle' %}selected{% endif
+                                %}>Castle</option>
+                        </select></div>
+                    <div class="col-md-4"><label class="form-label">Faction</label><select name="search_faction"
+                            class="form-select">
+                            <option value="">All</option>{% for f in factions %}<option value="{{ f.faction_id }}" {% if
+                                request.args.get('search_faction')==f.faction_id %}selected{% endif %}>{{ f.name }}
+                            </option>{% endfor %}
+                        </select></div>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4"><label class="form-label">Prosperity (Min-Max)</label>
+                        <div class="input-group"><input type="number" class="form-control" name="min_prosperity"
+                                placeholder="Min" value="{{ request.args.get('min_prosperity','') }}"><input
+                                type="number" class="form-control" name="max_prosperity" placeholder="Max"
+                                value="{{ request.args.get('max_prosperity','') }}"></div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end gap-2">
+                    <a href="{{ url_for('settlements_page') }}" class="btn btn-outline-secondary px-4"><i
+                            class="bi bi-arrow-counterclockwise"></i> Reset</a>
+                    <button type="submit" class="btn btn-success fw-bold px-4"><i class="bi bi-check2-circle"></i>
+                        Apply</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-dark table-hover mb-0 align-middle border-top border-secondary">
+                <thead class="bg-black">
+                    <tr class="text-secondary text-uppercase small">
+                        <th class="ps-4">Name</th>
+                        <th>Type</th>
+                        <th>Prosperity</th>
+                        <th>Faction</th>
+                        <th>Owner</th>
+                        <th>Culture</th>
+                        <th class="text-end pe-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in settlements %}
+                    <tr>
+                        <td class="ps-4">
+                            <div class="settlement-name">{{ s.name }}</div><small class="text-white-50 font-monospace"
+                                style="font-size: 0.75rem;">{{ s.settlement_id }}</small>
+                        </td>
+                        <td>{% if s.type == 'Town' %}<span
+                                class="badge bg-primary bg-opacity-25 text-primary border border-primary-subtle"><i
+                                    class="bi bi-building me-1"></i> Town</span>{% else %}<span
+                                class="badge bg-danger bg-opacity-25 text-danger border border-danger-subtle"><i
+                                    class="bi bi-bricks me-1"></i> Castle</span>{% endif %}</td>
+                        <td><span class="text-warning fw-bold"><i class="bi bi-coin small me-1"></i>{{ s.prosperity
+                                }}</span></td>
+                        <td>{% if s.FactionName %}<span class="badge bg-dark border border-secondary text-light">{{
+                                s.FactionName }}</span>{% else %}<span class="text-white-50 small">-</span>{% endif %}
+                        </td>
+                        <td>{{ s.LordName or '-' }}</td>
+                        <td>{% if s.CultureName %}<span class="d-flex align-items-center text-info small"><i
+                                    class="bi bi-flag-fill me-2"></i> {{ s.CultureName }}</span>{% else %} - {% endif %}
+                        </td>
+                        <td class="text-end pe-4">
+                            <div class="btn-group" role="group">
+                                <a href="{{ url_for('settlement_detail', settlement_id=s.settlement_id) }}"
+                                    class="btn btn-sm btn-outline-info" title="View Details & Villages"><i
+                                        class="bi bi-eye-fill"></i></a>
+
+                                {% if current_user.is_authenticated %}
+                                <a href="{{ url_for('update_page_settlement', settlement_id=s.settlement_id) }}"
+                                    class="btn btn-sm btn-outline-warning" title="Edit"><i
+                                        class="bi bi-pencil-square"></i></a>
+                                <form action="{{ url_for('delete_settlement', settlement_id=s.settlement_id) }}"
+                                    method="POST" class="d-inline" onsubmit="return confirm('Delete {{ s.name }}?');">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger rounded-0 rounded-end"
+                                        title="Delete"><i class="bi bi-trash-fill"></i></button></form> {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="7" class="text-center py-5 text-muted"><i
+                                class="bi bi-map fs-1 opacity-25 mb-3 d-block"></i>No settlements found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

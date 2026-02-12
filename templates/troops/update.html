@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}Update {{ troop.name }}{% endblock %}
+
+{% block content %}
+
+<style>
+    .custom-card-header { background: linear-gradient(45deg, #212529, #343a40); border-bottom: 2px solid #17a2b8; }
+    .form-label { font-size: 0.75rem; color: #17a2b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-control, .form-select { background-color: #2b3035; border: 1px solid #495057; color: #e9ecef; }
+    .form-control:focus, .form-select:focus { background-color: #2b3035; color: #fff; border-color: #17a2b8; box-shadow: 0 0 0 0.25rem rgba(23, 162, 184, 0.25); }
+</style>
+
+<div class="card shadow-lg bg-dark text-white border-0">
+    <div class="card-header custom-card-header py-3 d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-3">
+            <div class="bg-warning text-dark rounded p-2">
+                <i class="bi bi-pencil-square fs-4"></i>
+            </div>
+            <div>
+                <h4 class="mb-0 fw-bold">Update Troop</h4>
+                <small class="text-secondary">{{ troop.name }}</small>
+            </div>
+        </div>
+        <a href="{{ url_for('troop_detail', troop_id=troop.troop_id) }}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-1"></i>Back
+        </a>
+    </div>
+    
+    <div class="card-body p-4">
+        <form action="{{ url_for('update_troop', troop_id=troop.troop_id) }}" method="POST">
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <label class="form-label">Troop Name</label>
+                    <input type="text" class="form-control" name="name" value="{{ troop.name }}" required>
+                </div>
+                
+                <div class="col-md-4">
+                    <label class="form-label">Culture</label>
+                    <select name="Culture_Type_ID" class="form-select">
+                        <option value="">None</option>
+                        {% for c in cultures %}
+                        <option value="{{ c.Culture_Type_ID }}" {% if troop.culture_id == c.Culture_Type_ID %}selected{% endif %}>
+                            {{ c.Culture_Type_Name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <label class="form-label">Tier</label>
+                    <input type="number" min="1" max="6" class="form-control" name="tier" value="{{ troop.tier }}" required>
+                </div>
+                
+                <div class="col-md-4">
+                    <label class="form-label">Wage</label>
+                    <input type="number" min="0" class="form-control" name="wage" value="{{ troop.wage }}" required>
+                </div>
+                
+                <div class="col-md-4 d-flex align-items-end">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="is_mounted" id="isMounted" 
+                               {% if troop.is_mounted %}checked{% endif %}>
+                        <label class="form-check-label text-info" for="isMounted">
+                            <i class="bi bi-bicycle me-1"></i>Mounted
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="d-flex justify-content-end gap-2 pt-3 border-top border-secondary">
+                <a href="{{ url_for('troop_detail', troop_id=troop.troop_id) }}" class="btn btn-secondary px-4">
+                    <i class="bi bi-x-circle me-1"></i>Cancel
+                </a>
+                <button type="submit" class="btn btn-warning fw-bold px-4">
+                    <i class="bi bi-check2-circle me-1"></i>Update Troop
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Delete Section -->
+<div class="card shadow-lg bg-dark text-white border-danger border-0 mt-4">
+    <div class="card-header bg-danger bg-opacity-25 border-bottom border-danger py-3">
+        <h5 class="mb-0 text-danger fw-bold">
+            <i class="bi bi-exclamation-triangle me-2"></i>Danger Zone
+        </h5>
+    </div>
+    <div class="card-body p-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h6 class="text-white mb-1">Delete This Troop</h6>
+                <p class="text-secondary small mb-0">Once you delete a troop, there is no going back. Please be certain.</p>
+            </div>
+            <form action="{{ url_for('delete_troop', troop_id=troop.troop_id) }}" method="POST" 
+                  onsubmit="return confirm('Are you absolutely sure you want to delete {{ troop.name }}? This action cannot be undone.');">
+                <button type="submit" class="btn btn-danger fw-bold px-4">
+                    <i class="bi bi-trash me-1"></i>Delete Troop
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-lg-6">
+        <div class="card shadow-lg bg-dark text-white border-success">
+            <div class="card-header bg-success text-dark d-flex justify-content-between align-items-center">
+                <h3 class="mb-0 fw-bold"><i class="bi bi-house-fill me-2"></i>{{ village.name }}</h3>
+                <span class="badge bg-dark text-warning">{{ village.village_id }}</span>
+            </div>
+            <div class="card-body p-4">
+                <div class="mb-4 p-3 rounded" style="background-color: rgba(255, 255, 255, 0.05); border-left: 3px solid #ffc107;">
+                    <i class="bi bi-info-circle-fill text-warning me-2"></i>
+                    <span class="fst-italic text-light">{{ village.description or 'No description provided for this village.' }}</span>
+                </div>
+
+                <div class="mb-3">
+                    <h5 class="text-white-50 small text-uppercase fw-bold">Bound Settlement</h5>
+                    <a href="{{ url_for('settlement_detail', settlement_id=village.settlement_id) }}" class="fs-5 text-decoration-none text-info">
+                        <i class="bi bi-arrow-return-right me-1"></i> {{ village.settlement_name }}
+                    </a>
+                </div>
+                <hr class="border-secondary">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <small class="text-muted d-block">Primary Resource</small>
+                        <span class="fs-5 fw-bold text-warning">{{ village.primary_resource }}</span>
+                    </div>
+                    <div class="col-6">
+                        <small class="text-muted d-block">Hearth</small>
+                        <span class="fs-5 fw-bold text-danger">{{ village.hearth }}</span>
+                    </div>
+                    <div class="col-12">
+                        <small class="text-muted d-block">Culture</small>
+                        <span class="fs-5">{{ village.culture_name or '-' }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-transparent border-secondary d-flex justify-content-between">
+                <a href="{{ url_for('settlement_detail', settlement_id=village.settlement_id) }}" class="btn btn-outline-light btn-sm">Back</a>
+                {% if current_user.is_authenticated %}
+                <div>
+                    <a href="{{ url_for('edit_village', vid=village.village_id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{{ url_for('delete_village', village_id=village.village_id) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete village?');">
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,299 @@
+{% extends "base.html" %}
+
+{% block title %}Lords of Calradia{% endblock %}
+
+{% block content %}
+
+<style>
+    /* Sayfaya Özel Premium Stiller */
+    .lord-card {
+        background: linear-gradient(145deg, #2b3035, #212529);
+        border: 1px solid #495057;
+        transition: all 0.3s ease;
+    }
+
+    .lord-card:hover {
+        transform: translateY(-5px);
+        border-color: #ffc107;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .stat-box {
+        background-color: rgba(255, 255, 255, 0.03);
+        border-radius: 6px;
+        padding: 5px 10px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .filter-card {
+        background-color: #212529;
+        border-right: 1px solid #ffc107;
+        /* Sağ tarafta altın çizgi */
+    }
+
+    .form-control,
+    .form-select {
+        background-color: #2b3035;
+        border: 1px solid #495057;
+        color: #e9ecef;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        background-color: #2b3035;
+        border-color: #ffc107;
+        color: #fff;
+        box-shadow: none;
+    }
+
+    .form-label {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: #adb5bd;
+        letter-spacing: 0.5px;
+    }
+</style>
+
+<div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-secondary">
+    <div>
+        <h1 class="h3 mb-0 text-warning fw-bold text-uppercase" style="letter-spacing: 2px;">
+            <i class="bi bi-people-fill me-2"></i>Lords of Calradia
+        </h1>
+        <p class="text-muted small mb-0">Manage noble families, relations, and statistics.</p>
+    </div>
+
+    <div class="d-flex gap-2">
+        <!-- Complex skill + settlement stats (ilk query) -->
+        <a href="{{ url_for('lords_complex_stats') }}" class="btn btn-outline-warning fw-bold px-4 shadow-sm">
+            <i class="bi bi-graph-up-arrow me-2"></i>Complex Stats
+        </a>
+
+        <!-- Yeni: Lord Domain Stats (ikinci complex query) -->
+        <a href="{{ url_for('lords_domain_stats') }}" class="btn btn-outline-info fw-bold px-4 shadow-sm">
+            <i class="bi bi-diagram-3 me-2"></i>Domain Stats
+        </a>
+
+        <!-- Var olan: yeni lord ekleme -->
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('create_lord') }}" class="btn btn-success fw-bold px-4 shadow-sm">
+            <i class="bi bi-person-plus-fill me-2"></i>Add New Lord
+        </a>
+        {% endif %}
+    </div>
+</div>
+
+
+
+<div class="row">
+
+    <div class="col-lg-3 mb-4">
+        <div class="card filter-card text-light sticky-top shadow-lg" style="top: 20px; z-index: 100;">
+            <div class="card-header bg-transparent border-bottom border-secondary py-3">
+                <h5 class="mb-0 text-warning fw-bold"><i class="bi bi-sliders me-2"></i>Filter Roster</h5>
+            </div>
+            <div class="card-body">
+
+                <div
+                    class="d-flex justify-content-between align-items-center mb-4 p-3 bg-dark rounded border border-secondary">
+                    <span class="text-white-50 fw-bold">Total Lords</span>
+                    <span class="badge bg-warning text-dark fs-6 pill">{{ lords|length }}</span>
+                </div>
+
+                <form method="get" action="{{ url_for('lords_page') }}">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-dark border-secondary text-secondary"><i
+                                    class="bi bi-search"></i></span>
+                            <input type="text" name="search_name" class="form-control" placeholder="Search..."
+                                value="{{ request.args.get('search_name', '') }}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Culture</label>
+                        <select name="search_culture" class="form-select">
+                            <option value="">All Cultures</option>
+                            {% for c in cultures %}
+                            <option value="{{ c.Culture_Type_ID }}" {% if
+                                request.args.get('search_culture')|int==c.Culture_Type_ID %}selected{% endif %}>
+                                {{ c.Culture_Type_Name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Gender</label>
+                        <select name="gender" class="form-select">
+                            <option value="" {% if not request.args.get('gender') %}selected{% endif %}>All Genders
+                            </option>
+                            <option value="Male" {% if request.args.get('gender')=='Male' %}selected{% endif %}>Male
+                            </option>
+                            <option value="Female" {% if request.args.get('gender')=='Female' %}selected{% endif %}>
+                                Female</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Age Range</label>
+                        <div class="input-group">
+                            <input type="number" name="min_age" min="0" class="form-control" placeholder="Min"
+                                value="{{ request.args.get('min_age', '') }}">
+                            <span class="input-group-text bg-dark border-secondary text-secondary">-</span>
+                            <input type="number" name="max_age" min="0" class="form-control" placeholder="Max"
+                                value="{{ request.args.get('max_age', '') }}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Level Range</label>
+                        <div class="input-group">
+                            <input type="number" name="min_level" min="0" class="form-control" placeholder="Min"
+                                value="{{ request.args.get('min_level', '') }}">
+                            <span class="input-group-text bg-dark border-secondary text-secondary">-</span>
+                            <input type="number" name="max_level" min="0" class="form-control" placeholder="Max"
+                                value="{{ request.args.get('max_level', '') }}">
+                        </div>
+                    </div>
+
+                    <div class="mb-4 form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="has_wiki" value="1" id="hasWikiCheck" {%
+                            if request.args.get('has_wiki')=='1' %}checked{% endif %}>
+                        <label class="form-check-label text-white-50" for="hasWikiCheck">Wiki Page Available</label>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-warning fw-bold text-dark">
+                            <i class="bi bi-funnel-fill"></i> Apply Filters
+                        </button>
+                        <a href="{{ url_for('lords_page') }}" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-counterclockwise"></i> Reset
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-9">
+        <div class="row g-3">
+            {% for lord in lords %}
+            <div class="col-xl-4 col-md-6">
+                <div class="card h-100 lord-card text-light">
+
+                    <div
+                        class="card-header bg-transparent border-secondary d-flex justify-content-between align-items-start pt-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="bg-dark border border-secondary rounded-circle d-flex justify-content-center align-items-center"
+                                style="width: 40px; height: 40px;">
+                                {% if lord.gender == 'Female' %}
+                                <i class="bi bi-gender-female text-danger"></i>
+                                {% else %}
+                                <i class="bi bi-gender-male text-info"></i>
+                                {% endif %}
+                            </div>
+                            <div>
+                                <h5 class="card-title mb-0 fw-bold text-truncate" style="max-width: 140px;">{{ lord.name
+                                    }}</h5>
+                                {% if lord.CultureName %}
+                                <span class="badge bg-secondary bg-opacity-25 text-warning border border-secondary mt-1"
+                                    style="font-size: 0.65rem;">
+                                    {{ lord.CultureName }}
+                                </span>
+                                {% else %}
+                                <span class="badge bg-secondary bg-opacity-10 text-muted border border-secondary mt-1"
+                                    style="font-size: 0.65rem;">
+                                    Unknown Culture
+                                </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <span class="badge bg-dark border border-secondary text-secondary small">ID: {{ lord.lord_id
+                            }}</span>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row g-2 mb-3 text-center">
+                            <div class="col-6">
+                                <div class="stat-box">
+                                    <div class="text-white-50 small text-uppercase" style="font-size: 0.7rem;">Age</div>
+                                    <div class="fw-bold text-warning">{{ lord.age if lord.age is not none else "-" }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="stat-box">
+                                    <div class="text-white-50 small text-uppercase" style="font-size: 0.7rem;">Level
+                                    </div>
+                                    <div class="fw-bold text-info">{{ lord.level if lord.level is not none else "-" }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <small class="text-secondary text-uppercase fw-bold" style="font-size: 0.7rem;">Traits /
+                                Notes</small>
+                            <div class="text-light small text-truncate" style="min-height: 20px;">
+                                {% if lord.traits %}
+                                <i class="bi bi-stars text-warning"></i> {{ lord.traits }}
+                                {% else %}
+                                <span class="text-muted fst-italic">No specific traits recorded.</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer bg-transparent border-secondary pb-3">
+                        <div class="btn-group w-100 shadow-sm" role="group">
+                            {% if lord.source_url %}
+                            <a href="{{ lord.source_url }}" target="_blank"
+                                class="btn btn-sm btn-dark border-secondary text-white-50 hover-text-white"
+                                title="Open Wiki">
+                                <i class="bi bi-book"></i>
+                            </a>
+                            {% else %}
+                            <button class="btn btn-sm btn-dark border-secondary text-muted" disabled><i
+                                    class="bi bi-book-half"></i></button>
+                            {% endif %}
+
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('edit_lord', lord_id=lord.lord_id) }}"
+                                class="btn btn-sm btn-dark border-secondary text-warning hover-bg-dark"
+                                title="Edit Lord">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+
+                            <div class="btn-group" role="group">
+                                <form method="POST" action="{{ url_for('delete_lord', lord_id=lord.lord_id) }}"
+                                    onsubmit="return confirm('Are you sure you want to exile (delete) {{ lord.name }}?');"
+                                    style="width: 100%;">
+                                    <button type="submit"
+                                        class="btn btn-sm btn-dark border-secondary text-danger w-100 rounded-0 rounded-end"
+                                        title="Exile Lord">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {% else %}
+            <div class="col-12">
+                <div class="alert alert-secondary bg-dark border-secondary text-center py-5">
+                    <i class="bi bi-search fs-1 text-secondary mb-3"></i>
+                    <h4 class="text-white">No Lords Found</h4>
+                    <p class="text-muted">Try adjusting your search filters or recruit new lords.</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

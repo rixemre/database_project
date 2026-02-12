@@ -1,0 +1,583 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    :root {
+        --primary-gold: #ffc107;
+        --dark-bg: #1a1d23;
+        --card-bg: #212529;
+        --card-hover: #2c3034;
+        --border-color: #495057;
+        --text-primary: #e9ecef;
+        --text-muted: #6c757d;
+    }
+
+    .custom-card-header {
+        background: linear-gradient(135deg, #1a1d23 0%, #2c3034 50%, #1a1d23 100%);
+        border-bottom: 3px solid var(--primary-gold);
+        box-shadow: 0 4px 15px rgba(255, 193, 7, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .custom-card-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 193, 7, 0.1), transparent);
+        animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+        0% { left: -100%; }
+        100% { left: 100%; }
+    }
+
+    .item-icon-container {
+        background: linear-gradient(135deg, var(--primary-gold), #ffdb4d);
+        padding: 12px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .item-icon-container:hover {
+        transform: scale(1.1) rotate(5deg);
+        box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
+    }
+
+    .detail-label {
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        margin-bottom: 4px;
+    }
+
+    .detail-value {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .stat-card {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.05));
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 16px !important;
+        transition: all 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, transparent, rgba(255, 193, 7, 0.05));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .stat-card:hover {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.08));
+        border-color: var(--primary-gold);
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(255, 193, 7, 0.2);
+    }
+
+    .stat-card:hover::before {
+        opacity: 1;
+    }
+
+    .stat-card.highlight {
+        border: 2px solid var(--primary-gold);
+        background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05));
+    }
+
+    .section-title {
+        color: var(--primary-gold);
+        font-weight: 800;
+        text-transform: uppercase;
+        border-bottom: 2px solid var(--border-color);
+        padding-bottom: 12px;
+        margin-bottom: 24px;
+        margin-top: 40px;
+        font-size: 1.3rem;
+        letter-spacing: 2px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 80px;
+        height: 2px;
+        background: var(--primary-gold);
+    }
+
+    .badge-custom {
+        background: rgba(255, 193, 7, 0.15);
+        border: 1px solid var(--primary-gold);
+        color: var(--primary-gold);
+        padding: 6px 14px;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    .back-button {
+        background: rgba(255, 193, 7, 0.1);
+        border: 2px solid var(--primary-gold);
+        color: var(--primary-gold);
+        padding: 8px 24px;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .back-button:hover {
+        background: var(--primary-gold);
+        color: #1a1d23;
+        transform: translateX(-5px);
+        box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+    }
+
+    .main-card {
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Stat-specific styling */
+    .stat-damage {
+        border-left: 3px solid #dc3545;
+    }
+
+    .stat-defense {
+        border-left: 3px solid #28a745;
+    }
+
+    .stat-speed {
+        border-left: 3px solid #17a2b8;
+    }
+
+    .stat-special {
+        border-left: 3px solid var(--primary-gold);
+    }
+
+    /* Value colors for different stat types */
+    .value-damage { color: #ff6b6b; }
+    .value-defense { color: #51cf66; }
+    .value-speed { color: #4dabf7; }
+    .value-gold { color: var(--primary-gold); }
+
+    /* Icon styling */
+    .stat-icon {
+        font-size: 1.5rem;
+        opacity: 0.3;
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+    }
+
+    /* Responsive improvements */
+    @media (max-width: 768px) {
+        .detail-value {
+            font-size: 1rem;
+        }
+        .section-title {
+            font-size: 1.1rem;
+        }
+    }
+</style>
+
+<div class="card main-card shadow-lg bg-dark text-white border-0">
+  
+  <div class="card-header custom-card-header py-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <div class="d-flex align-items-center gap-3">
+        <div class="item-icon-container text-dark">
+            {% if 'armors' in item.Item_Type %}<i class="bi bi-shield-shaded fs-3"></i>
+            {% elif 'melee_weapons' in item.Item_Type %}<i class="bi bi-hammer fs-3"></i>
+            {% elif 'ranged_weapons' in item.Item_Type %}<i class="bi bi-bullseye fs-3"></i>
+            {% elif 'shields' in item.Item_Type %}<i class="bi bi-shield-fill fs-3"></i>
+            {% elif 'horses' in item.Item_Type %}<i class="bi bi-tencent-qq fs-3"></i>
+            {% else %}<i class="bi bi-box-seam fs-3"></i>{% endif %}
+        </div>
+        <div>
+            <h2 class="h3 mb-1 fw-bold text-shadow">{{ item.Item_Name }}</h2>
+            <span class="badge badge-custom small">ID: {{ item.Item_ID }}</span>
+        </div>
+    </div>
+    <a href="javascript:history.back()" class="back-button">
+        <i class="bi bi-arrow-left me-2"></i>Back
+    </a>
+  </div>
+
+  <div class="card-body p-4">
+    
+    <h5 class="section-title" style="margin-top: 0;">
+        <i class="bi bi-info-circle"></i> General Information
+    </h5>
+    <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card stat-special">
+                <div class="detail-label">Item Type</div>
+                <div class="detail-value value-gold">{{ item.Item_Type.replace('_', ' ').title() }}</div>
+                <i class="bi bi-tag stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card">
+                <div class="detail-label">Culture</div>
+                <div class="detail-value">{{ item.Culture.title() }}</div>
+                <i class="bi bi-globe stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card">
+                <div class="detail-label">Weight</div>
+                <div class="detail-value font-monospace">{{ item.Weight }}</div>
+                <i class="bi bi-boxes stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card">
+                <div class="detail-label">Civilian</div>
+                <div class="detail-value">
+                    {% if item.Civilian == 'Yes' %}
+                        <span class="text-success"><i class="bi bi-check-circle-fill"></i> Yes</span>
+                    {% else %}
+                        <span class="text-secondary"><i class="bi bi-x-circle-fill"></i> No</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if 'armors' in item.Item_Type %}
+    <h5 class="section-title text-primary border-primary">
+        <i class="bi bi-shield-shaded"></i> Armor Statistics
+    </h5>
+    <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card stat-defense">
+                <div class="detail-label">Head Armor</div>
+                <div class="detail-value value-defense">{{ item.Head_Armor_Rating }}</div>
+                <i class="bi bi-soundwave stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card stat-defense">
+                <div class="detail-label">Body Armor</div>
+                <div class="detail-value value-defense">{{ item.Body_Armor_Rating }}</div>
+                <i class="bi bi-person-bounding-box stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card stat-defense">
+                <div class="detail-label">Leg Armor</div>
+                <div class="detail-value value-defense">{{ item.Leg_Armor_Rating }}</div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card stat-defense">
+                <div class="detail-label">Arm Armor</div>
+                <div class="detail-value value-defense">{{ item.Arm_Armor_Rating }}</div>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card highlight">
+                <div class="detail-label text-warning">Total Rating</div>
+                <div class="detail-value value-gold">{{ item.Total_Armor_Rating }}</div>
+                <i class="bi bi-shield-check stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card">
+                <div class="detail-label">Material</div>
+                <div class="detail-value text-info">{{ item.Material.title() if item.Material else 'N/A' }}</div>
+                <i class="bi bi-grid-3x3 stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <div class="stat-card">
+                <div class="detail-label">Merchandise</div>
+                <div class="detail-value small">{{ item.Armor_Merchandise if item.Armor_Merchandise else 'N/A' }}</div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if 'melee_weapons' in item.Item_Type %}
+    <h5 class="section-title text-danger border-danger">
+        <i class="bi bi-hammer"></i> Melee Weapon Statistics
+    </h5>
+    <div class="row g-4">
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="detail-label">Tier</div>
+                <div class="detail-value">{{ item.Melee_Tier if item.Melee_Tier else 'N/A' }}</div>
+                <i class="bi bi-star stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card stat-damage">
+                <div class="detail-label text-danger">Swing Damage</div>
+                <div class="detail-value value-damage">{{ item.Swing_Damage if item.Swing_Damage else 'N/A' }}</div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card stat-speed">
+                <div class="detail-label">Swing Speed</div>
+                <div class="detail-value value-speed">{{ item.Swing_Speed if item.Swing_Speed else 'N/A' }}</div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card stat-damage">
+                <div class="detail-label text-warning">Thrust Damage</div>
+                <div class="detail-value value-damage">{{ item.Thrust_Damage if item.Thrust_Damage else 'N/A' }}</div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card stat-speed">
+                <div class="detail-label">Thrust Speed</div>
+                <div class="detail-value value-speed">{{ item.Thrust_Speed if item.Thrust_Speed else 'N/A' }}</div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="detail-label">Length</div>
+                <div class="detail-value">{{ item.Length if item.Length else 'N/A' }}</div>
+                <i class="bi bi-rulers stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="detail-label">Handling</div>
+                <div class="detail-value">{{ item.Handling if item.Handling else 'N/A' }}</div>
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-8">
+            <div class="stat-card">
+                <div class="detail-label">Merchandise</div>
+                <div class="detail-value small">{{ item.Melee_Merchandise if item.Melee_Merchandise else 'N/A' }}</div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if 'ranged_weapons' in item.Item_Type %}
+    <h5 class="section-title text-warning border-warning">
+        <i class="bi bi-bullseye"></i> Ranged Weapon Statistics
+    </h5>
+    <div class="row g-4">
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="detail-label">Tier</div>
+                <div class="detail-value">{{ item.Ranged_Tier if item.Ranged_Tier else 'N/A' }}</div>
+                <i class="bi bi-star stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card stat-damage">
+                <div class="detail-label text-danger">Damage</div>
+                <div class="detail-value value-damage">{{ item.Ranged_Damage if item.Ranged_Damage else 'N/A' }}</div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="detail-label">Accuracy</div>
+                <div class="detail-value text-info">{{ item.Accuracy if item.Accuracy else 'N/A' }}</div>
+                <i class="bi bi-crosshair stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card stat-speed">
+                <div class="detail-label">Missile Speed</div>
+                <div class="detail-value value-speed">{{ item.Missile_Speed if item.Missile_Speed else 'N/A' }}</div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="detail-label">Skill Required</div>
+                <div class="detail-value">{{ item.Skill if item.Skill else 'N/A' }}</div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="detail-label">Reload Speed</div>
+                <div class="detail-value">{{ item.Reload_Speed if item.Reload_Speed else 'N/A' }}</div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="detail-label">Draw Speed</div>
+                <div class="detail-value">{{ item.Draw_Speed if item.Draw_Speed else 'N/A' }}</div>
+            </div>
+        </div>
+        
+        <div class="col-lg-10 col-md-8">
+            <div class="stat-card">
+                <div class="d-flex flex-wrap gap-4 align-items-center justify-content-around">
+                    <div class="text-center">
+                        <div class="detail-label">Usable on Horseback</div>
+                        <div class="detail-value">
+                            {% if item.Usable_on_Horseback == 'Yes' %}
+                                <span class="text-success"><i class="bi bi-check-circle-fill"></i> Yes</span>
+                            {% else %}
+                                <span class="text-secondary"><i class="bi bi-x-circle-fill"></i> No</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="vr d-none d-md-block"></div>
+                    <div class="text-center">
+                        <div class="detail-label">Reload on Horseback</div>
+                        <div class="detail-value">
+                            {% if item.Reload_on_Horseback == 'Yes' %}
+                                <span class="text-success"><i class="bi bi-check-circle-fill"></i> Yes</span>
+                            {% else %}
+                                <span class="text-secondary"><i class="bi bi-x-circle-fill"></i> No</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if 'shields' in item.Item_Type %}
+    <h5 class="section-title text-info border-info">
+        <i class="bi bi-shield-fill"></i> Shield Statistics
+    </h5>
+    <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card stat-defense highlight">
+                <div class="detail-label text-success">Hit Points</div>
+                <div class="detail-value value-defense">{{ item.Durability if item.Durability else 'N/A' }}</div>
+                <i class="bi bi-heart-fill stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card stat-speed">
+                <div class="detail-label">Speed</div>
+                <div class="detail-value value-speed">{{ item.Shield_Speed if item.Shield_Speed else 'N/A' }}</div>
+                <i class="bi bi-lightning stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card stat-defense">
+                <div class="detail-label">Resistance</div>
+                <div class="detail-value">{{ item.Resistance if item.Resistance else 'N/A' }}</div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card">
+                <div class="detail-label">Size</div>
+                <div class="detail-value">{{ item.Size if item.Size else 'N/A' }}</div>
+                <i class="bi bi-bounding-box stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card stat-special">
+                <div class="detail-label">Base Value</div>
+                <div class="detail-value value-gold">{{ item.Shield_BaseValue if item.Shield_BaseValue else 'N/A' }}</div>
+                <i class="bi bi-coin stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-6">
+            <div class="stat-card">
+                <div class="detail-label">Merchandise</div>
+                <div class="detail-value small">{{ item.Shield_Merchandise if item.Shield_Merchandise else 'N/A' }}</div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if 'horses' in item.Item_Type %}
+    <h5 class="section-title text-success border-success">
+        <i class="bi bi-tencent-qq"></i> Mount Statistics
+    </h5>
+    <div class="row g-4">
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="detail-label">Tier</div>
+                <div class="detail-value">{{ item.Mount_Tier if item.Mount_Tier else 'N/A' }}</div>
+                <i class="bi bi-star stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="detail-label">Type</div>
+                <div class="detail-value text-info">{{ item.Mount_Type.replace('_', ' ').title() if item.Mount_Type else 'N/A' }}</div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card stat-defense highlight">
+                <div class="detail-label text-success">Health</div>
+                <div class="detail-value value-defense">{{ item.HP if item.HP else 'N/A' }}</div>
+                <i class="bi bi-heart-pulse stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card stat-speed">
+                <div class="detail-label">Speed</div>
+                <div class="detail-value value-speed">{{ item.Mount_Speed if item.Mount_Speed else 'N/A' }}</div>
+                <i class="bi bi-speedometer2 stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card stat-damage">
+                <div class="detail-label text-danger">Charge</div>
+                <div class="detail-value value-damage">{{ item.Charge if item.Charge else 'N/A' }}</div>
+                <i class="bi bi-lightning-charge stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="detail-label">Maneuver</div>
+                <div class="detail-value">{{ item.Maneuver if item.Maneuver else 'N/A' }}</div>
+                <i class="bi bi-arrow-left-right stat-icon"></i>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card">
+                <div class="detail-label">Riding Skill</div>
+                <div class="detail-value">{{ item.Riding if item.Riding else 'N/A' }}</div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+            <div class="stat-card stat-special">
+                <div class="detail-label">Weight Bonus</div>
+                <div class="detail-value value-gold">{{ item.Weight_Bonus if item.Weight_Bonus else 'N/A' }}</div>
+                <i class="bi bi-bag-plus stat-icon"></i>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock %}

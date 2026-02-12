@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% set default_image = url_for('static', filename='img/settlements/default.jpg') %}
+
+<style>
+    .custom-card-header { background: linear-gradient(45deg, #212529, #343a40); border-bottom: 2px solid #198754; }
+    .stat-card { background-color: rgba(255, 255, 255, 0.03); border: 1px solid #495057; border-radius: 10px; padding: 1rem; }
+    .village-card { background: #2b3035; border-left: 4px solid #198754; padding: 15px; border-radius: 6px; margin-bottom: 10px; transition: transform 0.2s; }
+    .village-card:hover { transform: translateX(5px); background: #343a40; }
+    .hover-underline:hover { text-decoration: underline !important; }
+</style>
+
+<div class="card shadow-lg bg-dark text-white border-0 mb-4">
+    
+    <div style="height: 350px; overflow: hidden; border-radius: 10px 10px 0 0; position: relative;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, transparent 70%, rgba(33, 37, 41, 0.8));"></div>
+        
+        <img src="{{ url_for('static', filename=image_filename) }}" 
+             class="w-100 h-100"
+             style="object-fit: cover; object-position: center;"
+             alt="{{ settlement.name }}"
+             onerror="this.onerror=null;this.src='{{ default_image }}';">
+    </div>
+
+    <div class="card-header custom-card-header py-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-4">
+                <div class="bg-success bg-gradient text-dark rounded-circle d-flex justify-content-center align-items-center shadow" style="width: 60px; height: 60px; font-size: 1.8rem;">
+                    {% if settlement.type == 'Town' %}<i class="bi bi-building"></i>{% else %}<i class="bi bi-bricks"></i>{% endif %}
+                </div>
+                <div>
+                    <h1 class="h2 mb-0 fw-bold text-uppercase">{{ settlement.name }}</h1>
+                    <span class="badge bg-dark border border-secondary text-uppercase">{{ settlement.type }}</span>
+                    <span class="badge bg-dark border border-secondary text-warning"><i class="bi bi-coin me-1"></i>{{ settlement.prosperity }}</span>
+                </div>
+            </div>
+            <a href="{{ url_for('settlements_page') }}" class="btn btn-outline-light"><i class="bi bi-arrow-left me-2"></i>Back</a>
+        </div>
+    </div>
+
+    <div class="card-body p-4">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <small class="text-uppercase text-muted fw-bold">Faction</small>
+                    <div class="fs-5">{{ settlement.FactionName or '-' }}</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <small class="text-uppercase text-muted fw-bold">Owner</small>
+                    <div class="fs-5 text-info">
+                        {{ settlement.LordName or '-' }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <small class="text-uppercase text-muted fw-bold">Culture</small>
+                    <div class="fs-5 text-info">{{ settlement.CultureName or '-' }}</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <small class="text-uppercase text-muted fw-bold">Description</small>
+                    <div class="small text-white-50">{{ settlement.description or 'No description.' }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <h4 class="text-success mb-3 border-bottom border-secondary pb-2"><i class="bi bi-house-door-fill me-2"></i>Bound Villages</h4>
+        
+        {% for v in villages %}
+        <div class="village-card d-flex justify-content-between align-items-center">
+            <div class="flex-grow-1">
+                <div class="d-flex align-items-center mb-1">
+                    <h5 class="mb-0 fw-bold">
+                        <a href="{{ url_for('village_detail', vid=v.village_id) }}" class="text-white text-decoration-none hover-underline">
+                            {{ v.name }}
+                        </a>
+                    </h5>
+                    <small class="ms-2 text-muted" style="font-size: 0.75rem;">({{ v.village_id }})</small>
+                </div>
+                
+                <div class="d-flex gap-3 text-white-50 small align-items-center">
+                    <span class="text-warning"><i class="bi bi-box-seam me-1"></i>{{ v.primary_resource }}</span>
+                    <span class="text-danger"><i class="bi bi-fire me-1"></i>{{ v.hearth }}</span>
+                    
+                    {% if v.description %}
+                        <span class="border-start border-secondary ps-3 fst-italic text-secondary text-truncate" style="max-width: 250px;">
+                            {{ v.description }}
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if current_user.is_authenticated %}
+            <form action="{{ url_for('delete_village', village_id=v.village_id) }}" method="POST" onsubmit="return confirm('Delete village {{ v.name }}?');" class="ms-3">
+                <button type="submit" class="btn btn-sm btn-outline-danger border-0" title="Delete Village"><i class="bi bi-trash"></i></button>
+            </form>
+            {% endif %}
+        </div>
+        {% else %}
+        <div class="alert alert-dark text-center text-muted border-secondary">
+            <i class="bi bi-exclamation-circle me-2"></i>No villages attached to this settlement yet.
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="col-lg-4">
+        {% if current_user.is_authenticated %}
+        <div class="card bg-dark border-success text-white shadow sticky-top" style="top: 20px; z-index: 1;">
+            <div class="card-header bg-success text-dark fw-bold d-flex align-items-center">
+                <i class="bi bi-plus-circle-fill me-2"></i>Add Bound Village
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('add_village') }}" method="POST">
+                    <input type="hidden" name="settlement_id" value="{{ settlement.settlement_id }}">
+                    
+                    <div class="row g-2 mb-2">
+                        <div class="col-4">
+                            <label class="small text-success fw-bold">ID</label>
+                            <input type="text" name="village_id" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="v1" required>
+                        </div>
+                        <div class="col-8">
+                            <label class="small text-success fw-bold">Name</label>
+                            <input type="text" name="name" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Village Name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-2">
+                        <label class="small text-success fw-bold">Description</label>
+                        <textarea name="description" class="form-control form-control-sm bg-dark text-white border-secondary" rows="2" placeholder="Write a short lore..."></textarea>
+                    </div>
+
+                    <div class="row g-2 mb-2">
+                        <div class="col-6">
+                            <label class="small text-success fw-bold">Resource</label>
+                            <input type="text" name="primary_resource" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Grain...">
+                        </div>
+                        <div class="col-6">
+                            <label class="small text-success fw-bold">Hearth</label>
+                            <input type="number" step="0.1" name="hearth" class="form-control form-control-sm bg-dark text-white border-secondary" value="0">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="small text-success fw-bold">Culture</label>
+                        <select name="culture_id" class="form-select form-select-sm bg-dark text-white border-secondary">
+                            <option value="">-- Same as Town --</option>
+                            {% for c in cultures %}
+                                <option value="{{ c.Culture_Type_ID }}">{{ c.Culture_Type_Name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button class="btn btn-success btn-sm fw-bold">Create Village</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,281 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    /* KRALLIKLARA ÖZEL TASARIM (Banner Style) */
+    .faction-card {
+        background: #212529;
+        border: 1px solid #495057;
+        border-left: 6px solid #dc3545;
+        /* Varsayılan Kırmızı Şerit */
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .faction-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        border-color: #fff;
+        /* Hover'da kenar parlasın */
+    }
+
+    /* Arka planda silik bayrak ikonu */
+    .faction-bg-icon {
+        position: absolute;
+        top: -10px;
+        right: -20px;
+        font-size: 8rem;
+        opacity: 0.03;
+        color: #fff;
+        transform: rotate(15deg);
+        z-index: 0;
+    }
+
+    .faction-header {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .faction-title {
+        font-family: 'Georgia', serif;
+        /* Daha asil bir font */
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: #f8f9fa;
+        letter-spacing: 1px;
+    }
+    .faction-title a {
+        color: #f8f9fa;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .faction-title a:hover {
+        color: #ffc107; 
+        text-decoration: underline;
+    }
+
+    .faction-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        color: #adb5bd;
+        font-weight: 700;
+        margin-bottom: 2px;
+    }
+
+    .faction-value {
+        font-size: 1rem;
+        color: #fff;
+        font-weight: 500;
+        margin-bottom: 12px;
+    }
+
+    .ruler-box {
+        background: rgba(220, 53, 69, 0.1);
+        /* Hafif kırmızı zemin */
+        border: 1px solid rgba(220, 53, 69, 0.3);
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 15px;
+    }
+</style>
+
+<div class="d-flex justify-content-between align-items-center mb-5 border-bottom border-secondary pb-3">
+    <div>
+        <h1 class="display-6 fw-bold text-white text-uppercase"><i class="bi bi-flag-fill text-danger me-3"></i>Kingdoms
+            of Calradia</h1>
+        <p class="text-muted lead mb-0" style="font-size: 1rem;">Political map and faction diplomacy registry.</p>
+    </div>
+    
+    <div class="d-flex gap-2">
+        <a href="{{ url_for('faction_stats') }}" class="btn btn-info fw-bold px-4 py-2 shadow-lg text-white">
+            <i class="bi bi-bar-chart-fill me-2"></i>Faction Analytics
+        </a>
+
+        {% if current_user.is_authenticated %}
+        <button class="btn btn-danger fw-bold px-4 py-2 shadow-lg" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseAddForm">
+            <i class="bi bi-plus-square-dotted me-2"></i>Declare New Kingdom
+        </button>
+        {% endif %}
+    </div>
+</div>
+
+<div class="collapse mb-5" id="collapseAddForm">
+    <div class="card bg-dark border-danger text-white shadow-lg">
+        <div class="card-header bg-danger text-white fw-bold text-uppercase">
+            <i class="bi bi-pen-fill me-2"></i> Establish New Faction
+        </div>
+        <div class="card-body p-4">
+            <form action="{{ url_for('add_faction') }}" method="POST">
+                <div class="row g-3 mb-3">
+                    <div class="col-md-2">
+                        <label class="form-label text-danger small fw-bold">ID</label>
+                        <input type="text" class="form-control bg-black text-white border-secondary" name="faction_id"
+                            placeholder="fac_..." required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label text-danger small fw-bold">Kingdom Name</label>
+                        <input type="text" class="form-control bg-black text-white border-secondary" name="name"
+                            placeholder="e.g. Kingdom of Swadia" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label text-danger small fw-bold">Culture</label>
+                        <select name="culture_id" class="form-select bg-black text-white border-secondary" required>
+                            <option value="">Select Culture...</option>
+                            {% for c in cultures %}
+                            <option value="{{ c.Culture_Type_ID }}">{{ c.Culture_Type_Name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label text-danger small fw-bold">Ruler (King/Queen)</label>
+                        <select name="leader_id" class="form-select bg-black text-white border-secondary">
+                            <option value="">None</option>
+                            {% for l in lords %}
+                            <option value="{{ l.lord_id }}">{{ l.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label text-danger small fw-bold">Ruling Clan</label>
+                        <select name="ruling_clan_id" class="form-select bg-black text-white border-secondary">
+                            <option value="">None</option>
+                            {% for cl in clans %}
+                            <option value="{{ cl.clan_id }}">{{ cl.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label text-danger small fw-bold">Banner Key</label>
+                        <input type="text" class="form-control bg-black text-white border-secondary" name="banner_key"
+                            placeholder="Banner Code...">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label text-danger small fw-bold">Description</label>
+                    <textarea class="form-control bg-black text-white border-secondary" name="description" rows="2"
+                        placeholder="Political stance or history..."></textarea>
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-outline-danger text-uppercase fw-bold px-5">Confirm
+                        Establishment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="card bg-dark border-secondary mb-5 p-3">
+    <form action="{{ url_for('factions_page') }}" method="GET">
+        <div class="row g-2 align-items-center">
+            <div class="col-md-5">
+                <div class="input-group">
+                    <span class="input-group-text bg-secondary border-secondary text-white"><i
+                            class="bi bi-search"></i></span>
+                    <input type="text" class="form-control bg-dark text-white border-secondary" name="search_name"
+                        value="{{ request.args.get('search_name','') }}" placeholder="Search Kingdom...">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <select name="search_culture" class="form-select bg-dark text-white border-secondary">
+                    <option value="">Filter by Culture</option>
+                    {% for c in cultures %}
+                    <option value="{{ c.Culture_Type_ID }}" {% if
+                        request.args.get('search_culture')|int==c.Culture_Type_ID %}selected{% endif %}>{{
+                        c.Culture_Type_Name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2 d-grid">
+                <button type="submit" class="btn btn-light fw-bold">Filter</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row g-4">
+    {% for f in factions %}
+    <div class="col-xl-4 col-md-6">
+        <div class="card h-100 faction-card p-4">
+            <i class="bi bi-shield-fill faction-bg-icon"></i>
+
+            <div class="faction-header d-flex justify-content-between align-items-start">
+                <div>
+                    <h2 class="faction-title mb-1">
+                     <a href="{{ url_for('faction_detail', faction_id=f.faction_id) }}">{{ f.name }}</a>   
+                    </h2>
+                    <span class="badge bg-secondary border border-secondary text-light">{{ f.faction_id }}</span>
+                </div>
+                <div class="text-end">
+                    <span class="badge bg-dark border border-secondary text-warning">
+                        <i class="bi bi-globe me-1"></i> {{ f.CultureName or 'Unknown' }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="position-relative" style="z-index: 1;">
+
+                <div class="ruler-box">
+                    <div class="d-flex align-items-center">
+                        <div class="me-3 display-6 text-danger"><i class="bi bi-person-lines-fill"></i></div>
+                        <div>
+                            <div class="faction-label text-danger">Ruling Sovereign</div>
+                            <div class="fs-5 fw-bold text-white">{{ f.LeaderName or 'No Ruler' }}</div>
+                            <div class="small text-white-50">Clan: {{ f.ClanName or '-' }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="faction-label">Description</div>
+                    <div class="text-white-50 small fst-italic">
+                        "{{ f.description or 'No description available for this faction.' }}"
+                    </div>
+                </div>
+
+                {% if f.banner_key %}
+                <div class="mb-3">
+                    <div class="faction-label">Banner Code</div>
+                    <code class="text-info small">{{ f.banner_key|truncate(30) }}</code>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="mt-auto pt-3 border-top border-secondary d-flex gap-2 position-relative" style="z-index: 1;">
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('update_faction', faction_id=f.faction_id) }}"
+                    class="btn btn-sm btn-outline-warning flex-grow-1">
+                    <i class="bi bi-pencil-square"></i> Edit
+                </a>
+                <form action="{{ url_for('delete_faction', faction_id=f.faction_id) }}" method="POST"
+                    class="flex-grow-1" onsubmit="return confirm('Dissolve {{ f.name }}?');">
+                    <button type="submit" class="btn btn-sm btn-outline-danger w-100">
+                        <i class="bi bi-trash-fill"></i> Dissolve
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+    {% else %}
+    <div class="col-12 text-center py-5">
+        <i class="bi bi-flag-fill display-1 text-secondary opacity-25"></i>
+        <h3 class="text-white mt-3">The Realm is Empty</h3>
+        <p class="text-muted">No factions established yet.</p>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

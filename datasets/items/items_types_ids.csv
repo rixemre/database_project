@@ -1,0 +1,6 @@
+Item_Type_ID,Item_Type_Name
+1,melee_weapons
+2,ranged_weapons
+3,armors
+4,shields
+5,horses

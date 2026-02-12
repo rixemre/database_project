@@ -1,0 +1,648 @@
+{% extends "base.html" %}
+
+{% block title %}Master Inventory - M&B Inventory{% endblock %}
+
+{% block content %}
+
+<style>
+  /* ============================================
+     PAGE HEADER
+  ============================================ */
+  .page-header {
+    background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);
+    border: 2px solid var(--primary-gold);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .page-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-gold) 0%, #c9a537 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: #000;
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+  }
+
+  .page-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--primary-gold);
+    margin: 0;
+    letter-spacing: 2px;
+  }
+
+  .page-subtitle {
+    color: #adb5bd;
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  /* ============================================
+     FILTERS SECTION
+  ============================================ */
+  .filters-card {
+    background: linear-gradient(145deg, #1a1f3a, #0f1419);
+    border: 2px solid #2a3f5f;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .filters-header {
+    background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);
+    border-bottom: 2px solid var(--primary-gold);
+    padding: 1.5rem;
+  }
+
+  .filters-header h5 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: var(--primary-gold);
+    margin: 0;
+    letter-spacing: 1px;
+  }
+
+  .filter-section-title {
+    font-size: 0.75rem;
+    color: var(--primary-gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #2a3f5f;
+  }
+
+  .form-label {
+    font-size: 0.8rem;
+    color: var(--primary-gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-control,
+  .form-select {
+    background: rgba(26, 31, 58, 0.5);
+    border: 1px solid #2a3f5f;
+    color: #e9ecef;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .form-control:focus,
+  .form-select:focus {
+    background: rgba(26, 31, 58, 0.8);
+    color: #fff;
+    border-color: var(--primary-gold);
+    box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
+  }
+
+  /* ============================================
+     TABLE STYLES
+  ============================================ */
+  .items-table-card {
+    background: linear-gradient(145deg, #1a1f3a, #0f1419);
+    border: 2px solid #2a3f5f;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .table-header {
+    background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);
+    border-bottom: 2px solid var(--primary-gold);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .table-header-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .table-header h5 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: var(--primary-gold);
+    margin: 0;
+    letter-spacing: 1px;
+  }
+
+  .table-icon {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, var(--primary-gold) 0%, #c9a537 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #000;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+  }
+
+  .table {
+    margin: 0;
+  }
+
+  .table thead {
+    background: rgba(10, 14, 39, 0.8);
+  }
+
+  .table thead th {
+    color: var(--primary-gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.75rem;
+    padding: 1rem;
+    border: none;
+    border-bottom: 2px solid #2a3f5f;
+  }
+
+  .table tbody tr {
+    border-bottom: 1px solid #2a3f5f;
+    transition: all 0.3s ease;
+  }
+
+  .table tbody tr:hover {
+    background: rgba(212, 175, 55, 0.05);
+    transform: scale(1.01);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .table tbody td {
+    padding: 1rem;
+    vertical-align: middle;
+    color: #e9ecef;
+  }
+
+  .item-name {
+    font-weight: 700;
+    color: #fff;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Type Badges */
+  .type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    min-width: 120px;
+    justify-content: center;
+    border: 1px solid;
+  }
+
+  .type-armor {
+    background: rgba(13, 110, 253, 0.15);
+    border-color: #0d6efd;
+    color: #0d6efd;
+  }
+
+  .type-melee {
+    background: rgba(220, 53, 69, 0.15);
+    border-color: #dc3545;
+    color: #dc3545;
+  }
+
+  .type-ranged {
+    background: rgba(255, 193, 7, 0.15);
+    border-color: #ffc107;
+    color: #ffc107;
+  }
+
+  .type-shield {
+    background: rgba(13, 202, 240, 0.15);
+    border-color: #0dcaf0;
+    color: #0dcaf0;
+  }
+
+  .type-mount {
+    background: rgba(25, 135, 84, 0.15);
+    border-color: #198754;
+    color: #198754;
+  }
+
+  .type-other {
+    background: rgba(108, 117, 125, 0.15);
+    border-color: #6c757d;
+    color: #adb5bd;
+  }
+
+  .culture-badge {
+    background: rgba(108, 117, 125, 0.2);
+    border: 1px solid #6c757d;
+    color: #adb5bd;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .weight-badge {
+    background: rgba(108, 117, 125, 0.1);
+    color: #adb5bd;
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+  }
+
+  .civilian-badge {
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .civilian-yes {
+    background: rgba(25, 135, 84, 0.15);
+    border: 1px solid #198754;
+    color: #198754;
+  }
+
+  .civilian-no {
+    background: rgba(108, 117, 125, 0.1);
+    border: 1px solid #495057;
+    color: #6c757d;
+  }
+
+  /* Action Button */
+  .btn-details {
+    background: linear-gradient(135deg, var(--primary-gold) 0%, #c9a537 100%);
+    border: none;
+    color: #000;
+    font-weight: 700;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .btn-details:hover {
+    background: linear-gradient(135deg, #c9a537 0%, var(--primary-gold) 100%);
+    box-shadow: 0 6px 18px rgba(212, 175, 55, 0.5);
+    transform: translateY(-2px);
+    color: #000;
+  }
+
+  /* Filter Buttons */
+  .btn-filters {
+    background: linear-gradient(135deg, var(--primary-gold) 0%, #c9a537 100%);
+    border: none;
+    color: #000;
+    font-weight: 700;
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .btn-filters:hover {
+    background: linear-gradient(135deg, #c9a537 0%, var(--primary-gold) 100%);
+    box-shadow: 0 6px 18px rgba(212, 175, 55, 0.6);
+    transform: translateY(-2px);
+  }
+
+  .btn-filters-toggle {
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid var(--primary-gold);
+    color: var(--primary-gold);
+    font-weight: 700;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-filters-toggle:hover {
+    background: var(--primary-gold);
+    color: #000;
+    transform: translateY(-2px);
+  }
+
+  /* Empty State */
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+
+  .empty-state i {
+    font-size: 4rem;
+    color: #495057;
+    margin-bottom: 1.5rem;
+    opacity: 0.3;
+  }
+
+  .empty-state p {
+    color: #6c757d;
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  .empty-state small {
+    color: #495057;
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-title {
+      font-size: 1.5rem;
+    }
+    .table-responsive {
+      font-size: 0.85rem;
+    }
+    .type-badge {
+      min-width: 100px;
+      font-size: 0.75rem;
+    }
+  }
+</style>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <div class="d-flex align-items-center gap-3">
+      <div class="page-icon">
+        <i class="bi bi-stack"></i>
+      </div>
+      <div>
+        <h1 class="page-title">MASTER INVENTORY</h1>
+        <p class="page-subtitle">Complete catalog of all items and equipment</p>
+      </div>
+    </div>
+    <div>
+      <a href="{{ url_for('complex_queries_page') }}" class="btn btn-link text-decoration-none text-warning">
+    <i class="bi bi-bar-chart-line me-2"></i> View Strategic Analytics
+</a>
+    </div>
+  </div>
+</div>
+
+<!-- Filters Section -->
+<div class="filters-card">
+  <div class="filters-header">
+    <div class="d-flex justify-content-between align-items-center">
+      <h5><i class="bi bi-funnel-fill me-2"></i>Advanced Filters</h5>
+      <button class="btn btn-filters-toggle btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilters">
+        <i class="bi bi-chevron-down"></i> Toggle
+      </button>
+    </div>
+    <
+  </div>
+
+  <div class="collapse show" id="collapseFilters">
+    <div class="card-body p-4">
+      <form action="{{ url_for('all_items_page') }}" method="GET">
+        
+        <!-- Basic Filters -->
+        <div class="filter-section-title">
+          <i class="bi bi-search me-2"></i>Basic Search
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-md-4">
+            <label class="form-label">Item Name</label>
+            <input type="search" class="form-control" name="search_name" 
+                   placeholder="Search by name..." 
+                   value="{{ request.args.get('search_name', '') }}">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Type</label>
+            <select name="search_type" class="form-select">
+              <option value="">All Types</option>
+              {% for type in item_types %}
+              <option value="{{ type.Item_Type_ID }}" 
+                      {% if request.args.get('search_type')|int == type.Item_Type_ID %}selected{% endif %}>
+                {{ type.Item_Type_Name }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Culture</label>
+            <select name="search_culture" class="form-select">
+              <option value="">All Cultures</option>
+              {% for culture in cultures %}
+              <option value="{{ culture.Culture_Type_ID }}" 
+                      {% if request.args.get('search_culture')|int == culture.Culture_Type_ID %}selected{% endif %}>
+                {{ culture.Culture_Type_Name }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <!-- Range Filters -->
+        <div class="filter-section-title">
+          <i class="bi bi-sliders me-2"></i>Range Filters
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label">Weight Range (kg)</label>
+            <div class="input-group">
+              <input type="number" step="0.1" min="0" class="form-control" 
+                     name="min_weight" placeholder="Min" 
+                     value="{{ request.args.get('min_weight', '') }}">
+              <span class="input-group-text bg-dark text-white-50 border-secondary">to</span>
+              <input type="number" step="0.1" min="0" class="form-control" 
+                     name="max_weight" placeholder="Max" 
+                     value="{{ request.args.get('max_weight', '') }}">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Civilian Status</label>
+            <select name="is_civilian" class="form-select">
+              <option value="">All Items</option>
+              <option value="Yes" {% if request.args.get('is_civilian') == 'Yes' %}selected{% endif %}>
+                Civilian Only (Yes)
+              </option>
+              <option value="No" {% if request.args.get('is_civilian') == 'No' %}selected{% endif %}>
+                Military Only (No)
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="d-flex justify-content-end gap-2">
+          <a href="{{ url_for('all_items_page') }}" class="btn btn-outline-secondary px-4">
+            <i class="bi bi-arrow-counterclockwise me-2"></i>Reset
+          </a>
+          <button type="submit" class="btn btn-filters px-4">
+            <i class="bi bi-check2-circle me-2"></i>Apply Filters
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Items Table -->
+<div class="items-table-card">
+  <div class="table-header">
+    <div class="table-header-title">
+      <div class="table-icon">
+        <i class="bi bi-list-check"></i>
+      </div>
+      <div>
+        <h5>Complete Item List</h5>
+        <small class="text-white-50">{{ all_items|length }} items found</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-dark table-hover mb-0">
+      <thead>
+        <tr>
+          <th class="ps-4">Item Name</th>
+          <th>Type</th>
+          <th>Culture</th>
+          <th class="text-center">Weight</th>
+          <th class="text-center">Civilian</th>
+          <th class="text-end pe-4">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in all_items %}
+        <tr>
+          <td class="ps-4">
+            <div class="item-name">
+              {% if 'Armor' in item.Item_Type %}
+                <i class="bi bi-shield-shaded"></i>
+              {% elif 'Melee' in item.Item_Type %}
+                <i class="bi bi-hammer"></i>
+              {% elif 'Ranged' in item.Item_Type %}
+                <i class="bi bi-bullseye"></i>
+              {% elif 'Shield' in item.Item_Type %}
+                <i class="bi bi-shield"></i>
+              {% elif 'Mount' in item.Item_Type %}
+                <i class="bi bi-tencent-qq"></i>
+              {% else %}
+                <i class="bi bi-box"></i>
+              {% endif %}
+              {{ item.Item_Name }}
+            </div>
+          </td>
+          
+          <td>
+            {% if 'Armor' in item.Item_Type %}
+              <span class="type-badge type-armor">
+                <i class="bi bi-shield-shaded"></i> Armor
+              </span>
+            {% elif 'Melee' in item.Item_Type %}
+              <span class="type-badge type-melee">
+                <i class="bi bi-hammer"></i> Melee
+              </span>
+            {% elif 'Ranged' in item.Item_Type %}
+              <span class="type-badge type-ranged">
+                <i class="bi bi-bullseye"></i> Ranged
+              </span>
+            {% elif 'Shield' in item.Item_Type %}
+              <span class="type-badge type-shield">
+                <i class="bi bi-shield"></i> Shield
+              </span>
+            {% elif 'Mount' in item.Item_Type %}
+              <span class="type-badge type-mount">
+                <i class="bi bi-tencent-qq"></i> Mount
+              </span>
+            {% else %}
+              <span class="type-badge type-other">
+                {{ item.Item_Type }}
+              </span>
+            {% endif %}
+          </td>
+          
+          <td>
+            <span class="culture-badge">
+              <i class="bi bi-flag-fill"></i> {{ item.Culture }}
+            </span>
+          </td>
+          
+          <td class="text-center">
+            <span class="weight-badge">{{ item.Weight }} kg</span>
+          </td>
+          
+          <td class="text-center">
+            {% if item.Civilian == 'Yes' %}
+              <span class="civilian-badge civilian-yes">
+                <i class="bi bi-check-circle-fill"></i> Yes
+              </span>
+            {% else %}
+              <span class="civilian-badge civilian-no">
+                <i class="bi bi-x-circle"></i> No
+              </span>
+            {% endif %}
+          </td>
+          
+          <td class="text-end pe-4">
+            {% set update_url = '#' %}
+            {% if item.Item_Type == 'Armor' %}
+              {% set update_url = url_for('update_page', item_id=item.Item_ID) %}
+            {% elif item.Item_Type == 'Melee Weapon' %}
+              {% set update_url = url_for('update_page_melee', item_id=item.Item_ID) %}
+            {% elif item.Item_Type == 'Ranged Weapon' %}
+              {% set update_url = url_for('update_page_ranged', item_id=item.Item_ID) %}
+            {% elif item.Item_Type == 'Shield' %}
+              {% set update_url = url_for('update_page_shield', item_id=item.Item_ID) %}
+            {% elif item.Item_Type == 'Mount' %}
+              {% set update_url = url_for('update_page_mount', item_id=item.Item_ID) %}
+            {% else %}
+              {% set update_url = url_for('item_details_page', item_id=item.Item_ID) %}
+            {% endif %}
+
+            <a href="{{ update_url }}" class="btn btn-details">
+              Details <i class="bi bi-chevron-right"></i>
+            </a>
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="6" class="empty-state">
+            <i class="bi bi-inbox"></i>
+            <p>No items found matching your criteria.</p>
+            <small>Try adjusting the filters or reset to see all items.</small>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

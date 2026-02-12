@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card shadow-sm mb-4 bg-dark">
+  <div class="card-header bg-dark-subtle">
+    <h2 class="h5 mb-0"><i class="bi bi-pencil-fill text-warning"></i> Update Ranged Weapon (ID: {{ item_id }})</h2>
+    <h3 class="h6 text-white-50">{{ weapon.Item_Name }}</h3>
+  </div>
+  <div class="card-body">
+    <form action="{{ url_for('update_ranged_weapon', item_id=item_id) }}" method="POST">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="item_name" class="form-label">Weapon Name</label>
+          <input type="text" class="form-control" id="item_name" name="item_name" value="{{ weapon.Item_Name }}" required>
+        </div>
+        <div class="col-md-6">
+          <label for="weight" class="form-label">Weight</label>
+          <input type="text" class="form-control" id="weight" name="weight" value="{{ weapon.Weight }}" required>
+        </div>
+        <div class="col-md-6">
+          <label for="culture_id" class="form-label">Culture</label>
+          <select id="culture_id" name="culture_id" class="form-select">
+            {% for culture in cultures %}
+            <option value="{{ culture.Culture_Type_ID }}" {% if culture.Culture_Type_ID == weapon.Culture_ID %}selected{% endif %}>
+              {{ culture.Culture_Type_Name }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-6 d-flex align-items-end">
+          <div class="form-check form-switch fs-5">
+            <input class="form-check-input" type="checkbox" id="civilian" name="civilian" value="Yes" role="switch" {% if weapon.Civilian == 'Yes' %}checked{% endif %}>
+            <label class="form-check-label" for="civilian">Civilian Item</label>
+          </div>
+        </div>
+      </div>
+      
+      <hr class="my-4">
+      
+      <h5 class="text-white-50">Weapon Stats</h5>
+      <div class="row g-3">
+        <div class="col-md-3">
+          <label for="Tier" class="form-label">Tier</label>
+          <input type="number" class="form-control" id="Tier" name="Tier" value="{{ weapon.Tier }}" min="1">
+        </div>
+        <div class="col-md-3">
+          <label for="Skill" class="form-label">Skill</label>
+          <input type="number" class="form-control" id="Skill" name="Skill" value="{{ weapon.Skill }}" min="0">
+        </div>
+        <div class="col-md-3">
+          <label for="Damage" class="form-label">Damage</label>
+          <input type="number" class="form-control" id="Damage" name="Damage" value="{{ weapon.Damage }}" min="0">
+        </div>
+        <div class="col-md-3">
+          <label for="Accuracy" class="form-label">Accuracy</label>
+          <input type="number" class="form-control" id="Accuracy" name="Accuracy" value="{{ weapon.Accuracy }}" min="0">
+        </div>
+      </div>
+      <div class="row g-3 mt-2">
+        <div class="col-md-4">
+          <label for="Missile_Speed" class="form-label">Missile Speed</label>
+          <input type="number" class="form-control" id="Missile_Speed" name="Missile_Speed" value="{{ weapon.Missile_Speed }}" min="0">
+        </div>
+        <div class="col-md-4">
+          <label for="Draw_Speed" class="form-label">Draw Speed</label>
+          <input type="number" class="form-control" id="Draw_Speed" name="Draw_Speed" value="{{ weapon.Draw_Speed }}" min="0">
+        </div>
+        <div class="col-md-4">
+          <label for="Reload_Speed" class="form-label">Reload Speed</label>
+          <input type="number" class="form-control" id="Reload_Speed" name="Reload_Speed" value="{{ weapon.Reload_Speed }}" min="0">
+        </div>
+      </div>
+       <div class="row g-3 mt-3">
+        <div class="col-md-4">
+          <div class="form-check form-switch fs-5">
+            <input class="form-check-input" type="checkbox" id="Usable_on_Horseback" name="Usable_on_Horseback" value="Yes" role="switch" {% if weapon.Usable_on_Horseback == 'Yes' %}checked{% endif %}>
+            <label class="form-check-label" for="Usable_on_Horseback">Usable on Horseback</label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-check form-switch fs-5">
+            <input class="form-check-input" type="checkbox" id="Reload_on_Horseback" name="Reload_on_Horseback" value="Yes" role="switch" {% if weapon.Reload_on_Horseback == 'Yes' %}checked{% endif %}>
+            <label class="form-check-label" for="Reload_on_Horseback">Reload on Horseback</label>
+          </div>
+        </div>
+      </div>
+      
+      <button type="submit" class="btn btn-success mt-4"><i class="bi bi-check-circle-fill"></i> Save Changes</button>
+      <a href="{{ url_for('ranged_weapons_page') }}" class="btn btn-secondary mt-4">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

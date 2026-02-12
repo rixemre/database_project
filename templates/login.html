@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Yönetici Girişi{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4">
+        <div class="card bg-dark text-light border-warning shadow-lg">
+            <div class="card-header border-warning text-center py-3">
+                <h3 class="text-warning mb-0"><i class="bi bi-shield-lock-fill"></i>Administration</h3>
+            </div>
+            <div class="card-body p-4">
+                {% if error %}
+                <div class="alert alert-danger text-center p-2 mb-3">
+                    <small><i class="bi bi-exclamation-circle-fill"></i> {{ error }}</small>
+                </div>
+                {% endif %}
+
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label text-white-50 small text-uppercase fw-bold">UserName</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-secondary border-secondary text-warning"><i
+                                    class="bi bi-person-fill"></i></span>
+                            <input type="text" name="username" class="form-control bg-dark text-light border-secondary"
+                                required autofocus>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label text-white-50 small text-uppercase fw-bold">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-secondary border-secondary text-warning"><i
+                                    class="bi bi-key-fill"></i></span>
+                            <input type="password" name="password"
+                                class="form-control bg-dark text-light border-secondary" required>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-warning fw-bold text-dark py-2">Login</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer border-warning text-center py-3 bg-secondary bg-opacity-10">
+                <a href="{{ url_for('index') }}" class="text-muted small text-decoration-none">← Back to homepage</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

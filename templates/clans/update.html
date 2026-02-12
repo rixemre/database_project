@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Update Clan{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        
+        <div class="d-flex align-items-center mb-4">
+            <a href="{{ url_for('clans_page') }}" class="btn btn-outline-secondary me-3">
+                <i class="bi bi-arrow-left"></i>
+            </a>
+            <div>
+                <h2 class="text-info fw-bold mb-0">Update Clan Details</h2>
+                <p class="text-muted small mb-0">Modify attributes for <span class="text-white">{{ clan.name }}</span>.</p>
+            </div>
+        </div>
+
+        <div class="card bg-dark border-secondary shadow-lg">
+            <div class="card-body p-4">
+                <form action="{{ url_for('update_clan', clan_id=clan.clan_id) }}" method="POST">
+                    
+                    <div class="mb-3">
+                        <label class="form-label text-info small fw-bold">Clan ID (Immutable)</label>
+                        <input type="text" value="{{ clan.clan_id }}" class="form-control bg-secondary text-white border-secondary opacity-50" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label text-info small fw-bold">Clan Name</label>
+                        <input type="text" name="name" value="{{ clan.name }}" class="form-control bg-black text-white border-secondary" required>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label text-info small fw-bold">Tier</label>
+                            <select name="tier" class="form-select bg-black text-white border-secondary">
+                                {% for i in range(7) %}
+                                <option value="{{ i }}" {% if clan.tier == i %}selected{% endif %}>Tier {{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-info small fw-bold">Faction Allegiance</label>
+                            <select name="faction_id" class="form-select bg-black text-white border-secondary">
+                                <option value="">-- Independent --</option>
+                                {% for f in factions %}
+                                <option value="{{ f.faction_id }}" {% if clan.faction_id == f.faction_id %}selected{% endif %}>
+                                    {{ f.name }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label text-info small fw-bold">Clan Leader</label>
+                        <select name="leader_id" class="form-select bg-black text-white border-secondary">
+                            <option value="">-- No Leader --</option>
+                            {% for l in lords %}
+                            <option value="{{ l.ext_id }}" {% if clan.leader_id == l.ext_id %}selected{% endif %}>
+                                {{ l.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label text-info small fw-bold">Banner Key</label>
+                        <textarea name="banner_key" rows="2" class="form-control bg-black text-white border-secondary text-muted small" 
+                                  placeholder="Banner code string...">{{ clan.banner_key }}</textarea>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-info fw-bold text-dark py-2">
+                            <i class="bi bi-save me-2"></i> Save Changes
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

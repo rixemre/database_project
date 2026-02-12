@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-lg bg-dark text-white border-warning">
+            <div class="card-header bg-transparent border-warning text-warning fw-bold">
+                <i class="bi bi-pencil-square me-2"></i>Edit Settlement: {{ settlement.name }}
+            </div>
+            <div class="card-body p-4">
+                <form action="{{ url_for('update_settlement', settlement_id=settlement.settlement_id) }}" method="POST">
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6"><label class="text-warning small">Name</label><input type="text" class="form-control bg-dark text-white border-secondary" name="name" value="{{ settlement.name }}" required></div>
+                        <div class="col-md-6"><label class="text-warning small">Type</label><select name="type" class="form-select bg-dark text-white border-secondary"><option value="Town" {% if settlement.type=='Town'%}selected{%endif%}>Town</option><option value="Castle" {% if settlement.type=='Castle'%}selected{%endif%}>Castle</option></select></div>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-warning">Update</button>
+                        <a href="{{ url_for('settlements_page') }}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

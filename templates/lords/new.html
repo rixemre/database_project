@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .form-label { font-size: 0.75rem; color: #ffc107; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-control, .form-select { background-color: #2b3035; border: 1px solid #495057; color: #e9ecef; }
+    .form-control:focus, .form-select:focus { background-color: #2b3035; color: #fff; border-color: #ffc107; box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25); }
+</style>
+
+<div class="card shadow-lg bg-dark text-white border-0 border-start border-4 border-success mb-4">
+    
+    <div class="card-header bg-transparent border-bottom border-secondary py-3">
+        <h5 class="mb-0 text-success fw-bold">
+            <i class="bi bi-person-plus-fill me-2 fs-4"></i>Register New Lord
+        </h5>
+    </div>
+    
+    <div class="card-body p-4">
+        <form method="POST">
+            
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <label for="name" class="form-label">Lord Name</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-secondary border-secondary text-light"><i class="bi bi-person-fill"></i></span>
+                        <input type="text" class="form-control" id="name" name="name" required placeholder="e.g. Rhagaea">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="culture_id" class="form-label">Culture</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-secondary border-secondary text-light"><i class="bi bi-flag-fill"></i></span>
+                        <select class="form-select" id="culture_id" name="culture_id">
+                            <option value="" selected>Select Culture...</option>
+                            {% for culture in cultures %}
+                                <option value="{{ culture.Culture_Type_ID }}">
+                                    {{ culture.Culture_Type_Name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label for="gender" class="form-label">Gender</label>
+                    <select class="form-select" id="gender" name="gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="age" class="form-label">Age</label>
+                    <input type="number" class="form-control" id="age" name="age" min="0" placeholder="e.g. 45">
+                </div>
+                <div class="col-md-4">
+                    <label for="level" class="form-label">Level</label>
+                    <input type="number" class="form-control" id="level" name="level" min="0" placeholder="e.g. 20">
+                </div>
+            </div>
+            
+            <div class="d-grid mt-5">
+                <button type="submit" class="btn btn-success fw-bold text-uppercase py-3 fs-5 shadow-sm">
+                    <i class="bi bi-check2-circle me-2"></i>Add New Lord
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="text-end">
+    <a href="{{ url_for('lords_page') }}" class="text-decoration-none text-secondary hover-text-light">
+        <i class="bi bi-arrow-left me-1"></i>Back to Lords Dashboard
+    </a>
+</div>
+
+{% endblock %}

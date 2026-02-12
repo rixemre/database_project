@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card shadow-sm mb-4 bg-dark">
+  <div class="card-header bg-dark-subtle">
+    <h2 class="h5 mb-0"><i class="bi bi-pencil-fill text-warning"></i> Update Armor (ID: {{ item_id }})</h2>
+    <h3 class="h6 text-white-50">{{ armor.Item_Name }}</h3>
+  </div>
+  <div class="card-body">
+    <form action="{{ url_for('update_armor', item_id=item_id) }}" method="POST">
+      
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="item_name" class="form-label">Armor Name</label>
+          <input type="text" class="form-control" id="item_name" name="item_name" value="{{ armor.Item_Name }}" required>
+        </div>
+        <div class="col-md-6">
+          <label for="weight" class="form-label">Weight</label>
+          <input type="text" class="form-control" id="weight" name="weight" value="{{ armor.Weight }}" required>
+        </div>
+        <div class="col-md-6">
+          <label for="culture_id" class="form-label">Culture</label>
+          <select id="culture_id" name="culture_id" class="form-select">
+            {% for culture in cultures %}
+              <option value="{{ culture.Culture_Type_ID }}" {% if culture.Culture_Type_ID == armor.Culture_ID %}selected{% endif %}>
+                {{ culture.Culture_Type_Name }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-6 d-flex align-items-end">
+          <div class="form-check form-switch fs-5">
+            <input class="form-check-input" type="checkbox" id="civilian" name="civilian" value="Yes" role="switch" {% if armor.Civilian == 'Yes' %}checked{% endif %}>
+            <label class="form-check-label" for="civilian">Civilian Item</label>
+          </div>
+        </div>
+      </div>
+      
+      <hr class="my-4">
+      
+      <h5 class="text-white-50">Armor Stats</h5>
+      <div class="row g-3">
+        <div class="col-md-3">
+          <label for="body_armor" class="form-label">Body Armor</label>
+          <input type="number" class="form-control" id="body_armor" name="body_armor" value="{{ armor.Body_Armor_Rating }}" min="0" required>
+        </div>
+        <div class="col-md-3">
+          <label for="leg_armor" class="form-label">Leg Armor</label>
+          <input type="number" class="form-control" id="leg_armor" name="leg_armor" value="{{ armor.Leg_Armor_Rating }}" min="0" required>
+        </div>
+        <div class="col-md-3">
+          <label for="head_armor" class="form-label">Head Armor</label>
+          <input type="number" class="form-control" id="head_armor" name="head_armor" value="{{ armor.Head_Armor_Rating }}" min="0" required>
+        </div>
+        <div class="col-md-3">
+          <label for="arm_armor" class="form-label">Arm Armor</label>
+          <input type="number" class="form-control" id="arm_armor" name="arm_armor" value="{{ armor.Arm_Armor_Rating }}" min="0" required>
+        </div>
+        <div class="col-md-6">
+          <label for="material" class="form-label">Material</label>
+          <input type="text" class="form-control" id="material" name="material" value="{{ armor.Material }}">
+        </div>
+        </div>
+      
+      <button type="submit" class="btn btn-success mt-4">
+        <i class="bi bi-check-circle-fill"></i> Save Changes
+      </button>
+      <a href="{{ url_for('armors_page') }}" class="btn btn-secondary mt-4">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

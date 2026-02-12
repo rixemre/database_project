@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Faction{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-lg bg-dark text-white border-0 border-top border-4 border-warning">
+            <div class="card-header bg-transparent border-bottom border-secondary py-3 d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 text-warning fw-bold"><i class="bi bi-pencil-square me-2"></i>Edit Faction: {{ faction.name }}</h5>
+                <a href="{{ url_for('factions_page') }}" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left me-1"></i>Back</a>
+            </div>
+            <div class="card-body p-4">
+                <form action="{{ url_for('update_faction', faction_id=faction.faction_id) }}" method="POST">
+                    
+                    <div class="mb-3">
+                        <label class="text-secondary small fw-bold text-uppercase">Faction ID</label>
+                        <input type="text" class="form-control bg-black text-white border-secondary" value="{{ faction.faction_id }}" disabled>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="text-warning small fw-bold text-uppercase">Name</label>
+                            <input type="text" class="form-control bg-dark text-white border-secondary" name="name" value="{{ faction.name }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="text-warning small fw-bold text-uppercase">Culture</label>
+                            <select name="culture_id" class="form-select bg-dark text-white border-secondary">
+                                <option value="">None</option>
+                                {% for c in cultures %}
+                                <option value="{{ c.Culture_Type_ID }}" {% if faction.culture_id == c.Culture_Type_ID %}selected{% endif %}>{{ c.Culture_Type_Name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="text-warning small fw-bold text-uppercase">Ruler (Lord)</label>
+                            <select name="leader_id" class="form-select bg-dark text-white border-secondary">
+                                <option value="">None</option>
+                                {% for l in lords %}
+                                <option value="{{ l.lord_id }}" {% if faction.leader_id|string == l.lord_id|string %}selected{% endif %}>{{ l.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="text-warning small fw-bold text-uppercase">Ruling Clan</label>
+                            <select name="ruling_clan_id" class="form-select bg-dark text-white border-secondary">
+                                <option value="">None</option>
+                                {% for cl in clans %}
+                                <option value="{{ cl.clan_id }}" {% if faction.ruling_clan_id == cl.clan_id %}selected{% endif %}>{{ cl.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="text-warning small fw-bold text-uppercase">Banner Key</label>
+                        <input type="text" class="form-control bg-dark text-white border-secondary" name="banner_key" value="{{ faction.banner_key or '' }}">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="text-warning small fw-bold text-uppercase">Description</label>
+                        <textarea class="form-control bg-dark text-white border-secondary" name="description" rows="3">{{ faction.description or '' }}</textarea>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-warning fw-bold text-dark py-2">Update Faction</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+clan_id,name,tier,banner_key,leader_id,faction_id
+banu_qild,Banu Qild,6,banu_qild_banner,sultan_unqid,aserai
+banu_habbab,Banu Habbab,4,banu_habbab_banner,emir_adram,aserai
+banu_sarran,Banu Sarran,4,banu_sarran_banner,emir_tais,aserai
+banu_atij,Banu Atij,4,banu_atij_banner,emir_suruq,aserai
+banu_ruwaid,Banu Ruwaid,4,banu_ruwaid_banner,emir_iyalas,aserai
+banu_hulyan,Banu Hulyan,4,banu_hulyan_banner,emir_talas,aserai
+banu_sarmal,Banu Sarmal,4,banu_sarmal_banner,emir_awdhan,aserai
+ghilman,Ghilman,3,ghilman_banner,emir_aqar,aserai
+clan_fen_cernach,Clan fen Cernach,6,clan_fen_cernach_banner,high_king_caladog,battania
+clan_fen_giall,Clan fen Giall,4,clan_fen_giall_banner,mormaer_ergeon,battania
+clan_fen_caern,Clan fen Caern,4,clan_fen_caern_banner,mormaer_melidir,battania
+clan_fen_derngil,Clan fen Derngil,4,clan_fen_derngil_banner,mormaer_pryndor,battania
+clan_fen_eingal,Clan fen Eingal,4,clan_fen_eingal_banner,mormaer_luichan,battania
+clan_fen_morcar,Clan fen Morcar,4,clan_fen_morcar_banner,mormaer_aeron,battania
+clan_fen_uvain,Clan fen Uvain,4,clan_fen_uvain_banner,mormaer_aradwyr,battania
+urkhunait,Urkhunait,6,urkhunait_banner,monchug_khan,khuzait_khanate
+khergit,Khergit,5,khergit_banner,mesui_begum,khuzait_khanate
+tigurid,Tigurid,4,tigurid_banner,tulag_beg,khuzait_khanate
+arkits,Arkits,4,arkits_banner,hurunag_beg,khuzait_khanate
+olhait,Olhait,4,olhait_banner,akrum_beg,khuzait_khanate
+khuzaitai,Khuzaitai,4,khuzaitai_banner,ilatar_beg,khuzait_khanate
+yalanchait,Yalanchait,4,yalanchait_banner,kanujan_beg,khuzait_khanate
+baltait,Baltait,4,baltait_banner,gusukan_beg,khuzait_khanate
+kuloving,Kuloving,6,kuloving_banner,grand_prince_raganvad,sturgia
+isyarov,Isyarov,4,isyarov_banner,knyaz_olek,sturgia
+kozarog,Kozarog,4,kozarog_banner,knyaz_godun,sturgia
+jaculan,Jaculan,4,jaculan_banner,knyaz_vyldur,sturgia
+malivig,Malivig,4,malivig_banner,knyaz_fafen,sturgia
+vagiroving,Vagiroving,4,vagiroving_banner,knyaz_vashorki,sturgia
+gundaroving,Gundaroving,4,gundaroving_banner,knyaz_tovir,sturgia
+ubdoving,Ubdoving,4,ubdoving_banner,knyaz_rolan,sturgia
+dey_meroc,dey Meroc,6,dey_meroc_banner,king_derthert,vlandia
+dey_tihr,dey Tihr,5,dey_tihr_banner,baron_aldric,vlandia
+dey_arromanc,dey Arromanc,4,dey_arromanc_banner,baroness_calatild,vlandia
+dey_cortain,dey Cortain,4,dey_cortain_banner,baron_ingalther,vlandia
+dey_valant,dey Valant,4,dey_valant_banner,baron_ospir,vlandia
+dey_gunric,dey Gunric,4,dey_gunric_banner,baron_servic,vlandia
+dey_molarn,dey Molarn,4,dey_molarn_banner,baron_belgir,vlandia
+dey_jelind,dey Jelind,4,dey_jelind_banner,baron_hecard,vlandia
+dey_fortes,dey Fortes,4,dey_fortes_banner,baron_vartin,vlandia
+dey_rothad,dey Rothad,4,dey_rothad_banner,baron_ecarand,vlandia
+dey_folcun,dey Folcun,4,dey_folcun_banner,baron_berican,vlandia
+osticos,Osticos,6,osticos_banner,emperor_lucon,northern_empire
+varnus,Varnus,4,varnus_banner,archon_manteos,northern_empire
+neretzes,Neretzes,4,neretzes_banner,archon_penton,northern_empire
+fulior,Fulior,4,fulior_banner,archon_encurion,northern_empire
+secuos,Secuos,4,secuos_banner,archon_gyphor,northern_empire
+lonalion,Lonalion,4,lonalion_banner,archon_nicasor,northern_empire
+dionicus,Dionicus,4,dionicus_banner,archon_tasynor,northern_empire
+julios,Julios,4,julios_banner,archon_maritzios,northern_empire
+sorados,Sorados,4,sorados_banner,archon_porphalios,northern_empire
+pethros,Pethros,6,pethros_banner,empress_rhagaea,southern_empire
+leonipardes,Leonipardes,4,leonipardes_banner,archon_pharon,southern_empire
+maneolis,Maneolis,4,maneolis_banner,archon_oros,southern_empire
+chonis,Chonis,4,chonis_banner,archon_turiados,southern_empire
+eleftheroi,Eleftheroi,4,eleftheroi_banner,archon_baranor,southern_empire
+visyros,Visyros,4,visyros_banner,archon_sichanis,southern_empire
+avlonos,Avlonos,4,avlonos_banner,archon_serandon,southern_empire
+minotharos,Minotharos,4,minotharos_banner,archon_abalytos,southern_empire
+impestores,Impestores,6,impestores_banner,emperor_garios,western_empire
+comnos,Comnos,4,comnos_banner,archon_comnos,western_empire
+argoros,Argoros,4,argoros_banner,archon_dypharos,western_empire

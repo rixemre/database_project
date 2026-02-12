@@ -1,0 +1,732 @@
+{% extends "base.html" %}
+
+{% block title %}Ranged Weapons - M&B Inventory{% endblock %}
+
+{% block content %}
+
+<style>
+  /* ============================================
+     PAGE HEADER
+  ============================================ */
+  .page-header {
+    background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);
+    border: 2px solid var(--primary-gold);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .page-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-gold) 0%, #c9a537 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: #000;
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+  }
+
+  .page-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--primary-gold);
+    margin: 0;
+    letter-spacing: 2px;
+  }
+
+  .page-subtitle {
+    color: #adb5bd;
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  /* ============================================
+     ADD FORM
+  ============================================ */
+  .add-form-card {
+    background: linear-gradient(145deg, #1a1f3a, #0f1419);
+    border: 2px solid #198754;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .add-form-header {
+    background: linear-gradient(135deg, #198754 0%, #157347 100%);
+    padding: 1.5rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .add-form-header h5 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    letter-spacing: 1px;
+  }
+
+  .form-label {
+    font-size: 0.8rem;
+    color: var(--primary-gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-control,
+  .form-select {
+    background: rgba(26, 31, 58, 0.5);
+    border: 1px solid #2a3f5f;
+    color: #e9ecef;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .form-control:focus,
+  .form-select:focus {
+    background: rgba(26, 31, 58, 0.8);
+    color: #fff;
+    border-color: var(--primary-gold);
+    box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
+  }
+
+  .btn-forge {
+    background: linear-gradient(135deg, #198754 0%, #157347 100%);
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    padding: 0.8rem;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    box-shadow: 0 5px 15px rgba(25, 135, 84, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .btn-forge:hover {
+    background: linear-gradient(135deg, #157347 0%, #198754 100%);
+    box-shadow: 0 8px 25px rgba(25, 135, 84, 0.6);
+    transform: translateY(-2px);
+  }
+
+  .filter-section-title {
+    font-size: 0.75rem;
+    color: var(--primary-gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #2a3f5f;
+  }
+
+  /* ============================================
+     FILTERS SECTION
+  ============================================ */
+  .filters-card {
+    background: linear-gradient(145deg, #1a1f3a, #0f1419);
+    border: 2px solid #2a3f5f;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .filters-header {
+    background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);
+    border-bottom: 2px solid var(--primary-gold);
+    padding: 1.5rem;
+  }
+
+  .filters-header h5 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: var(--primary-gold);
+    margin: 0;
+    letter-spacing: 1px;
+  }
+
+  /* ============================================
+     TABLE STYLES
+  ============================================ */
+  .weapons-table-card {
+    background: linear-gradient(145deg, #1a1f3a, #0f1419);
+    border: 2px solid #2a3f5f;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .table-header {
+    background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);
+    border-bottom: 2px solid var(--primary-gold);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .table-header-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .table-header h5 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: var(--primary-gold);
+    margin: 0;
+    letter-spacing: 1px;
+  }
+
+  .table-icon {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, var(--primary-gold) 0%, #c9a537 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #000;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+  }
+
+  .table {
+    margin: 0;
+  }
+
+  .table thead {
+    background: rgba(10, 14, 39, 0.8);
+  }
+
+  .table thead th {
+    color: var(--primary-gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.75rem;
+    padding: 1rem;
+    border: none;
+    border-bottom: 2px solid #2a3f5f;
+  }
+
+  .table tbody tr {
+    border-bottom: 1px solid #2a3f5f;
+    transition: all 0.3s ease;
+  }
+
+  .table tbody tr:hover {
+    background: rgba(212, 175, 55, 0.05);
+    transform: scale(1.01);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .table tbody td {
+    padding: 1rem;
+    vertical-align: middle;
+    color: #e9ecef;
+  }
+
+  .item-name {
+    font-weight: 700;
+    color: #fff;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .item-name::before {
+    content: "🏹";
+    font-size: 1.2rem;
+  }
+
+  /* Stat Badges */
+  .stat-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    min-width: 50px;
+  }
+
+  .stat-damage {
+    background: rgba(220, 53, 69, 0.2);
+    border: 1px solid #dc3545;
+    color: #dc3545;
+  }
+
+  .stat-accuracy {
+    background: rgba(13, 202, 240, 0.2);
+    border: 1px solid #0dcaf0;
+    color: #0dcaf0;
+  }
+
+  .stat-tier {
+    background: rgba(108, 117, 125, 0.2);
+    border: 1px solid #6c757d;
+    color: #adb5bd;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .culture-badge {
+    background: rgba(108, 117, 125, 0.2);
+    border: 1px solid #6c757d;
+    color: #adb5bd;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .horseback-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 1rem;
+  }
+
+  .horseback-yes {
+    background: rgba(25, 135, 84, 0.2);
+    border: 1px solid #198754;
+    color: #198754;
+  }
+
+  .horseback-no {
+    background: rgba(108, 117, 125, 0.1);
+    border: 1px solid #495057;
+    color: #6c757d;
+  }
+
+  /* Action Buttons */
+  .action-btn-group {
+    display: flex;
+    gap: 0.3rem;
+  }
+
+  .btn-action {
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 1px solid;
+  }
+
+  .btn-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .btn-view {
+    background: rgba(13, 202, 240, 0.1);
+    border-color: #0dcaf0;
+    color: #0dcaf0;
+  }
+
+  .btn-view:hover {
+    background: #0dcaf0;
+    color: #000;
+  }
+
+  .btn-edit {
+    background: rgba(255, 193, 7, 0.1);
+    border-color: #ffc107;
+    color: #ffc107;
+  }
+
+  .btn-edit:hover {
+    background: #ffc107;
+    color: #000;
+  }
+
+  .btn-delete {
+    background: rgba(220, 53, 69, 0.1);
+    border-color: #dc3545;
+    color: #dc3545;
+  }
+
+  .btn-delete:hover {
+    background: #dc3545;
+    color: #fff;
+  }
+
+  /* ============================================
+     BUTTONS
+  ============================================ */
+  .btn-add-weapon {
+    background: linear-gradient(135deg, #198754 0%, #157347 100%);
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    box-shadow: 0 5px 15px rgba(25, 135, 84, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .btn-add-weapon:hover {
+    background: linear-gradient(135deg, #157347 0%, #198754 100%);
+    box-shadow: 0 8px 25px rgba(25, 135, 84, 0.6);
+    transform: translateY(-3px);
+  }
+
+  .btn-filters {
+    background: linear-gradient(135deg, var(--primary-gold) 0%, #c9a537 100%);
+    border: none;
+    color: #000;
+    font-weight: 700;
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .btn-filters:hover {
+    background: linear-gradient(135deg, #c9a537 0%, var(--primary-gold) 100%);
+    box-shadow: 0 6px 18px rgba(212, 175, 55, 0.6);
+    transform: translateY(-2px);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-title {
+      font-size: 1.5rem;
+    }
+    .table-responsive {
+      font-size: 0.85rem;
+    }
+    .action-btn-group {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <div class="d-flex align-items-center gap-3">
+      <div class="page-icon">
+        <i class="bi bi-bullseye"></i>
+      </div>
+      <div>
+        <h1 class="page-title">RANGED WEAPONS</h1>
+        <p class="page-subtitle">Manage bows, crossbows, and projectile armaments</p>
+      </div>
+    </div>
+    
+    {% if current_user.is_authenticated and current_user.is_admin %}
+    <button class="btn btn-add-weapon" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAddForm">
+      <i class="bi bi-plus-circle-fill me-2"></i>Craft Ranged Weapon
+    </button>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Add Weapon Form (Collapsed) -->
+{% if current_user.is_authenticated and current_user.is_admin %}
+<div class="collapse mb-4" id="collapseAddForm">
+  <div class="add-form-card">
+    <div class="add-form-header">
+      <h5><i class="bi bi-bullseye me-2"></i>Forge Ranged Weapon</h5>
+    </div>
+    <div class="card-body p-4">
+      <form action="{{ url_for('add_ranged_weapon') }}" method="POST">
+        
+        <!-- Basic Info -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label">Weapon Name</label>
+            <input type="text" class="form-control" name="item_name" placeholder="Enter weapon name" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Weight (kg)</label>
+            <input type="number" step="0.1" min="0" class="form-control" name="weight" value="0.0" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Culture</label>
+            <select name="culture_id" class="form-select" required>
+              {% for c in cultures %}
+              <option value="{{ c.Culture_Type_ID }}">{{ c.Culture_Type_Name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <!-- Weapon Stats -->
+        <div class="filter-section-title">
+          <i class="bi bi-lightning-charge-fill me-2"></i>Weapon Statistics
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-md-2">
+            <label class="form-label">Tier</label>
+            <input type="number" min="0" class="form-control" name="Tier" value="1">
+          </div>
+          <div class="col-md-2">
+            <label class="form-label text-danger">Damage</label>
+            <input type="number" min="0" class="form-control" name="Damage" value="0">
+          </div>
+          <div class="col-md-2">
+            <label class="form-label text-info">Accuracy</label>
+            <input type="number" min="0" class="form-control" name="Accuracy" value="0">
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">Missile Speed</label>
+            <input type="number" min="0" class="form-control" name="Missile_Speed" value="0">
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">Skill Required</label>
+            <input type="number" min="0" class="form-control" name="Skill" value="0">
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">Reload Speed</label>
+            <input type="number" min="0" class="form-control" name="Reload_Speed" value="0">
+          </div>
+        </div>
+
+        <!-- Additional Properties -->
+        <div class="filter-section-title">
+          <i class="bi bi-gear-fill me-2"></i>Horseback Compatibility
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" name="Usable_on_Horseback" id="horseUseCheck">
+              <label class="form-check-label text-white" for="horseUseCheck">
+                <i class="bi bi-arrow-up-circle me-2"></i>Usable on Horseback
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" name="Reload_on_Horseback" id="horseReloadCheck">
+              <label class="form-check-label text-white" for="horseReloadCheck">
+                <i class="bi bi-arrow-repeat me-2"></i>Reload on Horseback
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-grid">
+          <button type="submit" class="btn btn-forge">
+            <i class="bi bi-check-circle-fill me-2"></i>Save to Arsenal
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Filters Section -->
+<div class="filters-card">
+  <div class="filters-header">
+    <div class="d-flex justify-content-between align-items-center">
+      <h5><i class="bi bi-funnel-fill me-2"></i>Advanced Filters</h5>
+      <button class="btn btn-filters btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilters">
+        <i class="bi bi-chevron-down"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="collapse show" id="collapseFilters">
+    <div class="card-body p-4">
+      <form action="{{ url_for('ranged_weapons_page') }}" method="GET">
+        
+        <!-- Basic Filters -->
+        <div class="filter-section-title">
+          <i class="bi bi-search me-2"></i>Basic Search
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label">Weapon Name</label>
+            <input type="search" class="form-control" name="search_name" placeholder="Search by name..." 
+                   value="{{ request.args.get('search_name', '') }}">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Culture</label>
+            <select name="search_culture" class="form-select">
+              <option value="">All Cultures</option>
+              {% for c in cultures %}
+              <option value="{{ c.Culture_Type_ID }}" 
+                      {% if request.args.get('search_culture')|int == c.Culture_Type_ID %}selected{% endif %}>
+                {{ c.Culture_Type_Name }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <!-- Range Filters -->
+        <div class="filter-section-title">
+          <i class="bi bi-sliders me-2"></i>Performance Ranges
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-md-3">
+            <label class="form-label">Damage (Min-Max)</label>
+            <div class="input-group">
+              <input type="number" min="0" class="form-control" name="min_dmg" placeholder="Min" 
+                     value="{{ request.args.get('min_dmg','') }}">
+              <input type="number" min="0" class="form-control" name="max_dmg" placeholder="Max" 
+                     value="{{ request.args.get('max_dmg','') }}">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Accuracy (Min-Max)</label>
+            <div class="input-group">
+              <input type="number" min="0" class="form-control" name="min_acc" placeholder="Min" 
+                     value="{{ request.args.get('min_acc','') }}">
+              <input type="number" min="0" class="form-control" name="max_acc" placeholder="Max" 
+                     value="{{ request.args.get('max_acc','') }}">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Missile Speed (Min-Max)</label>
+            <div class="input-group">
+              <input type="number" min="0" class="form-control" name="min_mspd" placeholder="Min" 
+                     value="{{ request.args.get('min_mspd','') }}">
+              <input type="number" min="0" class="form-control" name="max_mspd" placeholder="Max" 
+                     value="{{ request.args.get('max_mspd','') }}">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Skill (Min-Max)</label>
+            <div class="input-group">
+              <input type="number" min="0" class="form-control" name="min_skill" placeholder="Min" 
+                     value="{{ request.args.get('min_skill','') }}">
+              <input type="number" min="0" class="form-control" name="max_skill" placeholder="Max" 
+                     value="{{ request.args.get('max_skill','') }}">
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="d-flex justify-content-end gap-2">
+          <a href="{{ url_for('ranged_weapons_page') }}" class="btn btn-outline-secondary px-4">
+            <i class="bi bi-arrow-counterclockwise me-2"></i>Reset
+          </a>
+          <button type="submit" class="btn btn-filters px-4">
+            <i class="bi bi-check2-circle me-2"></i>Apply Filters
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Weapons Table -->
+<div class="weapons-table-card">
+  <div class="table-header">
+    <div class="table-header-title">
+      <div class="table-icon">
+        <i class="bi bi-bullseye"></i>
+      </div>
+      <div>
+        <h5>Ranged Arsenal</h5>
+        <small class="text-white-50">{{ ranged_weapons|length }} weapons found</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-dark table-hover mb-0">
+      <thead>
+        <tr>
+          <th class="ps-4">Weapon Name</th>
+          <th>Culture</th>
+          <th class="text-center">Tier</th>
+          <th class="text-center">Damage</th>
+          <th class="text-center">Accuracy</th>
+          <th class="text-center">Speed</th>
+          <th class="text-center">Horseback</th>
+          <th class="text-end pe-4">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for w in ranged_weapons %}
+        <tr>
+          <td class="ps-4">
+            <div class="item-name">{{ w.Item_Name }}</div>
+          </td>
+          <td>
+            <span class="culture-badge">{{ w.Culture }}</span>
+          </td>
+          <td class="text-center">
+            <span class="stat-tier">T{{ w.Tier }}</span>
+          </td>
+          <td class="text-center">
+            <span class="stat-badge stat-damage">{{ w.Damage }}</span>
+          </td>
+          <td class="text-center">
+            <span class="stat-badge stat-accuracy">{{ w.Accuracy }}</span>
+          </td>
+          <td class="text-center text-white-50">{{ w.Missile_Speed }}</td>
+          <td class="text-center">
+            {% if w.Usable_on_Horseback == 'Yes' %}
+            <span class="horseback-badge horseback-yes" title="Usable on Horseback">
+              <i class="bi bi-check-circle-fill"></i>
+            </span>
+            {% else %}
+            <span class="horseback-badge horseback-no" title="Not usable on Horseback">
+              <i class="bi bi-x"></i>
+            </span>
+            {% endif %}
+          </td>
+          <td class="text-end pe-4">
+            <div class="action-btn-group">
+              <a href="{{ url_for('item_details_page', item_id=w.Item_ID) }}" 
+                 class="btn btn-action btn-view" title="View Details">
+                <i class="bi bi-eye-fill"></i>
+              </a>
+              
+              {% if current_user.is_authenticated and current_user.is_admin %}
+              <a href="{{ url_for('update_page_ranged', item_id=w.Item_ID) }}" 
+                 class="btn btn-action btn-edit" title="Edit Weapon">
+                <i class="bi bi-pencil-square"></i>
+              </a>
+              <form action="{{ url_for('delete_ranged_weapon', item_id=w.Item_ID) }}" method="POST" 
+                    class="d-inline" onsubmit="return confirm('Delete {{ w.Item_Name }}?');">
+                <button type="submit" class="btn btn-action btn-delete" title="Delete Weapon">
+                  <i class="bi bi-trash-fill"></i>
+                </button>
+              </form>
+              {% endif %}
+            </div>
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="8" class="text-center py-5">
+            <i class="bi bi-inbox fs-1 text-secondary d-block mb-3"></i>
+            <p class="text-secondary mb-0">No ranged weapons found. Try adjusting your filters or add a new weapon.</p>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

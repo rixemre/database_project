@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="text-white fw-bold"><i class="bi bi-bar-chart-line-fill text-success me-2"></i>Analytics Dashboard</h1>
+        <a href="{{ url_for('settlements_page') }}" class="btn btn-outline-light">Back to Registry</a>
+    </div>
+
+    <div class="card bg-dark text-white border-secondary mb-4 shadow">
+        <div class="card-header bg-gradient-dark border-bottom border-success">
+            <h4 class="mb-0 text-success">1. Top 10 Economic Powerhouses</h4>
+            <small class="text-muted">Settlements ranked by Prosperity + Village Hearths</small>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-dark table-hover mb-0">
+                <thead>
+                    <tr class="text-secondary text-uppercase small"><th>Name</th><th>Type</th><th>Prosperity</th><th>Villages</th><th>Total Power</th></tr>
+                </thead>
+                <tbody>
+                    {% for row in stats_power %}
+                    <tr>
+                        <td class="fw-bold">{{ row.name }}</td>
+                        <td>{{ row.type }}</td>
+                        <td class="text-info">{{ row.prosperity }}</td>
+                        <td>{{ row.village_count }}</td>
+                        <td class="text-success fw-bold fs-5">{{ row.total_power }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="card bg-dark text-white border-secondary h-100 shadow">
+                <div class="card-header border-success"><h5 class="mb-0 text-success">2. Battania Hardwood Report</h5></div>
+                <div class="card-body p-0">
+                    <table class="table table-dark table-sm mb-0">
+                        <thead><tr><th>Village</th><th>Bound To</th><th class="text-end">Hearth</th></tr></thead>
+                        <tbody>
+                            {% for row in stats_battania %}
+                            <tr>
+                                <td>{{ row.village_name }}</td>
+                                <td class="text-muted">{{ row.bound_settlement }}</td>
+                                <td class="text-end text-warning">{{ row.hearth }}</td>
+                            </tr>
+                            {% else %}
+                            <tr><td colspan="3" class="text-center py-3 text-muted">No data found.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card bg-dark text-white border-secondary h-100 shadow">
+                <div class="card-header border-warning"><h5 class="mb-0 text-warning">3. Top Grain Producers</h5></div>
+                <div class="card-body p-0">
+                    <table class="table table-dark table-sm mb-0">
+                        <thead><tr><th>Culture</th><th>Grain Villages</th><th class="text-end">Total Capacity</th></tr></thead>
+                        <tbody>
+                            {% for row in stats_grain %}
+                            <tr>
+                                <td>{{ row.culture_name }}</td>
+                                <td>{{ row.total_grain_villages }}</td>
+                                <td class="text-end fw-bold text-success">{{ row.total_production_capacity }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

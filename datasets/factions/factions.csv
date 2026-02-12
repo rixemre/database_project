@@ -1,0 +1,9 @@
+faction_id,name,description,banner_key,leader_id,culture_id,ruling_clan_id
+aserai,Aserai,The Aserai inhabit the southern desert lands of Calradia and combine footmen and horsemen in battle.,aserai_banner,sultan_unqid,1,banu_qild
+battania,Battania,The Battanians are famed for their marksmanship as archers throughout Calradia.,battania_banner,high_king_caladog,2,clan_fen_cernach
+khuzait_khanate,Khuzait Khanate,The Khuzaits are a steppe tribe confederacy and makes heavy use of horse archers.,khuzait_banner,monchug_khan,4,urkhunait
+sturgia,Sturgia,The Sturgians inhabit the northern woodlands and are lethal axe-men and swordsmen.,sturgia_banner,grand_prince_raganvad,6,kuloving
+vlandia,Vlandia,The Vlandians are a feudal state that specializes in heavy cavalry.,vlandia_banner,king_derthert,7,dey_meroc
+northern_empire,Northern Empire,"Led by the aristocratic senator Emperor Lucon, who claims the Senate should pick the emperor.",northern_empire_banner,emperor_lucon,3,osticos
+southern_empire,Southern Empire,"Led by Empress Rhagaea, who claims that Ira should rule as Arenicos' only child.",southern_empire_banner,empress_rhagaea,3,pethros
+western_empire,Western Empire,"Led by war hero Emperor Garios, who wants Imperial veterans to pick the emperor.",western_empire_banner,emperor_garios,3,impestores

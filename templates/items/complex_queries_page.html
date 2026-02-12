@@ -1,0 +1,335 @@
+{% extends "base.html" %}
+
+{% block title %}Strategic Analytics - M&B Inventory{% endblock %}
+
+{% block content %}
+
+<style>
+    /* ============================================
+       DYNAMIC UI & THEME SETTINGS
+    ============================================ */
+    :root {
+        --primary-gold: #d4af37;
+        --dark-bg: #0a0e14;
+        --card-bg: rgba(26, 31, 58, 0.6);
+        --glass-border: rgba(212, 175, 55, 0.2);
+    }
+
+    body {
+        background-color: var(--dark-bg);
+        color: #e9ecef;
+    }
+
+    /* Page Header Enhancements */
+    .page-header {
+        background: linear-gradient(135deg, #1a1f3a 0%, #05070a 100%);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        padding: 2.5rem;
+        margin-bottom: 2.5rem;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .page-header::after {
+        content: '';
+        position: absolute;
+        top: 0; right: 0;
+        width: 300px; height: 100%;
+        background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+    }
+
+    .page-title {
+        font-family: 'Cinzel', serif;
+        font-weight: 900;
+        font-size: 2.5rem;
+        color: var(--primary-gold);
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    /* Analytics Navigation (Buttons) */
+    .analytics-nav {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+        padding: 0.5rem;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 15px;
+    }
+
+    .nav-link-custom {
+        background: var(--card-bg);
+        border: 1px solid var(--glass-border);
+        color: #adb5bd;
+        padding: 1.2rem;
+        border-radius: 12px;
+        font-family: 'Cinzel', serif;
+        font-weight: 700;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        cursor: pointer;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        backdrop-filter: blur(10px);
+    }
+
+    .nav-link-custom:hover {
+        border-color: var(--primary-gold);
+        color: #fff;
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    }
+
+    .nav-link-custom.active {
+        background: linear-gradient(135deg, var(--primary-gold) 0%, #9e7e1b 100%);
+        color: #000;
+        border-color: #fff;
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    }
+
+    /* Analytics Card Styling */
+    .analytics-card {
+        background: var(--card-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        margin-bottom: 3rem;
+    }
+
+    .analytics-header {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 2rem;
+        border-bottom: 1px solid var(--glass-border);
+    }
+
+    /* Table Enhancements */
+    .table thead th {
+        background: rgba(0, 0, 0, 0.4);
+        color: var(--primary-gold);
+        font-family: 'Cinzel', serif;
+        letter-spacing: 1px;
+        border: none;
+        padding: 1.2rem;
+    }
+
+    .table tbody tr {
+        transition: background 0.3s ease;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .table tbody tr:hover {
+        background: rgba(212, 175, 55, 0.08) !important;
+    }
+
+    /* Badges & Ranks */
+    .rank-badge {
+        width: 38px; height: 38px;
+        border-radius: 10px;
+        font-family: 'Cinzel', serif;
+        display: inline-flex;
+        align-items: center; justify-content: center;
+        font-weight: bold;
+    }
+
+    .rank-1 { background: #ffd700; color: #000; box-shadow: 0 0 15px #ffd700; }
+    .rank-2 { background: #c0c0c0; color: #000; }
+    .rank-3 { background: #cd7f32; color: #000; }
+
+    .metric-badge {
+        padding: 0.5rem 1.2rem;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.85rem;
+    }
+
+    .culture-badge {
+        background: rgba(212, 175, 55, 0.1);
+        border: 1px solid var(--glass-border);
+        padding: 0.4rem 1rem;
+        border-radius: 8px;
+        color: var(--primary-gold);
+    }
+
+    /* Animations */
+    .tab-content-area {
+        display: none;
+        animation: slideUp 0.6s ease forwards;
+    }
+
+    .tab-content-area.active { display: block; }
+
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<div class="container py-4">
+    <div class="page-header d-flex justify-content-between align-items-center flex-wrap">
+        <div>
+            <h1 class="page-title"><i class="bi bi-shield-shaded me-3"></i>STRATEGIC COMMAND</h1>
+            <p class="page-subtitle text-uppercase letter-spacing-2">Calradia Military Intelligence & Inventory Analytics</p>
+        </div>
+        <a href="{{ url_for('all_items_page') }}" class="btn btn-outline-warning btn-lg rounded-pill px-4 shadow-sm">
+    <i class="bi bi-arrow-left-circle me-2"></i> RETURN TO ITEMS
+</a>
+    </div>
+
+    <div class="analytics-nav">
+        <div class="nav-link-custom active" onclick="showTab('query1', this)">
+            <i class="bi bi-speedometer2 fs-5"></i> <span>WEAPON EFFICIENCY</span>
+        </div>
+        <div class="nav-link-custom" onclick="showTab('query2', this)">
+            <i class="bi bi-trophy fs-5"></i> <span>ELITE ARSENAL</span>
+        </div>
+        <div class="nav-link-custom" onclick="showTab('query3', this)">
+            <i class="bi bi-scales fs-5"></i> <span>WEIGHT BALANCE</span>
+        </div>
+    </div>
+
+    <div id="query1" class="tab-content-area active">
+        <div class="analytics-card">
+            <div class="analytics-header d-flex justify-content-between align-items-center">
+                <div>
+                    <h5><i class="bi bi-lightning-charge-fill me-2 text-warning"></i> MELEE EFFICIENCY INDEX</h5>
+                    <p class="mb-0 text-muted">Calculating Lethality: Damage to Weight Ratio</p>
+                </div>
+                <span class="badge bg-dark border border-warning text-warning px-3 py-2">INDEX > 50.0</span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-dark mb-0">
+                    <thead>
+                        <tr>
+                            <th class="text-center">RANK</th>
+                            <th>ITEM SPECIFICATION</th>
+                            <th>CULTURAL ORIGIN</th>
+                            <th class="text-center">EFFICIENCY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for weapon in melee_efficiency %}
+                        <tr>
+                            <td class="text-center">
+                                <span class="rank-badge rank-{{ weapon.Culture_Rank if weapon.Culture_Rank <= 3 else 'other' }}">
+                                    {{ weapon.Culture_Rank }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="fw-bold text-white fs-6">{{ weapon.Item_Name }}</div>
+                                <small class="text-muted">Tier {{ weapon.Tier }} • {{ weapon.Total_Damage }} DMG</small>
+                            </td>
+                            <td><span class="culture-badge small"><i class="bi bi-flag-fill me-1"></i> {{ weapon.Culture_Type_Name }}</span></td>
+                            <td class="text-center">
+                                <span class="metric-badge bg-success bg-opacity-10 text-success border border-success">
+                                    {{ weapon.Efficiency_Index_Rounded }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="query2" class="tab-content-area">
+        <div class="analytics-card">
+            <div class="analytics-header">
+                <h5><i class="bi bi-gem me-2 text-info"></i> ELITE GEAR COMPARISON</h5>
+                <p class="text-muted">High-Tier Performance Metrics: Top 5 Armor & Weapons</p>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-dark mb-0">
+                    <thead>
+                        <tr>
+                            <th>CATEGORY</th>
+                            <th>NAME</th>
+                            <th class="text-center">PERFORMANCE VALUE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cross_category %}
+                        <tr>
+                            <td>
+                                <span class="category-badge category-{{ item.Item_Category|lower|replace(' ', '') }} text-uppercase small px-3 py-1 rounded bg-secondary bg-opacity-25">
+                                    {{ item.Item_Category }}
+                                </span>
+                            </td>
+                            <td class="fw-bold">{{ item.Item_Detail }}</td>
+                            <td class="text-center">
+                                <span class="text-warning fs-5 fw-bold">{{ item.Metric_Value }}</span>
+                                <small class="text-muted ms-1">PTS</small>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="query3" class="tab-content-area">
+        <div class="analytics-card">
+            <div class="analytics-header">
+                <h5><i class="bi bi-intersect me-2 text-danger"></i> STRATEGIC WEIGHT BALANCE</h5>
+                <p class="text-muted">Analyzing Cultural Doctrines: Heavy Defense vs Brutal Offense</p>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-dark mb-0">
+                    <thead>
+                        <tr>
+                            <th>CULTURE</th>
+                            <th class="text-center">DEFENSE DELTA</th>
+                            <th class="text-center">DOCTRINE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for culture in weight_balance %}
+                        <tr>
+                            <td><span class="culture-badge fw-bold">{{ culture.Culture_Type_Name }}</span></td>
+                            <td class="text-center">
+                                <span class="{% if culture.Weight_Delta_Defense_Vs_Offense > 0 %}text-success{% else %}text-danger{% endif %} fw-bold fs-5">
+                                    {{ "%.2f"|format(culture.Weight_Delta_Defense_Vs_Offense) }} kg
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                {% if culture.Weight_Delta_Defense_Vs_Offense > 0 %}
+                                    <span class="badge bg-success bg-opacity-10 text-success border border-success px-4 py-2">TANK DOCTRINE</span>
+                                {% else %}
+                                    <span class="badge bg-danger bg-opacity-10 text-danger border border-danger px-4 py-2">STRIKE DOCTRINE</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showTab(tabId, element) {
+        // Tüm içerikleri gizle
+        document.querySelectorAll('.tab-content-area').forEach(tab => {
+            tab.classList.remove('active');
+        });
+
+        // Tüm butonlardan active sınıfını kaldır
+        document.querySelectorAll('.nav-link-custom').forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        // Tıklanan tabı göster
+        document.getElementById(tabId).classList.add('active');
+
+        // Tıklanan butonu aktif yap
+        element.classList.add('active');
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card shadow-sm mb-4 bg-dark">
+  <div class="card-header bg-dark-subtle">
+    <h2 class="h5 mb-0"><i class="bi bi-pencil-fill text-warning"></i> Update Mount (ID: {{ item_id }})</h2>
+    <h3 class="h6 text-white-50">{{ mount.Item_Name }}</h3>
+  </div>
+  <div class="card-body">
+    <form action="{{ url_for('update_mount', item_id=item_id) }}" method="POST">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="item_name" class="form-label">Mount Name</label>
+          <input type="text" class="form-control" id="item_name" name="item_name" value="{{ mount.Item_Name }}" required>
+        </div>
+        <div class="col-md-6">
+          <label for="weight" class="form-label">Weight</label>
+          <input type="text" class="form-control" id="weight" name="weight" value="{{ mount.Weight }}" required>
+        </div>
+      </div>
+      <div class="row g-3 mt-2">
+        <div class="col-md-6">
+          <label for="culture_id" class="form-label">Culture</label>
+          <select id="culture_id" name="culture_id" class="form-select">
+            {% for culture in cultures %}
+            <option value="{{ culture.Culture_Type_ID }}" {% if culture.Culture_Type_ID == mount.Culture_ID %}selected{% endif %}>
+              {{ culture.Culture_Type_Name }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-6 d-flex align-items-end">
+          <div class="form-check form-switch fs-5">
+            <input class="form-check-input" type="checkbox" id="civilian" name="civilian" value="Yes" role="switch" {% if mount.Civilian == 'Yes' %}checked{% endif %}>
+            <label class="form-check-label" for="civilian">Civilian Item</label>
+          </div>
+        </div>
+      </div>
+      
+      <hr class="my-4">
+      
+      <h5 class="text-white-50">Mount Stats</h5>
+      <div class="row g-3">
+        <div class="col-md-3">
+          <label for="Riding" class="form-label">Riding Skill Req.</label>
+          <input type="number" class="form-control" id="Riding" name="Riding" value="{{ mount.Riding }}" min="0">
+        </div>
+        <div class="col-md-3">
+          <label for="Tier" class="form-label">Tier</label>
+          <input type="number" class="form-control" id="Tier" name="Tier" value="{{ mount.Tier }}" min="1">
+        </div>
+        <div class="col-md-3">
+          <label for="Charge" class="form-label">Charge Damage</label>
+          <input type="number" class="form-control" id="Charge" name="Charge" value="{{ mount.Charge }}" min="0">
+        </div>
+        <div class="col-md-3">
+          <label for="HP" class="form-label">Hit Points (HP)</label>
+          <input type="number" class="form-control" id="HP" name="HP" value="{{ mount.HP }}" min="0">
+        </div>
+      </div>
+      <div class="row g-3 mt-2">
+        <div class="col-md-3">
+          <label for="Speed" class="form-label">Speed</label>
+          <input type="number" class="form-control" id="Speed" name="Speed" value="{{ mount.Speed }}" min="0">
+        </div>
+        <div class="col-md-3">
+          <label for="Maneuver" class="form-label">Maneuver</label>
+          <input type="number" class="form-control" id="Maneuver" name="Maneuver" value="{{ mount.Maneuver }}" min="0">
+        </div>
+        <div class="col-md-6">
+          <label for="Mount_Type" class="form-label">Mount Type</label>
+          <input type="text" class="form-control" id="Mount_Type" name="Mount_Type" value="{{ mount.Mount_Type }}">
+        </div>
+      </div>
+      
+      <button type="submit" class="btn btn-success mt-4"><i class="bi bi-check-circle-fill"></i> Save Changes</button>
+      <a href="{{ url_for('mounts_page') }}" class="btn btn-secondary mt-4">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

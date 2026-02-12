@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+
+{% block title %}Calradia Management System{% endblock %}
+
+{% block extra_styles %}
+<style>
+/* =========================
+   HERO (NO BOX, FULLSCREEN)
+   ========================= */
+.hero-banner {
+    min-height: 80vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 4rem;
+}
+
+.hero-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at center,
+        rgba(212, 175, 55, 0.18),
+        rgba(10, 14, 39, 0.75) 70%
+    );
+    z-index: 1;
+}
+
+.hero-banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(2px);
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+}
+
+.hero-icon-main {
+    font-size: 5rem;
+    color: var(--primary-gold);
+    margin-bottom: 1.5rem;
+    animation: float 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.8));
+}
+
+.hero-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 800;
+    font-size: 4rem;
+    color: var(--primary-gold);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    text-shadow: 0 0 40px rgba(212,175,55,0.8),
+                 3px 3px 15px rgba(0,0,0,0.9);
+}
+
+.hero-divider {
+    width: 160px;
+    height: 3px;
+    margin: 1.5rem auto;
+    background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+    color: #f8f9fa;
+    text-transform: uppercase;
+}
+
+/* =========================
+   MODULE CARDS
+   ========================= */
+.module-card {
+    background: linear-gradient(145deg, #1a1f3a 0%, #0f1419 100%);
+    border: 2px solid #2a3f5f;
+    border-radius: 18px;
+    padding: 2.5rem 2rem;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    text-decoration: none;
+    display: block;
+}
+
+.module-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.6),
+                0 0 40px var(--theme-color);
+    border-color: var(--theme-color);
+}
+
+.card-icon-container {
+    width: 90px;
+    height: 90px;
+    border-radius: 20px;
+    border: 2px solid var(--theme-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.card-icon-container i {
+    font-size: 2.5rem;
+    color: var(--theme-color);
+}
+
+.card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #f8f9fa;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.card-description {
+    color: #adb5bd;
+    font-size: 0.95rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.btn-module {
+    border: 2px solid var(--theme-color);
+    color: var(--theme-color);
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.btn-module:hover {
+    background: var(--theme-color);
+    color: #000;
+    box-shadow: 0 0 30px var(--theme-color);
+}
+
+/* =========================
+   ANIMATIONS
+   ========================= */
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+@media (max-width: 768px) {
+    .hero-title { font-size: 2.5rem; }
+    .hero-subtitle { font-size: 1rem; }
+    .hero-icon-main { font-size: 3.5rem; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<div class="hero-banner">
+    <div class="hero-content">
+        
+    </div>
+</div>
+
+<!-- MODULES -->
+<div class="row g-4 justify-content-center">
+
+    <div class="col-md-6 col-lg-4">
+        <a href="{{ url_for('items_dashboard') }}" class="module-card" style="--theme-color:#d4af37">
+            <div class="card-icon-container">
+                <i class="bi bi-shield-shaded"></i>
+            </div>
+            <h3 class="card-title">Items</h3>
+            <p class="card-description">
+                Weapons, armors, mounts and equipment management.
+            </p>
+            <div class="text-center">
+                <span class="btn-module">Open Inventory</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+        <a href="{{ url_for('lords_page') }}" class="module-card" style="--theme-color:#0dcaf0">
+            <div class="card-icon-container">
+                <i class="bi bi-person-vcard"></i>
+            </div>
+            <h3 class="card-title">Lords</h3>
+            <p class="card-description">
+                Noble families, traits and diplomacy.
+            </p>
+            <div class="text-center">
+                <span class="btn-module">Manage Lords</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+        <a href="{{ url_for('factions_page') }}" class="module-card" style="--theme-color:#dc3545">
+            <div class="card-icon-container">
+                <i class="bi bi-flag"></i>
+            </div>
+            <h3 class="card-title">Factions</h3>
+            <p class="card-description">
+                Kingdoms, alliances and wars.
+            </p>
+            <div class="text-center">
+                <span class="btn-module">View Factions</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+        <a href="{{ url_for('settlements_page') }}" class="module-card" style="--theme-color:#198754">
+            <div class="card-icon-container">
+                <i class="bi bi-building-fill-check"></i>
+            </div>
+            <h3 class="card-title">Settlements</h3>
+            <p class="card-description">
+                Towns, castles and villages.
+            </p>
+            <div class="text-center">
+                <span class="btn-module">Manage Settlements</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+        <a href="{{ url_for('troops_page') }}" class="module-card" style="--theme-color:#0d6efd">
+            <div class="card-icon-container">
+                <i class="bi bi-person-video3"></i>
+            </div>
+            <h3 class="card-title">Troops</h3>
+            <p class="card-description">
+                Recruitment trees and units.
+            </p>
+            <div class="text-center">
+                <span class="btn-module">Manage Troops</span>
+            </div>
+        </a>
+    </div>
+    
+    <div class="col-md-6 col-lg-4">
+        <div class="module-card" style="--theme-color: #ffc107;">
+            <i class="bi bi-shield-shaded bg-icon"></i>
+            <div class="card-content">
+                <div class="card-icon-container">
+                    <i class="bi bi-shield-fill-exclamation"></i>
+                </div>
+                <h3 class="card-title">Clans</h3>
+                <p class="card-description">
+                    Noble families registry. View tier rankings, wealth analysis and allegiances.
+                </p>
+                <a href="{{ url_for('clans_page') }}" class="btn btn-module">
+                    Manage Clans <i class="bi bi-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

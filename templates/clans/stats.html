@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 text-warning fw-bold"><i class="bi bi-pie-chart-fill me-2"></i>Clan Analytics</h1>
+    <a href="/clans" class="btn btn-outline-light btn-sm"><i class="bi bi-arrow-left"></i> Back to Registry</a>
+</div>
+
+<div class="row">
+    
+    <div class="col-lg-6 mb-4">
+        <div class="card bg-dark border-secondary h-100">
+            <div class="card-header border-secondary text-white fw-bold">
+                <i class="bi bi-cash-coin text-success me-2"></i> Top 10 Wealthiest Clans
+            </div>
+            <div class="card-body">
+                <p class="text-muted small">
+                    Calculated by joining <strong>Clans</strong>, <strong>Lords</strong>, and <strong>Settlements</strong> tables 
+                    and summing the prosperity of all fiefs owned by clan members.
+                </p>
+                <table class="table table-dark table-hover table-sm">
+                    <thead>
+                        <tr class="text-muted small">
+                            <th>Clan</th>
+                            <th>Faction</th>
+                            <th class="text-center">Fiefs</th>
+                            <th class="text-end">Total Wealth</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in wealth_stats %}
+                        <tr>
+                            <td class="fw-bold text-warning">{{ row.clan_name }}</td>
+                            <td>{{ row.faction_name }}</td>
+                            <td class="text-center">{{ row.total_fiefs }}</td>
+                            <td class="text-end text-success fw-bold">{{ row.total_wealth }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6 mb-4">
+        <div class="card bg-dark border-secondary h-100">
+            <div class="card-header border-secondary text-white fw-bold">
+                <i class="bi bi-star-fill text-warning me-2"></i> Elite Clans (Above Average)
+            </div>
+            <div class="card-body">
+                <p class="text-muted small">
+                    Uses a <strong>Subquery</strong> to compare each clan's Tier against the average Tier of their respective Faction.
+                </p>
+                <table class="table table-dark table-hover table-sm">
+                    <thead>
+                        <tr class="text-muted small">
+                            <th>Clan</th>
+                            <th>Tier</th>
+                            <th>Faction Avg</th>
+                            <th class="text-end">Difference</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in elite_stats %}
+                        <tr>
+                            <td class="fw-bold text-info">{{ row.clan_name }}</td>
+                            <td><span class="badge bg-warning text-dark">{{ row.tier }}</span></td>
+                            <td>{{ row.faction_avg|round(1) }}</td>
+                            <td class="text-end text-success">+{{ (row.tier - row.faction_avg)|round(1) }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

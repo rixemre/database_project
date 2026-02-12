@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="text-white fw-bold"><i class="bi bi-bar-chart-line-fill text-info me-2"></i>Settlement Analytics</h1>
+        <a href="{{ url_for('settlements_page') }}" class="btn btn-outline-light">
+            <i class="bi bi-arrow-left me-1"></i>Back to Registry
+        </a>
+    </div>
+
+    <div class="card bg-dark text-white border-secondary mb-5 shadow-lg">
+        <div class="card-header bg-gradient-dark border-bottom border-info d-flex align-items-center">
+            <i class="bi bi-cash-stack fs-4 text-info me-2"></i>
+            <div>
+                <h4 class="mb-0 text-info">1. Top 10 Economic Powerhouses</h4>
+                <small class="text-white-50">Settlements ranked by Total Power (Prosperity + Total Village Hearths)</small>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-dark table-hover mb-0 align-middle">
+                <thead class="bg-black">
+                    <tr class="text-secondary text-uppercase small">
+                        <th>Settlement Name</th>
+                        <th>Type</th>
+                        <th class="text-end">Prosperity</th>
+                        <th class="text-center">Bound Villages</th>
+                        <th class="text-end">Total Hearth</th>
+                        <th class="text-end pe-4">Total Power Index</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in stats_power %}
+                    <tr>
+                        <td class="fw-bold text-white">{{ row.name }}</td>
+                        <td>
+                            {% if row.type == 'Town' %}
+                                <span class="badge bg-primary bg-opacity-25 text-primary border border-primary-subtle">Town</span>
+                            {% else %}
+                                <span class="badge bg-danger bg-opacity-25 text-danger border border-danger-subtle">Castle</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-end font-monospace text-warning">{{ row.prosperity }}</td>
+                        <td class="text-center">{{ row.village_count }}</td>
+                        <td class="text-end font-monospace text-light">{{ row.total_village_hearth }}</td>
+                        <td class="text-end pe-4">
+                            <span class="badge bg-success fs-6">{{ row.total_power }}</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="card bg-dark text-white border-secondary h-100 shadow">
+                <div class="card-header border-success bg-transparent">
+                    <h5 class="mb-0 text-success"><i class="bi bi-tree-fill me-2"></i>The 'Battania' Hardwood Report</h5>
+                    <small class="text-muted d-block mt-1">Villages producing Hardwood in Battania culture.</small>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-dark table-striped mb-0 table-sm">
+                        <thead>
+                            <tr>
+                                <th class="ps-3">Village</th>
+                                <th>Bound Settlement</th>
+                                <th class="text-end pe-3">Hearth</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in stats_battania %}
+                            <tr>
+                                <td class="ps-3 fw-bold">{{ row.village_name }}</td>
+                                <td class="text-white-50">{{ row.bound_settlement }}</td>
+                                <td class="text-end pe-3 text-warning font-monospace">{{ row.hearth }}</td>
+                            </tr>
+                            {% else %}
+                            <tr><td colspan="3" class="text-center py-4 text-muted">No data found.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card bg-dark text-white border-secondary h-100 shadow">
+                <div class="card-header border-warning bg-transparent">
+                    <h5 class="mb-0 text-warning"><i class="bi bi-flower1 me-2"></i>Global Grain Production</h5>
+                    <small class="text-muted d-block mt-1">Total capacity (Hearth sum) by Culture.</small>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-dark table-striped mb-0 table-sm">
+                        <thead>
+                            <tr>
+                                <th class="ps-3">Culture</th>
+                                <th class="text-center">Grain Villages</th>
+                                <th class="text-end pe-3">Total Capacity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in stats_grain %}
+                            <tr>
+                                <td class="ps-3">
+                                    <span class="d-flex align-items-center">
+                                        <i class="bi bi-flag-fill me-2 text-secondary"></i> {{ row.culture_name }}
+                                    </span>
+                                </td>
+                                <td class="text-center">{{ row.total_grain_villages }}</td>
+                                <td class="text-end pe-3 fw-bold text-success font-monospace">{{ row.total_production_capacity }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card bg-dark text-white border-secondary mb-5 shadow">
+    <div class="card-header border-0 d-flex align-items-center" style="background: linear-gradient(90deg, #4c0bce 0%, #212529 100%);">
+        <h5 class="mb-0 text-white"><i class="bi bi-gem me-2"></i>Wealthiest Clans</h5>
+        <small class="ms-3 text-white-50">Combined power of Faction, Clan, Lord, and Settlement</small>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-dark table-hover mb-0 align-middle">
+            <thead>
+                <tr class="text-secondary text-uppercase small">
+                    <th class="ps-4">Clan Name</th>
+                    <th>Allegiance (Faction)</th>
+                    <th>Clan Leader</th>
+                    <th class="text-center">Fiefs</th>
+                    <th class="text-end pe-4">Clan Wealth</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in stats_clans %}
+                <tr>
+                    <td class="ps-4">
+                        <span class="fw-bold text-white fs-5">{{ row.ClanName }}</span>
+                    </td>
+                    <td>
+                        <span class="badge bg-dark border border-secondary">{{ row.FactionName }}</span>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-person-fill text-warning me-2"></i>{{ row.LeaderName }}
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <span class="badge bg-primary rounded-pill">{{ row.FiefCount }}</span>
+                    </td>
+                    <td class="text-end pe-4 text-warning font-monospace fw-bold fs-5">
+                        {{ row.TotalWealth }} <i class="bi bi-coin"></i>
+                    </td>
+                </tr>
+                {% else %}
+                <tr><td colspan="5" class="text-center text-muted">No clan data available.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+    </div>
+</div>
+{% endblock %}
